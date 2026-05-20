@@ -1,0 +1,226 @@
+html,
+body {
+  min-height: 100%;
+  background: #f4f6f8;
+}
+
+body {
+  width: 100%;
+  min-width: 320px;
+  margin: 0;
+  color: #2b3038;
+  font-family: "Microsoft YaHei", Arial, sans-serif;
+}
+
+#base {
+  position: relative;
+  width: 100%;
+  max-width: 428px;
+  min-height: 100vh;
+  margin: 0 auto;
+  background: #fff;
+  overflow: hidden;
+  box-shadow: 0 12px 32px rgba(36, 48, 70, 0.12);
+}
+
+.maintenance-shell {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 100vh;
+  padding: 22px 20px 24px;
+  box-sizing: border-box;
+  background: linear-gradient(180deg, #f7f3ff 0%, #ffffff 46%, #f6f8fb 100%);
+}
+
+.maintenance-logo {
+  text-align: center;
+  font-size: 20px;
+  line-height: 28px;
+  font-weight: 700;
+  color: #3b324f;
+}
+
+.maintenance-visual {
+  position: relative;
+  height: 250px;
+  margin-top: 12px;
+  border: 20px solid #cec8d8;
+  background: #eee9f8;
+  box-sizing: border-box;
+}
+
+.maintenance-visual::before,
+.maintenance-visual::after {
+  content: "";
+  position: absolute;
+  left: 8px;
+  right: 8px;
+  bottom: 0;
+  height: 60%;
+  background: #349bd2;
+}
+
+.maintenance-visual::before {
+  clip-path: polygon(0 30%, 24% 0, 57% 48%, 100% 12%, 100% 100%, 0 100%);
+}
+
+.maintenance-visual::after {
+  left: auto;
+  right: 92px;
+  top: 24px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #c2bdc9;
+}
+
+.maintenance-status {
+  margin-top: 18px;
+}
+
+.maintenance-kicker {
+  margin: 0;
+  font-size: 15px;
+  line-height: 22px;
+  color: #4b4d59;
+}
+
+.maintenance-countdown-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.maintenance-countdown {
+  font-size: 22px;
+  line-height: 30px;
+  font-weight: 700;
+  color: #3f384d;
+  letter-spacing: 0;
+}
+
+.maintenance-notice-title {
+  max-width: 250px;
+  font-size: 20px;
+  line-height: 28px;
+}
+
+.maintenance-tag {
+  flex: 0 0 auto;
+  padding: 3px 8px;
+  background: #fff8b8;
+  color: #4a451f;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.maintenance-message {
+  margin: 18px 0 0;
+  color: #4b4d59;
+  font-size: 15px;
+  line-height: 23px;
+}
+
+.maintenance-info {
+  margin: 28px -20px 0;
+  padding: 22px 20px;
+  min-height: 106px;
+  background: #ebe7f4;
+  box-sizing: border-box;
+  color: #6f6f7b;
+  font-size: 14px;
+  line-height: 22px;
+}
+
+.maintenance-actions {
+  position: relative;
+  z-index: 50;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  width: auto;
+  margin: 12px 0 0;
+  padding-top: 0;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.maintenance-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 140px;
+  min-height: 40px;
+  padding: 0 18px;
+  border: 0;
+  border-radius: 5px;
+  background: #169bd5;
+  color: #fff;
+  font-size: 14px;
+  line-height: 20px;
+  text-decoration: none;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.maintenance-btn.secondary {
+  background: #edf3f7;
+  color: #25627c;
+}
+
+.maintenance-finished .maintenance-shell {
+  background: linear-gradient(180deg, #f1fbf7 0%, #ffffff 48%, #f6f8fb 100%);
+}
+
+.maintenance-finished .maintenance-visual {
+  border-color: #b9d9ce;
+  background: #e7f6f0;
+}
+
+.maintenance-finished .maintenance-visual::before {
+  background: #37ad86;
+}
+
+.maintenance-finished .maintenance-tag {
+  background: #def7ea;
+  color: #177650;
+}
+
+.maintenance-finished .maintenance-info {
+  background: #eef7f3;
+}
+
+.maintenance-active #u125,
+.maintenance-active #u134,
+.maintenance-active #u133,
+.maintenance-active #u140 {
+  display: none !important;
+}
+
+@media (max-width: 360px) {
+  .maintenance-shell {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .maintenance-visual {
+    height: 224px;
+    border-width: 16px;
+  }
+
+  .maintenance-countdown-row {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .maintenance-info {
+    margin-left: -14px;
+    margin-right: -14px;
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+}
