@@ -71,7 +71,8 @@
       notes += noteHtml("maintenance-note-status", [
         "维护倒计时字样说明：",
         "中文文案：维护结束倒计时",
-        "English：Site upgrading, launching in:"
+        "English：Site upgrading, launching in:",
+        "若取不到维护结束时间，使用无倒计时维护页面。"
       ]);
       notes += noteHtml("maintenance-note-actions", [
         "按钮跳转说明：",
