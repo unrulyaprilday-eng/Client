@@ -12,6 +12,19 @@ body {
   font-family: "Microsoft YaHei", Arial, sans-serif;
 }
 
+body.maintenance-note-layout {
+  width: 800px !important;
+  min-width: 800px !important;
+  max-width: none;
+}
+
+body.maintenance-note-layout #base {
+  width: 428px !important;
+  max-width: none;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
 #base {
   position: relative;
   width: 100%;
@@ -102,10 +115,27 @@ body {
   letter-spacing: 0;
 }
 
+.maintenance-countdown-note {
+  display: inline-block;
+  margin: 8px 0 0;
+  padding: 3px 8px;
+  background: #fff8b8;
+  color: #4a451f;
+  font-size: 14px;
+  line-height: 20px;
+}
+
 .maintenance-notice-title {
-  max-width: 250px;
-  font-size: 20px;
-  line-height: 28px;
+  width: 100%;
+  max-width: none;
+  font-size: 18px;
+  line-height: 26px;
+}
+
+.maintenance-notice-row {
+  align-items: stretch;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .maintenance-tag {
@@ -192,6 +222,68 @@ body {
 
 .maintenance-finished .maintenance-info {
   background: #eef7f3;
+}
+
+.maintenance-dev-note {
+  position: absolute;
+  left: 463px;
+  width: 324px;
+  min-height: 112px;
+  padding: 12px 14px;
+  box-sizing: border-box;
+  border: 1px solid #d2b33f;
+  background: #fff2a8;
+  color: #333;
+  display: block !important;
+  font-size: 13px;
+  line-height: 20px;
+  z-index: 80;
+}
+
+.maintenance-note-status {
+  top: 338px;
+}
+
+.maintenance-note-actions {
+  top: 592px;
+}
+
+.maintenance-dev-note::before {
+  content: "";
+  position: absolute;
+  left: -118px;
+  top: 30px;
+  width: 106px;
+  height: 1px;
+  background: #333;
+}
+
+.maintenance-dev-note::after {
+  content: "";
+  position: absolute;
+  left: -124px;
+  top: 25px;
+  width: 0;
+  height: 0;
+  border-top: 6px solid transparent;
+  border-bottom: 6px solid transparent;
+  border-right: 10px solid #333;
+}
+
+.maintenance-note-actions::before {
+  top: 20px;
+}
+
+.maintenance-note-actions::after {
+  top: 15px;
+}
+
+.maintenance-dev-note p {
+  margin: 0 0 5px;
+}
+
+.maintenance-dev-note p:last-child {
+  margin-bottom: 0;
 }
 
 .maintenance-active #u125,
