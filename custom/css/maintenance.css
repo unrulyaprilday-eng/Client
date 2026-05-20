@@ -115,6 +115,18 @@ body.maintenance-note-layout #base {
   letter-spacing: 0;
 }
 
+.maintenance-active:not(.maintenance-notice):not(.maintenance-finished) .maintenance-countdown-row {
+  justify-content: center;
+}
+
+.maintenance-active:not(.maintenance-notice):not(.maintenance-finished) .maintenance-countdown {
+  padding: 4px 14px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.7);
+  box-shadow: 0 4px 12px rgba(63, 56, 77, 0.08);
+  font-variant-numeric: tabular-nums;
+}
+
 .maintenance-countdown-note {
   display: inline-block;
   margin: 8px 0 0;
