@@ -1,0 +1,143 @@
+/* My Data tab refinements for the invite prototype. */
+#u1_state1,
+#u1_state1_content {
+  background:#fff4f1;
+}
+
+#u1_state1 .invite-my-data {
+  position:absolute;
+  left:0;
+  top:0;
+  width:428px;
+  min-height:790px;
+  box-sizing:border-box;
+  padding:0 12px 28px;
+  background:#fff4f1;
+  color:#a34400;
+  font-family:'微软雅黑', Arial, sans-serif;
+}
+
+.invite-my-data__filters {
+  display:flex;
+  gap:12px;
+  padding:14px 0 14px;
+  border-bottom:1px solid #f3d3ca;
+  overflow:hidden;
+}
+
+.invite-my-data__filter {
+  flex:1 0 56px;
+  height:34px;
+  border:1px solid #f4cfc5;
+  border-radius:18px;
+  background:#fff8f6;
+  color:#b86c4f;
+  font-size:14px;
+  line-height:32px;
+  text-align:center;
+  box-sizing:border-box;
+}
+
+.invite-my-data__filter.is-active {
+  border-color:#ff6b21;
+  background:#ff6b21;
+  color:#fff;
+  font-weight:700;
+}
+
+.invite-data-section {
+  margin-top:14px;
+  overflow:hidden;
+  border-radius:8px;
+  background:#fff;
+  box-shadow:0 1px 8px rgba(196, 110, 84, 0.07);
+}
+
+.invite-data-section:first-of-type {
+  margin-top:16px;
+}
+
+.invite-data-section__title {
+  height:54px;
+  border-bottom:1px solid #f1d4cc;
+  color:#ad4b00;
+  font-size:20px;
+  line-height:54px;
+  text-align:center;
+}
+
+.invite-data-grid {
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  padding:0 14px;
+}
+
+.invite-data-item {
+  height:70px;
+  padding:14px 4px 12px;
+  border-right:1px solid #f1d4cc;
+  border-bottom:1px solid #f1d4cc;
+  box-sizing:border-box;
+  text-align:center;
+}
+
+.invite-data-section--compact .invite-data-item {
+  height:64px;
+  padding-top:11px;
+  padding-bottom:10px;
+}
+
+.invite-data-item:nth-child(3n) {
+  border-right:none;
+}
+
+.invite-data-item:nth-last-child(-n+3) {
+  border-bottom:none;
+}
+
+.invite-data-grid--two .invite-data-item {
+  grid-column:span 1;
+}
+
+.invite-data-label {
+  min-height:18px;
+  color:#ff9b8e;
+  font-size:14px;
+  line-height:18px;
+  white-space:nowrap;
+}
+
+.invite-data-value {
+  margin-top:9px;
+  color:#a34400;
+  font-size:16px;
+  line-height:20px;
+}
+
+.invite-data-value--money {
+  color:#ff9500;
+}
+
+.invite-data-item--wide {
+  grid-column:span 3;
+}
+
+.invite-data-item--empty {
+  visibility:hidden;
+}
+
+@media (max-width: 360px) {
+  #u1_state1 .invite-my-data {
+    width:100vw;
+    padding-left:10px;
+    padding-right:10px;
+  }
+
+  .invite-my-data__filters {
+    gap:8px;
+  }
+
+  .invite-data-label {
+    font-size:12px;
+  }
+}
