@@ -1,7 +1,7 @@
 /* My Data tab refinements for the invite prototype. */
 #u1_state1,
 #u1_state1_content {
-  background:#fff4f1;
+  background:#09111f;
 }
 
 #u1_state1 .invite-my-data {
@@ -12,26 +12,26 @@
   min-height:790px;
   box-sizing:border-box;
   padding:0 12px 28px;
-  background:#fff4f1;
-  color:#a34400;
+  background:#09111f;
+  color:#f5f8ff;
   font-family:'微软雅黑', Arial, sans-serif;
 }
 
 .invite-my-data__filters {
   display:flex;
-  gap:12px;
+  gap:6px;
   padding:14px 0 14px;
-  border-bottom:1px solid #f3d3ca;
+  border-bottom:1px solid #18263a;
   overflow:hidden;
 }
 
 .invite-my-data__filter {
-  flex:1 0 56px;
+  flex:1 0 62px;
   height:34px;
-  border:1px solid #f4cfc5;
+  border:1px solid #1f2f46;
   border-radius:18px;
-  background:#fff8f6;
-  color:#b86c4f;
+  background:#0d1726;
+  color:#b7c3d4;
   font-size:14px;
   line-height:32px;
   text-align:center;
@@ -39,8 +39,8 @@
 }
 
 .invite-my-data__filter.is-active {
-  border-color:#ff6b21;
-  background:#ff6b21;
+  border-color:#1c82ff;
+  background:#1684ff;
   color:#fff;
   font-weight:700;
 }
@@ -49,8 +49,8 @@
   margin-top:14px;
   overflow:hidden;
   border-radius:8px;
-  background:#fff;
-  box-shadow:0 1px 8px rgba(196, 110, 84, 0.07);
+  background:#101a29;
+  box-shadow:none;
 }
 
 .invite-data-section:first-of-type {
@@ -59,8 +59,9 @@
 
 .invite-data-section__title {
   height:54px;
-  border-bottom:1px solid #f1d4cc;
-  color:#ad4b00;
+  border-bottom:1px solid #1f2d42;
+  color:#f5f8ff;
+  font-weight:700;
   font-size:20px;
   line-height:54px;
   text-align:center;
@@ -69,14 +70,17 @@
 .invite-data-grid {
   display:grid;
   grid-template-columns:repeat(3, 1fr);
-  padding:0 14px;
+  gap:7px;
+  padding:0 14px 12px;
 }
 
 .invite-data-item {
   height:70px;
   padding:14px 4px 12px;
-  border-right:1px solid #f1d4cc;
-  border-bottom:1px solid #f1d4cc;
+  border-right:none;
+  border-bottom:none;
+  border-radius:6px;
+  background:#151f2e;
   box-sizing:border-box;
   text-align:center;
 }
@@ -101,7 +105,7 @@
 
 .invite-data-label {
   min-height:18px;
-  color:#ff9b8e;
+  color:#718095;
   font-size:14px;
   line-height:18px;
   white-space:nowrap;
@@ -109,13 +113,13 @@
 
 .invite-data-value {
   margin-top:9px;
-  color:#a34400;
+  color:#f5f8ff;
   font-size:16px;
   line-height:20px;
 }
 
 .invite-data-value--money {
-  color:#ff9500;
+  color:#ffae00;
 }
 
 .invite-data-item--wide {
