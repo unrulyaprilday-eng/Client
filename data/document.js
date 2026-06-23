@@ -43,6 +43,20 @@ $axure.loadDocument({
         ]
       },
       {
+        "id": "home_component_group",
+        "pageName": "首页",
+        "type": "Folder",
+        "url": "",
+        "children": [
+          {
+            "id": "live_feed_component",
+            "pageName": "奖励动态",
+            "type": "Wireframe",
+            "url": "奖励动态.html"
+          }
+        ]
+      },
+      {
         "id": "onbtmf",
         "pageName": "VIP CLUB",
         "type": "Wireframe",

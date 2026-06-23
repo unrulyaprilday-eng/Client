@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>奖励动态</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link href="resources/css/axure_rp_page.css" type="text/css" rel="stylesheet"/>
+    <link href="data/styles.css" type="text/css" rel="stylesheet"/>
+    <link href="files/奖励动态/styles.css" type="text/css" rel="stylesheet"/>
+    <link href="custom/css/live-feed.css" type="text/css" rel="stylesheet"/>
+    <script src="resources/scripts/jquery-3.2.1.min.js"></script>
+    <script src="resources/scripts/axure/axQuery.js"></script>
+    <script src="resources/scripts/axure/globals.js"></script>
+    <script src="resources/scripts/axutils.js"></script>
+    <script src="resources/scripts/axure/annotation.js"></script>
+    <script src="resources/scripts/axure/axQuery.std.js"></script>
+    <script src="resources/scripts/axure/doc.js"></script>
+    <script src="resources/scripts/messagecenter.js"></script>
+    <script src="resources/scripts/axure/events.js"></script>
+    <script src="resources/scripts/axure/recording.js"></script>
+    <script src="resources/scripts/axure/action.js"></script>
+    <script src="resources/scripts/axure/expr.js"></script>
+    <script src="resources/scripts/axure/geometry.js"></script>
+    <script src="resources/scripts/axure/flyout.js"></script>
+    <script src="resources/scripts/axure/model.js"></script>
+    <script src="resources/scripts/axure/repeater.js"></script>
+    <script src="resources/scripts/axure/sto.js"></script>
+    <script src="resources/scripts/axure/utils.temp.js"></script>
+    <script src="resources/scripts/axure/variables.js"></script>
+    <script src="resources/scripts/axure/drag.js"></script>
+    <script src="resources/scripts/axure/move.js"></script>
+    <script src="resources/scripts/axure/visibility.js"></script>
+    <script src="resources/scripts/axure/style.js"></script>
+    <script src="resources/scripts/axure/adaptive.js"></script>
+    <script src="resources/scripts/axure/tree.js"></script>
+    <script src="resources/scripts/axure/init.temp.js"></script>
+    <script src="resources/scripts/axure/legacy.js"></script>
+    <script src="resources/scripts/axure/viewer.js"></script>
+    <script src="resources/scripts/axure/math.js"></script>
+    <script src="resources/scripts/axure/jquery.nicescroll.min.js"></script>
+    <script src="data/document.js"></script>
+    <script src="files/奖励动态/data.js"></script>
+    <script src="custom/js/axure-custom-page-ready.js"></script>
+    <script src="resources/scripts/axure/ios.js"></script>
+    <script src="custom/js/live-feed.js"></script>
+    <script type="text/javascript">
+      $axure.utils.getTransparentGifPath = function() { return 'resources/images/transparent.gif'; };
+      $axure.utils.getOtherPath = function() { return 'resources/Other.html'; };
+      $axure.utils.getReloadPath = function() { return 'resources/reload.html'; };
+    </script>
+  </head>
+  <body data-axure-page-id="live_feed_component">
+    <div id="base" class="">
+      <div class="custom-page-shell live-feed-page">
+        <div class="phone-stage">
+          <section class="mobile-preview">
+            <div class="modules-stack">
+              <section class="surface-card">
+                <div class="surface-head">
+                  <strong>1 行效果</strong>
+                  <span>单行滚动</span>
+                </div>
+                <div class="component-title" id="singleTitle">中奖动态</div>
+                <div class="feed-box single-line dark" id="singlePreview">
+                  <div class="feed-track" id="singleTrack">
+                    <article class="feed-item">
+                      <span class="feed-icon">🔥</span>
+                      <strong>J***3 won ₹12,560 in Gates of Olympus</strong>
+                    </article>
+                    <article class="feed-item">
+                      <span class="feed-icon">🎉</span>
+                      <strong>R***8 claimed ₹500 activity reward</strong>
+                    </article>
+                    <article class="feed-item">
+                      <span class="feed-icon">🏆</span>
+                      <strong>M***2 reached VIP8</strong>
+                    </article>
+                  </div>
+                </div>
+              </section>
+
+              <section class="surface-card">
+                <div class="surface-head">
+                  <strong>3 行效果</strong>
+                  <span>多行展示</span>
+                </div>
+                <div class="component-title" id="tripleTitle">中奖动态</div>
+                <div class="feed-box triple-line dark" id="triplePreview">
+                  <div class="feed-track feed-track-multi" id="tripleTrack">
+                    <article class="feed-item">
+                      <span class="feed-icon">🔥</span>
+                      <strong>J***3 won ₹12,560 in Gates of Olympus</strong>
+                    </article>
+                    <article class="feed-item">
+                      <span class="feed-icon">🎁</span>
+                      <strong>R***8 claimed ₹500 mission reward</strong>
+                    </article>
+                    <article class="feed-item">
+                      <span class="feed-icon">🏆</span>
+                      <strong>M***2 reached VIP8</strong>
+                    </article>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </section>
+        </div>
+
+        <aside class="outside-config">
+          <div class="config-card">
+            <h2>组件配置</h2>
+            <p class="config-desc">配置项单独放在页面外，方便评审和开发确认，不混进手机页面内容。</p>
+            <div class="toggle-row">
+              <span>显示标题</span>
+              <button class="switch on" id="titleToggle" type="button" data-on="true" aria-label="显示标题"></button>
+            </div>
+            <div class="toggle-row">
+              <span>显示图标</span>
+              <button class="switch on" id="iconToggle" type="button" data-on="true" aria-label="显示图标"></button>
+            </div>
+            <label class="field">
+              <span>滚动间隔</span>
+              <select id="intervalSelect">
+                <option>0.5 秒</option>
+                <option>1 秒</option>
+                <option>2 秒</option>
+                <option selected>3 秒</option>
+                <option>5 秒</option>
+                <option>8 秒</option>
+              </select>
+            </label>
+          </div>
+          <div class="callout-arrow" aria-hidden="true"></div>
+        </aside>
+      </div>
+    </div>
+  </body>
+</html>

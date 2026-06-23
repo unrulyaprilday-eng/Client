@@ -1,0 +1,135 @@
+{
+  "schemaVersion": 1,
+  "savedAt": "2026-06-02T06:22:19.368Z",
+  "source": "data/document.js sitemap.rootNodes",
+  "rootNodes": [
+    {
+      "id": "",
+      "pageName": "Invite",
+      "type": "Folder",
+      "url": "",
+      "children": [
+        {
+          "id": "0y9vvn",
+          "pageName": "Invite_分享",
+          "type": "Wireframe",
+          "url": "invite___.html"
+        }
+      ]
+    },
+    {
+      "id": "",
+      "pageName": "优惠",
+      "type": "Folder",
+      "url": "",
+      "children": [
+        {
+          "id": "ni6wfh",
+          "pageName": "优惠",
+          "type": "Wireframe",
+          "url": "优惠.html"
+        }
+      ]
+    },
+    {
+      "id": "onbtmf",
+      "pageName": "VIP CLUB",
+      "type": "Wireframe",
+      "url": "vip_club.html"
+    },
+    {
+      "id": "p17udf",
+      "pageName": "VIP CLUB 保级",
+      "type": "Wireframe",
+      "url": "vip_club___.html"
+    },
+    {
+      "id": "3vstxy",
+      "pageName": "VIP CLUB 保级_en",
+      "type": "Wireframe",
+      "url": "vip_club____en.html"
+    },
+    {
+      "id": "",
+      "pageName": "Promotion",
+      "type": "Folder",
+      "url": "",
+      "children": [
+        {
+          "id": "lv051n",
+          "pageName": "Rank",
+          "type": "Wireframe",
+          "url": "rank.html"
+        }
+      ]
+    },
+    {
+      "id": "",
+      "pageName": "存款",
+      "type": "Folder",
+      "url": "",
+      "children": [
+        {
+          "id": "4jekko",
+          "pageName": "存款",
+          "type": "Wireframe",
+          "url": "存款.html"
+        }
+      ]
+    },
+    {
+      "id": "",
+      "pageName": "My",
+      "type": "Folder",
+      "url": "",
+      "children": [
+        {
+          "id": "huzl40",
+          "pageName": "My",
+          "type": "Wireframe",
+          "url": "my.html"
+        }
+      ]
+    },
+    {
+      "id": "",
+      "pageName": "拼多多转盘",
+      "type": "Folder",
+      "url": "",
+      "children": [
+        {
+          "id": "kr14tv",
+          "pageName": "拼多多转盘",
+          "type": "Wireframe",
+          "url": "拼多多转盘.html"
+        }
+      ]
+    },
+    {
+      "id": "v3x5tg",
+      "pageName": "维护页面",
+      "type": "Wireframe",
+      "url": "维护页面.html",
+      "children": [
+        {
+          "id": "l8h67m",
+          "pageName": "维护结束",
+          "type": "Wireframe",
+          "url": "维护结束.html"
+        },
+        {
+          "id": "maint_notice_001",
+          "pageName": "维护无倒计时",
+          "type": "Wireframe",
+          "url": "维护无倒计时.html"
+        }
+      ]
+    },
+    {
+      "id": "qk6oix",
+      "pageName": "客服弹窗",
+      "type": "Wireframe",
+      "url": "客服弹窗.html"
+    }
+  ]
+}
