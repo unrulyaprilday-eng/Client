@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="450" viewBox="0 0 800 450" role="img" aria-labelledby="title desc">
+  <title id="title">Share Now reward banner</title>
+  <desc id="desc">A mobile sharing promotion banner with social channels, coins, and daily reward.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#122357"/>
+      <stop offset="0.45" stop-color="#2148b5"/>
+      <stop offset="1" stop-color="#0a172e"/>
+    </linearGradient>
+    <linearGradient id="green" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#7cff35"/>
+      <stop offset="1" stop-color="#05d96f"/>
+    </linearGradient>
+    <linearGradient id="coin" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fff1a6"/>
+      <stop offset="0.42" stop-color="#ffc645"/>
+      <stop offset="1" stop-color="#ff7d20"/>
+    </linearGradient>
+    <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="10" result="blur"/>
+      <feColorMatrix in="blur" type="matrix" values="0 0 0 0 0.2 0 0 0 0 0.9 0 0 0 0 1 0 0 0 0.55 0"/>
+      <feBlend in="SourceGraphic" mode="screen"/>
+    </filter>
+  </defs>
+  <rect width="800" height="450" fill="url(#bg)"/>
+  <path d="M0 315 C120 250 190 335 310 270 C430 205 530 215 800 130 L800 450 L0 450 Z" fill="#07101f" opacity="0.58"/>
+  <g opacity="0.42" stroke="#57d8ff" stroke-width="3" fill="none">
+    <path d="M-20 146 C150 80 270 70 392 142 S635 220 820 90"/>
+    <path d="M-30 318 C130 206 292 210 430 290 S642 355 825 245"/>
+  </g>
+  <g transform="translate(74 62)">
+    <circle cx="92" cy="88" r="54" fill="#1877f2"/>
+    <circle cx="186" cy="52" r="42" fill="#28a8e8"/>
+    <circle cx="250" cy="136" r="48" fill="#20c769"/>
+    <circle cx="118" cy="198" r="39" fill="#141414"/>
+    <text x="92" y="107" text-anchor="middle" font-family="Arial, sans-serif" font-size="68" font-weight="800" fill="#fff">f</text>
+    <text x="186" y="64" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="800" fill="#fff">TG</text>
+    <text x="250" y="151" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="800" fill="#fff">WA</text>
+    <text x="118" y="213" text-anchor="middle" font-family="Arial, sans-serif" font-size="32" font-weight="800" fill="#fff">X</text>
+  </g>
+  <g transform="translate(425 56)" filter="url(#glow)">
+    <rect x="0" y="0" width="234" height="332" rx="32" fill="#101b35" stroke="#4cc9ff" stroke-width="4"/>
+    <rect x="24" y="45" width="186" height="218" rx="18" fill="#fff8ef"/>
+    <rect x="48" y="75" width="138" height="20" rx="10" fill="#ffd9b7"/>
+    <rect x="48" y="111" width="88" height="16" rx="8" fill="#ffe9d7"/>
+    <rect x="48" y="151" width="138" height="70" rx="16" fill="url(#green)"/>
+    <text x="117" y="195" text-anchor="middle" font-family="Arial, sans-serif" font-size="28" font-weight="800" fill="#041407">Share</text>
+    <circle cx="116" cy="292" r="13" fill="#263a72"/>
+  </g>
+  <g transform="translate(575 245)">
+    <circle cx="0" cy="0" r="33" fill="url(#coin)"/>
+    <circle cx="58" cy="46" r="25" fill="url(#coin)"/>
+    <circle cx="-32" cy="79" r="22" fill="url(#coin)"/>
+    <text x="0" y="9" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="800" fill="#7b3b04">$</text>
+    <text x="58" y="54" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="800" fill="#7b3b04">$</text>
+    <text x="-32" y="86" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="800" fill="#7b3b04">$</text>
+  </g>
+  <g transform="translate(72 302)">
+    <text x="0" y="0" font-family="Arial, sans-serif" font-size="32" font-weight="800" fill="#ffffff">Share Now</text>
+    <text x="0" y="42" font-family="Arial, sans-serif" font-size="56" font-weight="900" fill="#36ff6b">R$ 500</text>
+    <text x="0" y="76" font-family="Arial, sans-serif" font-size="20" font-weight="700" fill="#ffcf7d">Daily reward after one share</text>
+  </g>
+  <g fill="#fff" opacity="0.8">
+    <circle cx="704" cy="78" r="5"/>
+    <circle cx="736" cy="116" r="3"/>
+    <circle cx="382" cy="58" r="4"/>
+    <circle cx="334" cy="372" r="3"/>
+  </g>
+</svg>

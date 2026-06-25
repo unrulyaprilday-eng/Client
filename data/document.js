@@ -85,6 +85,13 @@ $axure.loadDocument({
             "pageName": "Rank",
             "type": "Wireframe",
             "url": "rank.html"
+          },
+          {
+            "id": "promotion_share_activity",
+            "pageName": "分享活动",
+            "type": "Wireframe",
+            "url": "分享活动.html",
+            "children": []
           }
         ]
       },
@@ -104,15 +111,22 @@ $axure.loadDocument({
       },
       {
         "id": "",
-        "pageName": "My",
+        "pageName": "Profile",
         "type": "Folder",
         "url": "",
         "children": [
           {
             "id": "huzl40",
-            "pageName": "My",
+            "pageName": "Profile",
             "type": "Wireframe",
             "url": "my.html"
+          },
+          {
+            "id": "profile_notification",
+            "pageName": "Notifications",
+            "type": "Wireframe",
+            "url": "通知.html",
+            "children": []
           }
         ]
       },

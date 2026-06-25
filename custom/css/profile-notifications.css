@@ -1,0 +1,45 @@
+#profile_notifications_entry.profile-notifications-entry {
+  position:absolute;
+  left:14px;
+  top:529px;
+  width:400px;
+  height:64px;
+  display:block;
+  box-sizing:border-box;
+  background:transparent;
+  color:#ffffff;
+  text-decoration:none;
+  cursor:pointer;
+  z-index:20;
+  font-family:"微软雅黑", "Microsoft YaHei", sans-serif;
+  font-size:15px;
+}
+
+.profile-notifications-entry__icon {
+  display:none;
+}
+
+.profile-notifications-entry__icon::before {
+  content:none;
+}
+
+.profile-notifications-entry__icon::after {
+  content:none;
+}
+
+.profile-notifications-entry__label {
+  position:absolute;
+  left:64px;
+  top:18px;
+  width:154px;
+  height:40px;
+  display:block;
+  line-height:40px;
+  background:#151d29;
+  text-align:left;
+  white-space:nowrap;
+}
+
+.profile-notifications-entry__arrow {
+  display:none;
+}

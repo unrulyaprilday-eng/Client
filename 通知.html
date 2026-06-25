@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Notifications</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=884, initial-scale=1"/>
+    <link href="resources/css/axure_rp_page.css" type="text/css" rel="stylesheet"/>
+    <link href="data/styles.css" type="text/css" rel="stylesheet"/>
+    <link href="files/通知/styles.css" type="text/css" rel="stylesheet"/>
+    <link href="custom/css/notification.css" type="text/css" rel="stylesheet"/>
+    <script src="resources/scripts/jquery-3.7.1.min.js"></script>
+    <script src="resources/scripts/axure/axQuery.js"></script>
+    <script src="resources/scripts/axure/globals.js"></script>
+    <script src="resources/scripts/axutils.js"></script>
+    <script src="resources/scripts/axure/annotation.js"></script>
+    <script src="resources/scripts/axure/axQuery.std.js"></script>
+    <script src="resources/scripts/axure/doc.js"></script>
+    <script src="resources/scripts/messagecenter.js"></script>
+    <script src="resources/scripts/axure/events.js"></script>
+    <script src="resources/scripts/axure/recording.js"></script>
+    <script src="resources/scripts/axure/action.js"></script>
+    <script src="resources/scripts/axure/expr.js"></script>
+    <script src="resources/scripts/axure/geometry.js"></script>
+    <script src="resources/scripts/axure/flyout.js"></script>
+    <script src="resources/scripts/axure/model.js"></script>
+    <script src="resources/scripts/axure/repeater.js"></script>
+    <script src="resources/scripts/axure/sto.js"></script>
+    <script src="resources/scripts/axure/utils.temp.js"></script>
+    <script src="resources/scripts/axure/variables.js"></script>
+    <script src="resources/scripts/axure/drag.js"></script>
+    <script src="resources/scripts/axure/move.js"></script>
+    <script src="resources/scripts/axure/visibility.js"></script>
+    <script src="resources/scripts/axure/style.js"></script>
+    <script src="resources/scripts/axure/adaptive.js"></script>
+    <script src="resources/scripts/axure/tree.js"></script>
+    <script src="resources/scripts/axure/init.temp.js"></script>
+    <script src="resources/scripts/axure/legacy.js"></script>
+    <script src="resources/scripts/axure/viewer.js"></script>
+    <script src="resources/scripts/axure/math.js"></script>
+    <script src="resources/scripts/axure/jquery.nicescroll.min.js"></script>
+    <script src="data/document.js"></script>
+    <script src="files/通知/data.js"></script>
+    <script type="text/javascript">
+      $axure.utils.getTransparentGifPath = function() { return 'resources/images/transparent.gif'; };
+      $axure.utils.getOtherPath = function() { return 'resources/Other.html'; };
+      $axure.utils.getReloadPath = function() { return 'resources/reload.html'; };
+    </script>
+    <script src="custom/js/axure-custom-page-ready.js"></script>
+    <script src="resources/scripts/axure/ios.js"></script>
+    <script src="custom/js/notification.js"></script>
+  </head>
+  <body data-axure-page-id="profile_notification">
+    <div id="base" class="">
+      <div class="notification-shell">
+      <main class="notification-app" aria-label="Notifications">
+        <header class="topbar">
+          <a class="icon-button icon-button--back" href="my.html" aria-label="返回 My"></a>
+          <div class="topbar__title">
+            <p>Profile / Settings</p>
+            <h1>Notifications</h1>
+          </div>
+        </header>
+
+        <section class="notification-card" data-status-card>
+          <div class="bell-mark" aria-hidden="true">
+            <span class="bell-mark__dome"></span>
+            <span class="bell-mark__clapper"></span>
+          </div>
+          <div class="notification-copy">
+            <p>Notification Permission</p>
+            <h2 data-state-title>未开启通知</h2>
+            <span data-state-desc>可在 APP 或网页开启通知，点击开关后再触发系统授权。</span>
+          </div>
+        </section>
+
+        <section class="switch-panel">
+          <button class="single-switch-row" type="button" data-action="toggle-notification" aria-pressed="false">
+            <span class="single-switch-copy">
+              <strong>通知开关</strong>
+              <em data-switch-desc>仅点击开启后请求系统通知权限</em>
+            </span>
+            <span class="switch" data-main-switch aria-hidden="true"></span>
+          </button>
+        </section>
+
+        <section class="ios-install-tip" data-ios-tip hidden>
+          <div class="tip-icon" aria-hidden="true"></div>
+          <div>
+            <h2>添加到主屏幕</h2>
+            <p>iPhone/iPad 未安装 PWA 时，请先添加到主屏幕，再从主屏幕打开开启通知。</p>
+          </div>
+        </section>
+
+        <section class="notice-copy">
+          <p data-footer-copy>关闭通知、退出登录或权限不可用时，会同步更新状态并停止继续发送。</p>
+        </section>
+      </main>
+
+      <aside class="notification-app notification-app--preview" aria-hidden="true">
+        <header class="topbar">
+          <div class="icon-button icon-button--back" aria-hidden="true"></div>
+          <div class="topbar__title">
+            <p>Profile / Settings</p>
+            <h1>Notifications</h1>
+          </div>
+        </header>
+
+        <section class="ios-install-tip">
+          <div class="tip-icon" aria-hidden="true"></div>
+          <div>
+            <h2>添加到主屏幕</h2>
+            <p>iPhone/iPad 未安装 PWA 时，请先用 Safari 打开网站，点击分享，选择“添加到主屏幕”。</p>
+          </div>
+        </section>
+
+        <section class="switch-panel switch-panel--disabled">
+          <div class="single-switch-row single-switch-row--preview" aria-hidden="true">
+            <span class="single-switch-copy">
+              <strong>通知开关</strong>
+              <em>仅点击开启后请求系统通知权限</em>
+            </span>
+            <span class="switch" aria-hidden="true"></span>
+          </div>
+        </section>
+      </aside>
+      </div>
+
+      <div class="sheet" data-sheet hidden>
+        <div class="sheet__scrim" data-action="close-sheet"></div>
+        <section class="sheet__panel" role="dialog" aria-modal="true" aria-labelledby="sheet-title">
+          <button class="sheet__close" type="button" data-action="close-sheet" aria-label="关闭"></button>
+          <h2 id="sheet-title" data-sheet-title>通知暂不可用</h2>
+          <p data-sheet-body>请检查 APP、浏览器或系统权限设置后重试。</p>
+          <button class="primary-action" type="button" data-action="close-sheet">知道了</button>
+        </section>
+      </div>
+
+      <div class="toast" data-toast hidden></div>
+    </div>
+  </body>
+</html>

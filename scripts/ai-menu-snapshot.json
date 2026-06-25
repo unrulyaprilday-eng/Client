@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "savedAt": "2026-06-02T06:22:19.368Z",
+  "savedAt": "2026-06-24T08:53:23.749Z",
   "source": "data/document.js sitemap.rootNodes",
   "rootNodes": [
     {
@@ -28,6 +28,20 @@
           "pageName": "优惠",
           "type": "Wireframe",
           "url": "优惠.html"
+        }
+      ]
+    },
+    {
+      "id": "home_component_group",
+      "pageName": "首页",
+      "type": "Folder",
+      "url": "",
+      "children": [
+        {
+          "id": "live_feed_component",
+          "pageName": "奖励动态",
+          "type": "Wireframe",
+          "url": "奖励动态.html"
         }
       ]
     },
@@ -60,6 +74,13 @@
           "pageName": "Rank",
           "type": "Wireframe",
           "url": "rank.html"
+        },
+        {
+          "id": "promotion_share_activity",
+          "pageName": "分享活动",
+          "type": "Wireframe",
+          "url": "分享活动.html",
+          "children": []
         }
       ]
     },
@@ -79,15 +100,22 @@
     },
     {
       "id": "",
-      "pageName": "My",
+      "pageName": "Profile",
       "type": "Folder",
       "url": "",
       "children": [
         {
           "id": "huzl40",
-          "pageName": "My",
+          "pageName": "Profile",
           "type": "Wireframe",
           "url": "my.html"
+        },
+        {
+          "id": "profile_notification",
+          "pageName": "Notifications",
+          "type": "Wireframe",
+          "url": "通知.html",
+          "children": []
         }
       ]
     },
