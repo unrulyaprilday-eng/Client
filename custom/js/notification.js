@@ -143,7 +143,7 @@
       var copy = {
         on: ["通知已开启", "APP 或网页通知权限已开启，账户、安全、资金与优惠提醒会继续推送。", "已开启，点击可关闭"],
         off: ["未开启通知", "可在 APP 或网页开启通知，点击开关后再触发系统授权。", "仅点击开启后请求系统通知权限"],
-        add_to_home_screen: ["添加到主屏幕", "iPhone/iPad 未安装 PWA 时，请先添加到主屏幕，再从主屏幕打开开启通知。", "请先添加到主屏幕"],
+        add_to_home_screen: ["添加到主屏幕", "当前设备需先将网站添加到主屏幕，之后从主屏幕进入，才可开启通知。", "请先添加到主屏幕"],
         blocked: ["系统权限已禁止", "APP 或网页通知权限已被系统禁止，请到对应权限设置中改为允许。", "权限已禁止"],
         unavailable: ["通知不可用", "当前 APP、浏览器或访问环境不支持开启通知。", "当前环境不可用"]
       }[status];
@@ -225,7 +225,7 @@
       if (isIOSWithoutPWA(device)) {
         disableAndSave();
         render();
-        showSheet(els, "添加到主屏幕", "iPhone/iPad 未安装 PWA 时，请先用 Safari 打开网站，点击分享，选择“添加到主屏幕”。安装后从主屏幕打开，再开启通知。");
+        showSheet(els, "添加到主屏幕", "请先使用 Safari 打开网站，点击分享，选择“添加到主屏幕”。完成后从主屏幕进入，再开启通知。");
         return;
       }
 
@@ -269,6 +269,8 @@
       var action = actionTarget.getAttribute("data-action");
       if (action === "toggle-notification") {
         toggleNotification();
+      } else if (action === "show-install-help") {
+        showSheet(els, "添加到主屏幕", "请先使用 Safari 打开网站，点击分享，选择“添加到主屏幕”。完成后从主屏幕进入，再开启通知。");
       } else if (action === "close-sheet") {
         closeSheet(els);
       }

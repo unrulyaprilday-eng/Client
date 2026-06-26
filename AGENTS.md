@@ -45,9 +45,67 @@ HTML 必须：
 - `page.name` 与菜单页面名称一致。
 - 保留 Axure 常用 `variables`。
 - `diagram.objects` 至少为空数组。
-- `defaultAdaptiveView.size.width/height` 与实际画布一致；有页面外说明区时宽度也要同步加宽。
+- `defaultAdaptiveView.size.width/height` 表示 Axure 预览视窗尺寸，不等于长页面内容总高度；普通手机页常用 `428x926`，左侧页面加右侧说明页常用 `800x926`。页面内容可比视窗高，但不要把 `height` 写成长内容总高度，否则 `Default scale` 会把整页缩小。
 
 `files/页面名称/styles.css` 可以为空，但必须存在并被 HTML 引用。
+
+## 正常视窗页与 Axure 缩放
+
+- Axure Player 的 `Default scale` 会按 `defaultAdaptiveView.size.width/height` 拟合预览视窗；这里定义的是“首屏视窗框”，不是长页面内容总高度。
+- 普通手机页默认按 `428x926` 建模：HTML `meta viewport` 使用 `width=428, initial-scale=1`，`files/页面名称/data.js` 的 `defaultAdaptiveView.size` 也使用 `428x926`。
+- 普通手机页的 `files/页面名称/styles.css` 建议保持 Axure 常规基线：`body` 宽 `428px`、`position: static`、`margin: 0`，`.form_sketch` 透明，`#base` 仅保留 `position:absolute; z-index:0;`。不要先把 `body` 或 `#base` 缩小，再靠缩放补回来。
+- 带右侧说明区的“左页面 + 右备注”页，默认按 `800x926` 建模：HTML `meta viewport` 使用 `width=800, initial-scale=1`，`body`/`#base` 宽 `800px`，左侧手机页面仍保持 `428px` 原尺寸。
+- 右侧说明页的 `#base` 可设置 `width: 800px; min-height: 926px;`，长内容高度交给内部容器，例如 `.prototype-canvas`、`.phone-stage`、`.notes-panel`；不要把 `defaultAdaptiveView.size.height` 写成 `1548`、`2168` 这类长内容高度。
+- 页面内容较长时，应让页面自然滚动或由内部容器撑高；Axure 视窗高度仍保持常用 `926px` 或明确约定的首屏高度。长页面不是靠放大 `defaultAdaptiveView.size.height` 来实现的。
+- 若用户反馈“页面太小”“和 Rank 占比不一致”“刷新时有从大到小闪动”，优先检查三项：`defaultAdaptiveView.size.height` 是否误写成长内容高度、`meta viewport` 是否与展示宽度一致、`body/#base` 是否仍是标准宽度。先修正视窗定义，不要默认用 `transform: scale(...)`、`zoom` 或压缩手机页来补救。
+
+常用 CSS 基线：
+
+```css
+/* 普通手机页 */
+body {
+  margin: 0;
+  background-image: none;
+  position: static;
+  left: auto;
+  width: 428px;
+  margin-left: 0;
+  margin-right: 0;
+  text-align: left;
+}
+.form_sketch {
+  border-color: transparent;
+  background-color: transparent;
+}
+#base {
+  position: absolute;
+  z-index: 0;
+}
+```
+
+```css
+/* 左侧页面 + 右侧说明 */
+body {
+  margin: 0;
+  background-image: none;
+  position: static;
+  left: auto;
+  width: 800px;
+  margin-left: 0;
+  margin-right: 0;
+  text-align: left;
+}
+.form_sketch {
+  border-color: transparent;
+  background-color: transparent;
+}
+#base {
+  position: absolute;
+  z-index: 0;
+  width: 800px;
+  min-height: 926px;
+}
+```
 
 ## Sitemap
 
@@ -126,22 +184,21 @@ Axure 重新导出后，执行一条命令恢复菜单：
 
 规则：
 
-- 参考 `VIP CLUB 保级`：整体画布加宽，手机页面固定左侧，说明框放右侧。
-- 同步修改 HTML/CSS 和 `files/页面名称/data.js` 的 `defaultAdaptiveView.size.width`，否则 Axure 预览会裁掉右侧说明。
-- 常用布局：画布宽 `800px`；手机页保持 `428px` 原尺寸左对齐；说明框 `left: 463px; width: 324px`。
+- 参考 `VIP CLUB 保级`：整体画布使用正常视窗页基线，左侧放手机页面，右侧放说明区。
+- 常用布局：整体画布宽 `800px`，Axure 视窗常规为 `800x926`；左侧手机页保持 `428px` 原尺寸左对齐，右侧为备注区。
+- HTML `meta viewport` 使用 `width=800, initial-scale=1`；`files/页面名称/data.js` 的 `defaultAdaptiveView.size` 常规写 `800x926`。右侧备注再长，也不要把 `height` 写成整页总高度。
+- 自定义静态页推荐在 `#base` 内加一层外部画布容器，例如 `.prototype-canvas { position: relative; width: 800px; min-height: 926px; }`，再把手机页面容器放在左侧 `width: 428px`，说明区、箭头、弹窗等放在同一画布坐标系内。
+- 右侧备注区起点常用 `left: 463px` 或 `476px`，宽度常用 `296px-324px`，保证页面内容与备注区之间有明确留白。
+- 当用户要求“页面内容和备注区分更开”时，优先做成右侧白底备注列或白底备注区，再在其中放淡黄色说明卡；不要把整块备注做成和手机页同层级的彩色大卡片。
 - 不要为了放下右侧说明而缩放手机页面、压缩字号或缩小内容占比；手机 UI 仍按真实移动端密度设计，右侧只是原型备注区。
-- 自定义静态页推荐在 `#base` 内加一层外部画布容器，例如 `.prototype-canvas { position: relative; width: 800px; min-height: ...; }`，再把手机页面容器放在左侧 `width: 428px`，说明区、箭头、弹窗等放在同一画布坐标系内。
-- 如果用户在桌面/Axure 预览里反馈整体仍显小，可保留内部逻辑画布 `800px`，外层展示画布放大到 `1120px`，并用内部 stage 统一 `transform: scale(1.4); transform-origin: left top;` 放大手机页和右侧说明；同时把 `data.js` 的 `defaultAdaptiveView.size.width/height` 同步到放大后的展示画布。
-- HTML 有页面外说明时，`meta viewport` 应与展示画布宽度一致，常规为 `width=800, initial-scale=1`；若使用 1.4 倍放大展示画布，则使用 `width=1120, initial-scale=1`。没有页面外说明的纯手机页仍使用 `width=428`。
-- `files/页面名称/data.js` 的 `defaultAdaptiveView.size.width/height` 必须等于最终展示画布尺寸，常规右侧说明为 `800px` 宽，1.4 倍放大时为 `1120px` 宽；高度必须覆盖手机页和右侧说明的最大内容高度。只改 CSS 宽高但不改 `data.js` 会导致预览裁切。
-- 说明框可用淡黄色背景、细边框、13px 文本；箭头从说明框指向页面内对应元素，箭头落点应靠近被解释的标题、按钮、状态或区域。
+- 说明框可用淡黄色背景、细边框、13px 文本；箭头只在确实有助于定位时使用，不是必须。
 - 说明文字不要放进手机 UI 内，不要让用户误以为是业务提示、资产、奖励、操作结果或真实用户可见提示。
 - 右侧说明内容应使用产品/开发可读语言，说明配置映射、按钮跳转、状态变化、特殊规则等；不要把后台配置表格、管理端字段密集塞进 C 端手机 UI。
 - 如果页面有弹窗、Toast、底部 Sheet 等交互层，默认仍限制在左侧 `428px` 手机区域内，不要覆盖右侧说明框；必要时用画布内绝对定位或固定宽度控制。
 - 按钮跳转说明也属于页面外说明：例如 `Play Now：点击跳转到网站首页。`、`Live Support：点击跳转到客服。`，说明框应放在 UI 外并用箭头指向按钮区域，按钮自身仍保持原页面按钮样式。
 - 文案命名说明也属于页面外说明：例如 `维护结束倒计时`、`维护结束` 这类“字样描述”，应在 UI 外说明框中描述中文/英文文案，箭头指向页面内对应标题或状态文字，不要额外塞进用户 UI。
 - 若页面由 JS 重写 `#base`，旁注优先静态写在 HTML 的 `#base` 外；JS 可做去重兜底。
-- 若用户后续指出“页面太小”“参考 Rank 的布局和占比”“说明放右边”，优先检查该页是否误用 `428px` 画布或把手机页缩放了；修复方向是加宽外层画布到 `800px` 并保持手机页 `428px`，不是整体缩小 UI。
+- 若用户后续指出“页面太小”“参考 Rank 的布局和占比”“说明放右边”，优先检查该页是否把 `defaultAdaptiveView.size.height` 误写成长页面高度、`meta viewport` 是否仍是 `800` 宽、`body/#base` 是否保持标准宽度；修复方向是恢复正常视窗尺寸并保持手机页 `428px`，不是整体缩小或放大 UI。
 
 ## 编码与 Windows 注意事项
 

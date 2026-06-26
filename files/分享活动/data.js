@@ -4,8 +4,8 @@ $axure.loadCurrentPage({
   "defaultAdaptiveView": {
     "name": "",
     "size": {
-      "width": 1120,
-      "height": 2168
+      "width": 800,
+      "height": 926
     }
   },
   "adaptiveViews": [],

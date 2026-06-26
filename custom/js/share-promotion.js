@@ -3,6 +3,10 @@
   var MAX_DAILY_SHARE = 1;
   var REWARD_TEXT = "R$ 500";
   var END_AT = new Date("2026-07-17T23:59:00+08:00");
+  var DEMO_MODES = {
+    manual: "manual",
+    auto: "auto"
+  };
 
   function onReady(callback) {
     if (document.readyState === "loading") {
@@ -24,9 +28,9 @@
   function defaultState() {
     return {
       day: todayKey(),
+      mode: DEMO_MODES.manual,
       shared: 0,
-      claimed: false,
-      records: []
+      claimed: false
     };
   }
 
@@ -36,10 +40,13 @@
       var state = Object.assign(defaultState(), saved);
       if (state.day !== todayKey()) {
         state.day = todayKey();
+        state.mode = state.mode === DEMO_MODES.auto ? DEMO_MODES.auto : DEMO_MODES.manual;
         state.shared = 0;
         state.claimed = false;
       }
-      state.records = Array.isArray(state.records) ? state.records.slice(0, 6) : [];
+      if (state.mode !== DEMO_MODES.auto && state.mode !== DEMO_MODES.manual) {
+        state.mode = DEMO_MODES.manual;
+      }
       return state;
     } catch (error) {
       return defaultState();
@@ -87,6 +94,11 @@
     });
   }
 
+  function resetDailyProgress(state) {
+    state.shared = 0;
+    state.claimed = false;
+  }
+
   function formatCountdown() {
     var diff = END_AT.getTime() - Date.now();
     if (diff <= 0) {
@@ -112,27 +124,33 @@
     }
   }
 
-  function renderHistory(state) {
-    var list = query("[data-history-list]");
-    if (!list) {
-      return;
-    }
-    list.innerHTML = "";
-    if (!state.records.length) {
-      var empty = document.createElement("div");
-      empty.className = "empty-state";
-      empty.textContent = "今日暂无领取记录";
-      list.appendChild(empty);
-      return;
-    }
-    state.records.forEach(function (record) {
-      var row = document.createElement("div");
-      row.className = "history-row";
-      row.innerHTML =
-        "<div><span>" + record.channel + " 分享奖励</span><em>" +
-        record.time + " · 已到账</em></div><strong>" + record.amount + "</strong>";
-      list.appendChild(row);
+  function isManualMode(state) {
+    return state.mode === DEMO_MODES.manual;
+  }
+
+  function hasSharedToday(state) {
+    return state.shared >= MAX_DAILY_SHARE;
+  }
+
+  function updateModeActions(state) {
+    queryAll("[data-demo-mode]").forEach(function (button) {
+      var isActive = button.getAttribute("data-demo-mode") === state.mode;
+      button.classList.toggle("is-active", isActive);
+      button.setAttribute("aria-pressed", isActive ? "true" : "false");
     });
+
+    var flow = query("[data-mode-flow]");
+    var detail = query("[data-mode-detail]");
+    if (flow) {
+      flow.textContent = isManualMode(state)
+        ? "按钮变化：Share Now -> Claim -> Share Now"
+        : "按钮变化：Share Now -> Share Now";
+    }
+    if (detail) {
+      detail.textContent = isManualMode(state)
+        ? "手动领奖：完成分享后切换为 Claim，领取完成后恢复 Share Now。"
+        : "自动领取：分享成功后奖励自动到账，按钮保持 Share Now。";
+    }
   }
 
   function renderState(state) {
@@ -143,10 +161,14 @@
     var progressHint = query("[data-progress-hint]");
     var shareButton = query("[data-action='share-now']");
     var ended = END_AT.getTime() <= Date.now();
+    var manualMode = isManualMode(state);
+    var sharedToday = hasSharedToday(state);
 
     if (shareCount) {
       shareCount.textContent = Math.min(state.shared, MAX_DAILY_SHARE) + "/" + MAX_DAILY_SHARE;
     }
+
+    updateModeActions(state);
 
     if (ended) {
       if (statusLabel) {
@@ -165,70 +187,163 @@
       return;
     }
 
-    if (state.claimed) {
-      if (rewardPanel) {
-        rewardPanel.classList.add("is-claimed");
+    if (rewardPanel) {
+      rewardPanel.classList.toggle("is-claimed", state.claimed);
+      rewardPanel.classList.toggle("is-ready", manualMode && sharedToday && !state.claimed);
+    }
+
+    if (!manualMode && state.claimed) {
+      if (statusLabel) {
+        statusLabel.textContent = "已到账";
       }
+      if (rewardState) {
+        rewardState.textContent = "分享成功后奖励已自动发放，明天可再次参与";
+      }
+      if (progressHint) {
+        progressHint.textContent = "Reward auto-credited today";
+      }
+      if (shareButton) {
+        shareButton.textContent = "Share Now";
+        shareButton.disabled = false;
+      }
+      return;
+    }
+
+    if (state.claimed) {
       if (statusLabel) {
         statusLabel.textContent = "已领取";
       }
       if (rewardState) {
-        rewardState.textContent = "今日奖励已到账，明天可再次参与";
+        rewardState.textContent = manualMode
+          ? "今日奖励已领取，仍可继续分享"
+          : "分享成功后奖励已自动发放，明天可再次参与";
       }
       if (progressHint) {
-        progressHint.textContent = "Reward credited today";
+        progressHint.textContent = manualMode
+          ? "Reward claimed, sharing still available"
+          : "Reward auto-credited today";
       }
       if (shareButton) {
-        shareButton.textContent = "今日已领取";
-        shareButton.disabled = true;
+        shareButton.textContent = "Share Now";
+        shareButton.disabled = false;
       }
-    } else {
-      if (rewardPanel) {
-        rewardPanel.classList.remove("is-claimed");
-      }
+    } else if (manualMode && sharedToday) {
       if (statusLabel) {
         statusLabel.textContent = "可领取";
       }
       if (rewardState) {
-        rewardState.textContent = "点击分享后立即派奖，每日限领 1 次";
+        rewardState.textContent = "分享已完成，请点击 Claim 领取今日奖励";
       }
       if (progressHint) {
-        progressHint.textContent = "Share once today to get " + REWARD_TEXT;
+        progressHint.textContent = "Claim is now available";
+      }
+      if (shareButton) {
+        shareButton.textContent = "Claim";
+        shareButton.disabled = false;
+      }
+    } else if (manualMode) {
+      if (rewardPanel) {
+        rewardPanel.classList.remove("is-claimed");
+      }
+      if (statusLabel) {
+        statusLabel.textContent = "待分享";
+      }
+      if (rewardState) {
+        rewardState.textContent = "完成分享后可手动领取，每日限领 1 次";
+      }
+      if (progressHint) {
+        progressHint.textContent = "Share once to unlock claim";
+      }
+      if (shareButton) {
+        shareButton.textContent = "Share Now";
+        shareButton.disabled = false;
+      }
+    } else {
+      if (statusLabel) {
+        statusLabel.textContent = "待分享";
+      }
+      if (rewardState) {
+        rewardState.textContent = "完成分享后奖励自动发放，每日限领 1 次";
+      }
+      if (progressHint) {
+        progressHint.textContent = sharedToday
+          ? "Reward auto-credited today"
+          : "Share once today to get " + REWARD_TEXT;
       }
       if (shareButton) {
         shareButton.textContent = "Share Now";
         shareButton.disabled = false;
       }
     }
-
-    renderHistory(state);
   }
 
   function completeShare(state, channel) {
-    if (state.claimed) {
-      showToast("今日已领取，明天再来");
-      return state;
+    if (hasSharedToday(state)) {
+      if (isManualMode(state) && !state.claimed) {
+        showToast("今日分享已完成，请直接领取奖励");
+        return state;
+      }
+      if (!isManualMode(state)) {
+        showToast("今日奖励已自动到账");
+        return state;
+      }
     }
-    var now = new Date();
     state.shared = MAX_DAILY_SHARE;
-    state.claimed = true;
-    state.records.unshift({
-      channel: channel,
-      amount: REWARD_TEXT,
-      time: now.toLocaleString("zh-CN", { hour12: false })
-    });
-    state.records = state.records.slice(0, 6);
+    if (!isManualMode(state)) {
+      state.claimed = true;
+    }
     saveState(state);
     renderState(state);
     closeSheets();
-    showToast("分享成功，" + REWARD_TEXT + " 已到账");
+    showToast(
+      isManualMode(state)
+        ? (state.claimed
+          ? "已完成 " + channel + " 分享，今日奖励已领取"
+          : "已完成 " + channel + " 分享，可点击 Claim 领取")
+        : "已完成 " + channel + " 分享，" + REWARD_TEXT + " 已自动到账"
+    );
+    return state;
+  }
+
+  function claimReward(state) {
+    if (!isManualMode(state)) {
+      showToast("当前活动为自动领取，无需手动领奖");
+      return state;
+    }
+    if (!hasSharedToday(state)) {
+      showToast("请先完成分享，再领取奖励");
+      return state;
+    }
+    if (state.claimed) {
+      showToast("今日奖励已领取");
+      return state;
+    }
+    state.claimed = true;
+    saveState(state);
+    renderState(state);
+    showToast(REWARD_TEXT + " 已领取");
+    return state;
+  }
+
+  function switchMode(state, nextMode) {
+    if (nextMode !== DEMO_MODES.auto && nextMode !== DEMO_MODES.manual) {
+      return state;
+    }
+    if (state.mode === nextMode) {
+      return state;
+    }
+    state.mode = nextMode;
+    resetDailyProgress(state);
+    saveState(state);
+    renderState(state);
+    closeSheets();
+    showToast(nextMode === DEMO_MODES.manual ? "已切换为手动领奖模式" : "已切换为自动领取模式");
     return state;
   }
 
   onReady(function () {
     var state = readState();
     var shareSheet = query("[data-share-sheet]");
-    var historySheet = query("[data-history-sheet]");
 
     renderCountdown();
     window.setInterval(renderCountdown, 1000);
@@ -238,15 +353,13 @@
       control.addEventListener("click", function () {
         var action = control.getAttribute("data-action");
         if (action === "share-now") {
-          if (state.claimed) {
-            showToast("今日已领取，明天再来");
+          if (isManualMode(state) && hasSharedToday(state) && !state.claimed) {
+            state = claimReward(state);
+          } else if (!isManualMode(state) && state.claimed) {
+            showToast("今日奖励已自动到账");
           } else {
             openSheet(shareSheet);
           }
-        }
-        if (action === "open-history") {
-          renderHistory(state);
-          openSheet(historySheet);
         }
         if (action === "close-sheet") {
           closeSheets();
@@ -262,6 +375,12 @@
     queryAll("[data-channel]", shareSheet).forEach(function (button) {
       button.addEventListener("click", function () {
         state = completeShare(state, button.getAttribute("data-channel") || "Share");
+      });
+    });
+
+    queryAll("[data-demo-mode]").forEach(function (button) {
+      button.addEventListener("click", function () {
+        state = switchMode(state, button.getAttribute("data-demo-mode"));
       });
     });
 

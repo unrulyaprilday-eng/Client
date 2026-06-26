@@ -52,6 +52,10 @@ a {
   margin-top: 12px;
 }
 
+.notification-app--preview .tip-action {
+  pointer-events: none;
+}
+
 .topbar {
   display: flex;
   align-items: center;
@@ -356,24 +360,23 @@ a {
   line-height: 19px;
 }
 
-.ios-install-tip ol {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 6px;
-  margin: 8px 0 0;
-  padding: 0;
-  list-style: none;
-}
-
-.ios-install-tip li {
+.tip-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 112px;
   min-height: 32px;
-  padding: 6px 7px;
+  margin-top: 10px;
+  padding: 0 14px;
+  border: 1px solid rgba(255, 210, 128, 0.22);
   border-radius: 8px;
   color: #ffe2aa;
-  background: rgba(238, 178, 73, 0.11);
-  font-size: 11px;
+  background: rgba(238, 178, 73, 0.14);
+  box-shadow: inset 0 1px 0 rgba(255, 234, 190, 0.08);
+  font-size: 12px;
   line-height: 16px;
-  text-align: center;
+  font-weight: 700;
+  cursor: pointer;
 }
 
 .notice-copy {

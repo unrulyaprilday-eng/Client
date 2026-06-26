@@ -1,7 +1,13 @@
 (function () {
+  var notified = false;
+
   function notifyPlayer() {
+    if (notified) {
+      return;
+    }
     try {
       if (window.parent && window.parent !== window && window.parent.$axure && window.parent.$axure.player) {
+        notified = true;
         window.parent.$axure.player.resizeContent(true);
         window.parent.$axure.player.refreshViewPort();
       }
@@ -10,12 +16,19 @@
     }
   }
 
-  if (document.readyState === "complete") {
-    notifyPlayer();
-  } else {
-    window.addEventListener("load", notifyPlayer);
+  function scheduleNotify() {
+    var runner = window.requestAnimationFrame || function (callback) {
+      window.setTimeout(callback, 16);
+    };
+
+    runner(function () {
+      notifyPlayer();
+    });
   }
 
-  window.setTimeout(notifyPlayer, 80);
-  window.setTimeout(notifyPlayer, 240);
+  if (document.readyState === "complete") {
+    scheduleNotify();
+  } else {
+    window.addEventListener("load", scheduleNotify, { once: true });
+  }
 })();

@@ -4,7 +4,7 @@
     <title>分享活动</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-    <meta name="viewport" content="width=1120, initial-scale=1"/>
+    <meta name="viewport" content="width=800, initial-scale=1"/>
     <link href="resources/css/axure_rp_page.css" type="text/css" rel="stylesheet"/>
     <link href="data/styles.css" type="text/css" rel="stylesheet"/>
     <link href="files/分享活动/styles.css" type="text/css" rel="stylesheet"/>
@@ -58,7 +58,7 @@
         <header class="promo-topbar">
           <a class="promo-back" href="rank.html" aria-label="返回 Promotion"></a>
           <h1>Share Now</h1>
-          <button class="history-link" type="button" data-action="open-history">领取记录</button>
+          <span class="topbar-spacer" aria-hidden="true"></span>
         </header>
 
         <section class="activity-summary">
@@ -79,41 +79,7 @@
         <section class="reward-panel" data-reward-panel>
           <span class="panel-label">今日奖励</span>
           <strong data-reward-amount>R$ 500</strong>
-          <p data-reward-state>点击分享后立即派奖，每日限领 1 次</p>
           <button class="primary-action" type="button" data-action="share-now">Share Now</button>
-        </section>
-
-        <section class="player-card">
-          <div class="avatar-mark" aria-hidden="true">tt</div>
-          <div class="player-stat">
-            <span>MY STATUS</span>
-            <strong data-status-label>可领取</strong>
-          </div>
-          <div class="player-stat">
-            <span>SHARED</span>
-            <strong data-share-count>0/1</strong>
-          </div>
-          <div class="player-hint" data-progress-hint>Share once today to get R$ 500</div>
-        </section>
-
-        <section class="activity-meta">
-          <span class="status-flag">Active</span>
-          <strong>2026/06/17 00:00 - 2026/07/17 23:59</strong>
-          <button type="button" data-action="open-history">History</button>
-        </section>
-
-        <section class="channel-panel">
-          <div class="section-heading">
-            <span class="heading-icon heading-icon--share" aria-hidden="true"></span>
-            <h2>支持渠道</h2>
-          </div>
-          <div class="channel-list" aria-label="支持分享渠道">
-            <span class="channel-pill channel-pill--fb">f</span>
-            <span class="channel-pill channel-pill--tg">TG</span>
-            <span class="channel-pill channel-pill--wa">WA</span>
-            <span class="channel-pill channel-pill--x">X</span>
-            <span class="channel-pill channel-pill--line">LINE</span>
-          </div>
         </section>
 
         <article class="rules-panel">
@@ -125,8 +91,8 @@
           <section class="rule-block">
             <h3>参与规则</h3>
             <ol>
-              <li>活动期间，玩家每日点击 <strong>Share Now</strong> 并完成任一渠道分享，即可领取今日奖励。</li>
-              <li>每个账号每日最多领取 1 次，重复分享不会重复发奖。</li>
+              <li>活动期间，玩家每日点击 <strong>Share Now</strong> 并完成任一渠道分享，即可参与今日奖励。</li>
+              <li>自动领取活动：分享成功后立即到账；手动领奖活动：分享完成后需点击 <strong>Claim</strong> 领取。</li>
               <li>分享目标页以后台配置为准，进入活动后默认展示本活动详情。</li>
             </ol>
           </section>
@@ -135,33 +101,9 @@
             <h3>奖励设置</h3>
             <ul>
               <li>今日奖励：<strong>R$ 500</strong>。</li>
-              <li>发奖方式：立即派奖，分享成功后奖励自动到账。</li>
+              <li>发奖方式：支持自动领取和手动领奖两种模式，前端按钮状态跟随配置变化。</li>
               <li>打码要求：奖励需完成 <strong>1 倍</strong>有效投注后可提款。</li>
             </ul>
-          </section>
-
-          <section class="rule-block">
-            <h3>分享内容</h3>
-            <div class="share-copy-list">
-              <div class="share-copy-item">
-                <span>01</span>
-                <strong>Claim Your Bonus</strong>
-                <p>Get your free reward now</p>
-                <em>/activity/welcome-bonus</em>
-              </div>
-              <div class="share-copy-item">
-                <span>02</span>
-                <strong>Limited Time Offer</strong>
-                <p>Don't miss today's reward</p>
-                <em>/activity/welcome-bonus</em>
-              </div>
-              <div class="share-copy-item">
-                <span>03</span>
-                <strong>Big Win Today</strong>
-                <p>Can you beat this jackpot?</p>
-                <em>/activity/winner-board</em>
-              </div>
-            </div>
           </section>
 
           <section class="rule-block">
@@ -201,21 +143,26 @@
 
         <section class="note-card note-card--share">
           <h3>Share Now 按钮</h3>
-          <p>点击后弹出分享渠道；玩家完成任一渠道分享后，奖励立即到账。</p>
-          <p>每日领取次数按后台配置：<strong>1 次/天</strong>。当天已领取后按钮置灰并显示“今日已领取”。</p>
+          <p>点击后弹出分享渠道选择，玩家完成任一渠道分享后返回当前页面。</p>
         </section>
 
         <section class="note-card note-card--config">
           <h3>后台配置映射</h3>
           <p>活动名称：FreePlay 分享活动。</p>
           <p>活动标题：Share Now 领取今日奖励。</p>
-          <p>支持渠道：Facebook、Telegram、WhatsApp、X、LINE。</p>
-          <p>打码倍数：1 倍；发奖方式：立即派奖。</p>
+          <p>支持渠道：跟随分享配置开启的渠道。</p>
+          <p>发奖方式：支持自动领取 / 手动领奖两种配置。</p>
         </section>
 
-        <section class="note-card note-card--copy">
-          <h3>分享内容配置</h3>
-          <p>下方“分享内容”三条对应后台分享标题、分享描述、OG 图片和 Target URL 配置。C 端仅展示分享任务含义，不展示后台表格口径。</p>
+        <section class="note-card note-card--mode">
+          <h3>原型演示模式</h3>
+          <p>右侧按钮仅用于原型演示后台配置切换，不属于真实 C 端页面元素。</p>
+          <div class="note-actions" role="group" aria-label="切换奖励模式">
+            <button class="note-action is-active" type="button" data-demo-mode="manual">手动领奖</button>
+            <button class="note-action" type="button" data-demo-mode="auto">自动领取</button>
+          </div>
+          <p class="note-mode-flow" data-mode-flow>按钮变化：Share Now -&gt; Claim -&gt; Share Now</p>
+          <p class="note-mode-detail" data-mode-detail>手动领奖：完成分享后切换为 Claim，领取完成后恢复 Share Now。</p>
         </section>
       </aside>
 
@@ -228,24 +175,12 @@
         <section class="sheet__panel" role="dialog" aria-modal="true" aria-labelledby="share-sheet-title">
           <button class="sheet__close" type="button" data-action="close-sheet" aria-label="关闭"></button>
           <h2 id="share-sheet-title">选择分享渠道</h2>
-          <p>完成任一渠道分享后，今日奖励将自动发放。</p>
           <div class="sheet-channels">
             <button type="button" data-channel="Facebook"><span class="channel-pill channel-pill--fb">f</span>Facebook</button>
             <button type="button" data-channel="Telegram"><span class="channel-pill channel-pill--tg">TG</span>Telegram</button>
             <button type="button" data-channel="WhatsApp"><span class="channel-pill channel-pill--wa">WA</span>WhatsApp</button>
             <button type="button" data-channel="X"><span class="channel-pill channel-pill--x">X</span>X</button>
             <button type="button" data-channel="LINE"><span class="channel-pill channel-pill--line">LINE</span>LINE</button>
-          </div>
-        </section>
-      </div>
-
-      <div class="sheet" data-history-sheet hidden>
-        <div class="sheet__scrim" data-action="close-sheet"></div>
-        <section class="sheet__panel" role="dialog" aria-modal="true" aria-labelledby="history-sheet-title">
-          <button class="sheet__close" type="button" data-action="close-sheet" aria-label="关闭"></button>
-          <h2 id="history-sheet-title">领取记录</h2>
-          <div class="history-list" data-history-list>
-            <div class="empty-state">今日暂无领取记录</div>
           </div>
         </section>
       </div>
