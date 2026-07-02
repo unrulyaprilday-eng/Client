@@ -93,6 +93,14 @@
       return;
     }
 
+    var backButton = document.querySelector("a.icon-button--back[href='profile.html']");
+    if (backButton) {
+      backButton.addEventListener("click", function (event) {
+        event.preventDefault();
+        window.location.href = "profile.html";
+      });
+    }
+
     var enabled = readEnabled();
     var els = {
       card: document.querySelector("[data-status-card]"),

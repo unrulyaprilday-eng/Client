@@ -4,14 +4,11 @@
     <title>Profile</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=428, initial-scale=1"/>
     <link href="resources/css/axure_rp_page.css" type="text/css" rel="stylesheet"/>
     <link href="data/styles.css" type="text/css" rel="stylesheet"/>
-    <link href="files/my/styles.css" type="text/css" rel="stylesheet"/>
-    <link href="custom/css/profile-notifications.css" type="text/css" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com" rel="preconnect"/>
-    <link href="https://fonts.gstatic.com" rel="preconnect"/>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet"/>
-    <link href="https://demo.axureux.com/fontawesome/5.7.2/pro/css/all.min.css" type="text/css" rel="stylesheet"/>
+    <link href="files/profile/styles.css" type="text/css" rel="stylesheet"/>
+    <link href="custom/css/profile-menu-rebuild.css" type="text/css" rel="stylesheet"/>
     <script src="resources/scripts/jquery-3.7.1.min.js"></script>
     <script src="resources/scripts/axure/axQuery.js"></script>
     <script src="resources/scripts/axure/globals.js"></script>
@@ -43,19 +40,22 @@
     <script src="resources/scripts/axure/math.js"></script>
     <script src="resources/scripts/axure/jquery.nicescroll.min.js"></script>
     <script src="data/document.js"></script>
-    <script src="files/my/data.js"></script>
+    <script src="files/profile/data.js"></script>
     <script type="text/javascript">
       $axure.utils.getTransparentGifPath = function() { return 'resources/images/transparent.gif'; };
       $axure.utils.getOtherPath = function() { return 'resources/Other.html'; };
       $axure.utils.getReloadPath = function() { return 'resources/reload.html'; };
     </script>
+    <script src="custom/js/axure-custom-page-ready.js"></script>
+    <script src="resources/scripts/axure/ios.js"></script>
+    <script src="custom/js/profile-menu-rebuild.js"></script>
   </head>
-  <body>
+  <body data-axure-page-id="46471295ed4d49daa0477b5358be296f">
     <div id="base" class="">
 
       <!-- Unnamed (动态面板) -->
       <div id="u0" class="ax_default">
-        <div id="u0_state0" class="panel_state" data-label="MY" style="">
+        <div id="u0_state0" class="panel_state" data-label="Profile" style="">
           <div id="u0_state0_content" class="panel_state_content">
 
             <!-- Unnamed (图片) -->
@@ -119,7 +119,128 @@
               <span class="profile-notifications-entry__label">Notifications</span>
               <span class="profile-notifications-entry__arrow" aria-hidden="true"></span>
             </a>
+
+            <div class="profile-menu-mask" aria-hidden="true"></div>
+
+            <section class="profile-menu-rebuild" aria-label="Profile menu">
+              <div class="profile-menu-card" role="group" aria-label="Profile records">
+                <button class="profile-menu-row" type="button" data-action="open-records">
+                  <span class="profile-menu-row__icon profile-menu-row__icon--records" aria-hidden="true"></span>
+                  <span class="profile-menu-row__copy">
+                    <strong>我的记录</strong>
+                  </span>
+                  <span class="profile-menu-row__meta">明细、投注、报表</span>
+                  <span class="profile-menu-row__arrow" aria-hidden="true"></span>
+                </button>
+                <button class="profile-menu-row" type="button" data-action="open-withdraw">
+                  <span class="profile-menu-row__icon profile-menu-row__icon--wallet" aria-hidden="true"></span>
+                  <span class="profile-menu-row__copy">
+                    <strong>提款管理</strong>
+                  </span>
+                  <span class="profile-menu-row__arrow" aria-hidden="true"></span>
+                </button>
+                <button class="profile-menu-row" type="button" data-action="open-redeem">
+                  <span class="profile-menu-row__icon profile-menu-row__icon--redeem" aria-hidden="true"></span>
+                  <span class="profile-menu-row__copy">
+                    <strong>兑换码</strong>
+                  </span>
+                  <span class="profile-menu-row__meta profile-menu-row__meta--accent">立即兑换</span>
+                  <span class="profile-menu-row__arrow" aria-hidden="true"></span>
+                </button>
+              </div>
+
+              <div class="profile-menu-card" role="group" aria-label="Profile utilities">
+                <button class="profile-menu-row" type="button" data-action="open-share">
+                  <span class="profile-menu-row__icon profile-menu-row__icon--share" aria-hidden="true"></span>
+                  <span class="profile-menu-row__copy">
+                    <strong>分享赚钱</strong>
+                  </span>
+                  <span class="profile-menu-row__meta profile-menu-row__meta--accent">月入千刀</span>
+                  <span class="profile-menu-row__arrow" aria-hidden="true"></span>
+                </button>
+                <button class="profile-menu-row" type="button" data-action="open-security">
+                  <span class="profile-menu-row__icon profile-menu-row__icon--security" aria-hidden="true"></span>
+                  <span class="profile-menu-row__copy">
+                    <strong>安全中心</strong>
+                  </span>
+                  <span class="profile-menu-row__arrow" aria-hidden="true"></span>
+                </button>
+                <button class="profile-menu-row" type="button" data-action="open-notifications">
+                  <span class="profile-menu-row__icon profile-menu-row__icon--notification" aria-hidden="true"></span>
+                  <span class="profile-menu-row__copy">
+                    <strong>通知</strong>
+                  </span>
+                  <span class="profile-menu-row__meta" aria-hidden="true"></span>
+                  <span class="profile-menu-row__arrow" aria-hidden="true"></span>
+                </button>
+                <button class="profile-menu-row" type="button" data-action="open-language">
+                  <span class="profile-menu-row__icon profile-menu-row__icon--language" aria-hidden="true"></span>
+                  <span class="profile-menu-row__copy">
+                    <strong>选择语言</strong>
+                  </span>
+                  <span class="profile-menu-row__meta" data-language-label>Chinese</span>
+                  <span class="profile-menu-row__arrow" aria-hidden="true"></span>
+                </button>
+                <button class="profile-menu-row" type="button" data-action="toggle-music">
+                  <span class="profile-menu-row__icon profile-menu-row__icon--music" aria-hidden="true"></span>
+                  <span class="profile-menu-row__copy">
+                    <strong>音乐</strong>
+                  </span>
+                  <span class="profile-menu-row__meta" data-music-label>已开启</span>
+                  <span class="profile-menu-row__arrow" aria-hidden="true"></span>
+                </button>
+                <button class="profile-menu-row" type="button" data-action="open-faq">
+                  <span class="profile-menu-row__icon profile-menu-row__icon--faq" aria-hidden="true"></span>
+                  <span class="profile-menu-row__copy">
+                    <strong>常见问题</strong>
+                  </span>
+                  <span class="profile-menu-row__arrow" aria-hidden="true"></span>
+                </button>
+              </div>
+
+              <div class="profile-menu-card profile-menu-card--single">
+                <button class="profile-menu-row profile-menu-row--danger" type="button" data-action="logout">
+                  <span class="profile-menu-row__icon profile-menu-row__icon--logout" aria-hidden="true"></span>
+                  <span class="profile-menu-row__copy">
+                    <strong>安全退出</strong>
+                  </span>
+                  <span class="profile-menu-row__arrow" aria-hidden="true"></span>
+                </button>
+              </div>
+            </section>
+
+            <div class="profile-modal-shell" aria-live="polite">
+              <div class="profile-modal profile-modal--redeem" data-modal="redeem" hidden>
+                <div class="profile-modal__scrim" data-close-modal="redeem"></div>
+                <section class="profile-modal__panel" role="dialog" aria-modal="true" aria-labelledby="redeem-title">
+                  <button class="profile-modal__close" type="button" data-close-modal="redeem" aria-label="关闭兑换码弹窗"></button>
+                  <h2 id="redeem-title">兑换码</h2>
+                  <label class="profile-input">
+                    <input type="text" maxlength="24" placeholder="请输入兑换码" data-redeem-input/>
+                  </label>
+                  <div class="profile-modal__actions">
+                    <button class="profile-button profile-button--ghost" type="button" data-close-modal="redeem">取消</button>
+                    <button class="profile-button" type="button" data-action="submit-redeem">立即兑换</button>
+                  </div>
+                </section>
+              </div>
+
+              <div class="profile-sheet" data-sheet hidden>
+                <div class="profile-sheet__scrim" data-action="close-sheet"></div>
+                <section class="profile-sheet__panel" role="dialog" aria-modal="true" aria-labelledby="profile-sheet-title">
+                  <button class="profile-sheet__close" type="button" data-action="close-sheet" aria-label="关闭"></button>
+                  <p class="profile-sheet__eyebrow" data-sheet-eyebrow>Profile</p>
+                  <h2 id="profile-sheet-title" data-sheet-title>提示</h2>
+                  <p class="profile-sheet__body" data-sheet-body></p>
+                  <div class="profile-sheet__choices" data-sheet-choices></div>
+                  <div class="profile-sheet__actions" data-sheet-actions></div>
+                </section>
+              </div>
+
+              <div class="profile-toast" data-toast hidden></div>
+            </div>
           </div>
+
         </div>
         <div id="u0_state1" class="panel_state" data-label="ACCOUNT INFO" style="visibility: hidden;">
           <div id="u0_state1_content" class="panel_state_content">
@@ -2633,6 +2754,28 @@
         </div>
       </div>
     </div>
+    <nav class="profile-bottom-nav" aria-label="Bottom navigation">
+      <button class="profile-bottom-nav__item" type="button">
+        <span class="profile-bottom-nav__icon profile-bottom-nav__icon--home" aria-hidden="true"></span>
+        <span class="profile-bottom-nav__label">首页</span>
+      </button>
+      <a class="profile-bottom-nav__item" href="奖励动态.html">
+        <span class="profile-bottom-nav__icon profile-bottom-nav__icon--promo" aria-hidden="true"></span>
+        <span class="profile-bottom-nav__label">优惠</span>
+      </a>
+      <a class="profile-bottom-nav__item" href="存款.html">
+        <span class="profile-bottom-nav__icon profile-bottom-nav__icon--deposit" aria-hidden="true"></span>
+        <span class="profile-bottom-nav__label">存款</span>
+      </a>
+      <button class="profile-bottom-nav__item" type="button" data-action="open-withdraw">
+        <span class="profile-bottom-nav__icon profile-bottom-nav__icon--withdraw" aria-hidden="true"></span>
+        <span class="profile-bottom-nav__label">提现</span>
+      </button>
+      <a class="profile-bottom-nav__item is-active" href="profile.html" aria-current="page">
+        <span class="profile-bottom-nav__icon profile-bottom-nav__icon--profile" aria-hidden="true"></span>
+        <span class="profile-bottom-nav__label">我的</span>
+      </a>
+    </nav>
     <script src="resources/scripts/axure/ios.js"></script>
   </body>
 </html>

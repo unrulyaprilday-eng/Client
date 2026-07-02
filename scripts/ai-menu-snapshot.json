@@ -1,4 +1,4 @@
-{
+﻿{
   "schemaVersion": 1,
   "savedAt": "2026-06-24T08:53:23.749Z",
   "source": "data/document.js sitemap.rootNodes",
@@ -108,7 +108,7 @@
           "id": "huzl40",
           "pageName": "Profile",
           "type": "Wireframe",
-          "url": "my.html"
+          "url": "profile.html"
         },
         {
           "id": "profile_notification",
@@ -161,3 +161,4 @@
     }
   ]
 }
+

@@ -1,4 +1,4 @@
-$axure.loadDocument({
+﻿$axure.loadDocument({
   "configuration": {
     "showPageNotes": true,
     "showPageNoteNames": false,
@@ -119,7 +119,7 @@ $axure.loadDocument({
             "id": "huzl40",
             "pageName": "Profile",
             "type": "Wireframe",
-            "url": "my.html"
+            "url": "profile.html"
           },
           {
             "id": "profile_notification",
@@ -2008,3 +2008,4 @@ $axure.loadDocument({
     }
   }
 });
+
