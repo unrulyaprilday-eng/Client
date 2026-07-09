@@ -1,6 +1,6 @@
-﻿{
+{
   "schemaVersion": 1,
-  "savedAt": "2026-06-24T08:53:23.749Z",
+  "savedAt": "2026-07-08T05:39:39.882Z",
   "source": "data/document.js sitemap.rootNodes",
   "rootNodes": [
     {
@@ -42,6 +42,28 @@
           "pageName": "奖励动态",
           "type": "Wireframe",
           "url": "奖励动态.html"
+        }
+      ]
+    },
+    {
+      "id": "game_play_group",
+      "pageName": "独立活动",
+      "type": "Folder",
+      "url": "",
+      "children": [
+        {
+          "id": "piggy_bank_original_hotspots",
+          "pageName": "PIGGY BANK",
+          "type": "Wireframe",
+          "url": "PIGGY BANK.html",
+          "children": []
+        },
+        {
+          "id": "piggybank_guide_game",
+          "pageName": "PIGGYBANK引导游戏",
+          "type": "Wireframe",
+          "url": "PIGGYBANK引导游戏.html",
+          "children": []
         }
       ]
     },
@@ -161,4 +183,3 @@
     }
   ]
 }
-

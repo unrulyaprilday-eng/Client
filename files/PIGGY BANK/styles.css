@@ -1,0 +1,21 @@
+body {
+  margin:0px;
+  background-image:none;
+  background-color:#f4f0ea;
+  position:static;
+  left:auto;
+  width:800px;
+  margin-left:0;
+  margin-right:0;
+  text-align:left;
+}
+.form_sketch {
+  border-color:transparent;
+  background-color:transparent;
+}
+#base {
+  position:absolute;
+  z-index:0;
+  width:800px;
+  min-height:926px;
+}

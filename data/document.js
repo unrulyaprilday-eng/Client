@@ -57,6 +57,28 @@
         ]
       },
       {
+        "id": "game_play_group",
+        "pageName": "独立活动",
+        "type": "Folder",
+        "url": "",
+        "children": [
+          {
+            "id": "piggy_bank_original_hotspots",
+            "pageName": "PIGGY BANK",
+            "type": "Wireframe",
+            "url": "PIGGY BANK.html",
+            "children": []
+          },
+          {
+            "id": "piggybank_guide_game",
+            "pageName": "PIGGYBANK引导游戏",
+            "type": "Wireframe",
+            "url": "PIGGYBANK引导游戏.html",
+            "children": []
+          }
+        ]
+      },
+      {
         "id": "onbtmf",
         "pageName": "VIP CLUB",
         "type": "Wireframe",
@@ -2008,4 +2030,3 @@
     }
   }
 });
-

@@ -1,0 +1,376 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+  background: #f4f0ea;
+}
+
+body {
+  min-height: 100%;
+  width: 800px;
+  color: #fff4d6;
+  font-family: "Arial", "Microsoft YaHei", "PingFang SC", sans-serif;
+}
+
+.piggy-bank-canvas {
+  position: relative;
+  width: 800px;
+  min-height: 1132px;
+  background: #f4f0ea;
+}
+
+.piggy-prototype {
+  position: relative;
+  width: 428px;
+  min-height: 926px;
+  overflow: hidden;
+  background: #220003;
+}
+
+.piggy-screen {
+  position: relative;
+  width: 428px;
+  min-height: 761px;
+}
+
+.piggy-screen[hidden] {
+  display: none !important;
+}
+
+.piggy-shot {
+  display: block;
+  width: 428px;
+  height: auto;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.piggy-shot-crop {
+  position: relative;
+  width: 428px;
+  overflow: hidden;
+}
+
+.piggy-shot-crop--main-lower {
+  height: 371px;
+  margin-top: 0;
+}
+
+.piggy-shot-crop--main-lower .piggy-shot {
+  transform: translateY(-408px);
+}
+
+.hotspot {
+  position: absolute;
+  display: block;
+  padding: 0;
+  border: 0;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0);
+  color: transparent;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.hotspot:focus-visible {
+  outline: 2px solid rgba(255, 226, 99, 0.92);
+  outline-offset: -2px;
+}
+
+.hotspot--top-back,
+.hotspot--pending-back,
+.hotspot--complete-back {
+  left: 8px;
+  top: 22px;
+  width: 50px;
+  height: 52px;
+}
+
+.hotspot--top-rules,
+.hotspot--pending-rules,
+.hotspot--complete-rules {
+  left: 331px;
+  top: 22px;
+  width: 48px;
+  height: 52px;
+}
+
+.hotspot--top-history,
+.hotspot--pending-history,
+.hotspot--complete-history {
+  left: 382px;
+  top: 22px;
+  width: 42px;
+  height: 52px;
+}
+
+.hotspot--top-claim {
+  left: 49px;
+  top: 607px;
+  width: 332px;
+  height: 58px;
+}
+
+.hotspot--pending-claim,
+.hotspot--complete-claim {
+  left: 47px;
+  top: 234px;
+  width: 333px;
+  height: 55px;
+}
+
+.hotspot--pending-bet {
+  left: 153px;
+  top: 397px;
+  width: 122px;
+  height: 164px;
+}
+
+.hotspot--top-bet {
+  left: 153px;
+  top: 750px;
+  width: 122px;
+  height: 164px;
+}
+
+.hotspot--pending-deposit-top {
+  left: 289px;
+  top: 397px;
+  width: 122px;
+  height: 164px;
+}
+
+.hotspot--top-deposit-top {
+  left: 289px;
+  top: 750px;
+  width: 122px;
+  height: 164px;
+}
+
+.hotspot--pending-deposit-vip {
+  left: 18px;
+  top: 571px;
+  width: 122px;
+  height: 160px;
+}
+
+.hotspot--top-deposit-vip {
+  left: 18px;
+  top: 924px;
+  width: 122px;
+  height: 160px;
+}
+
+.hotspot--pending-guide-card {
+  left: 153px;
+  top: 571px;
+  width: 122px;
+  height: 116px;
+}
+
+.hotspot--top-guide-card {
+  left: 153px;
+  top: 924px;
+  width: 122px;
+  height: 116px;
+}
+
+.hotspot--pending-guide-bet {
+  left: 163px;
+  top: 713px;
+  width: 102px;
+  height: 30px;
+}
+
+.hotspot--top-guide-bet {
+  left: 163px;
+  top: 1066px;
+  width: 102px;
+  height: 30px;
+}
+
+.hotspot--complete-bet {
+  left: 160px;
+  top: 535px;
+  width: 108px;
+  height: 32px;
+}
+
+.hotspot--complete-deposit-top {
+  left: 296px;
+  top: 535px;
+  width: 108px;
+  height: 32px;
+}
+
+.hotspot--complete-deposit-vip {
+  left: 28px;
+  top: 719px;
+  width: 106px;
+  height: 33px;
+}
+
+.hotspot--history-close {
+  left: 366px;
+  top: 172px;
+  width: 44px;
+  height: 44px;
+}
+
+.hotspot--rules-close {
+  left: 365px;
+  top: 142px;
+  width: 45px;
+  height: 45px;
+}
+
+.piggy-toast {
+  position: absolute;
+  left: 50%;
+  bottom: 26px;
+  z-index: 20;
+  max-width: 360px;
+  padding: 9px 14px;
+  border: 1px solid rgba(255, 219, 112, 0.62);
+  border-radius: 8px;
+  background: rgba(47, 0, 5, 0.92);
+  color: #ffe4aa;
+  font-size: 13px;
+  line-height: 18px;
+  text-align: center;
+  transform: translateX(-50%);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.36);
+}
+
+.piggy-notes {
+  position: absolute;
+  left: 463px;
+  top: 24px;
+  z-index: 130;
+  width: 312px;
+  min-height: 858px;
+  padding: 18px 16px 20px;
+  border: 1px solid #e2d6c5;
+  border-radius: 8px;
+  color: #332821;
+  background: #fffdf8;
+  box-shadow: 0 12px 28px rgba(67, 43, 28, 0.12);
+  font-family: "Microsoft YaHei", "PingFang SC", Arial, sans-serif;
+}
+
+.piggy-notes__header {
+  padding-bottom: 12px;
+  border-bottom: 1px solid #eadfce;
+}
+
+.piggy-notes__header span {
+  display: block;
+  margin-bottom: 5px;
+  color: #a56826;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.piggy-notes__header h1 {
+  margin: 0;
+  color: #2c211a;
+  font-size: 22px;
+  font-weight: 900;
+  line-height: 1.18;
+}
+
+.piggy-notes__header p {
+  margin: 8px 0 0;
+  color: #7a6d60;
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.piggy-note-card {
+  margin-top: 12px;
+  padding: 12px;
+  border: 1px solid #f0dfc7;
+  border-radius: 6px;
+  background: #fff8e9;
+}
+
+.piggy-note-card h2 {
+  margin: 0 0 8px;
+  color: #8d391f;
+  font-size: 15px;
+  font-weight: 900;
+}
+
+.piggy-note-card p {
+  margin: 0 0 8px;
+  color: #4c4037;
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+.piggy-note-card p:last-child {
+  margin-bottom: 0;
+}
+
+.piggy-note-card ul {
+  margin: 0;
+  padding-left: 17px;
+  color: #4c4037;
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+.piggy-note-card li + li {
+  margin-top: 4px;
+}
+
+.piggy-note-card strong {
+  color: #a62d1f;
+}
+
+.piggy-note-card--important {
+  border-color: #e7c176;
+  background: #fff4d4;
+}
+
+.piggy-note-formula {
+  margin: 8px 0;
+  padding: 9px 10px;
+  border-left: 3px solid #d4a338;
+  border-radius: 4px;
+  color: #5d3a18;
+  background: #fff3cf;
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1.5;
+}
+
+.piggy-note-arrow {
+  position: absolute;
+  left: -36px;
+  width: 30px;
+  height: 1px;
+  background: #d0a03b;
+}
+
+.piggy-note-arrow::before {
+  content: "";
+  position: absolute;
+  left: -7px;
+  top: -4px;
+  width: 8px;
+  height: 8px;
+  border-left: 2px solid #d0a03b;
+  border-bottom: 2px solid #d0a03b;
+  transform: rotate(45deg);
+}
+
+.piggy-note-arrow--rules {
+  top: 52px;
+}
+
+.piggy-note-arrow--actions {
+  top: 748px;
+}

@@ -167,6 +167,14 @@ Axure 重新导出后，执行一条命令恢复菜单：
 - 写回时保留 `$axure.loadDocument(...)` 外壳，可以写成格式化 JSON，便于后续维护。
 - 重排后检查顶层顺序、关键子级归属、页面 `url` 和文件是否存在。
 
+Axure 菜单解析命令规则：
+
+- 在 PowerShell 里不要把复杂 `node -e` 当作调试战场；命令同时包含 `$axure`、中文、单双引号或 JSON 时，优先写成临时/复用 Node 脚本，再执行脚本。
+- 一次性 `node -e` 如需挂载 Axure 回调，优先避免在命令字符串里直接出现 `$axure`，可用 `const axureName = String.fromCharCode(36) + 'axure'; global[axureName] = {...};`，避免 PowerShell 把 `$axure` 展开成空字符串。
+- 如果必须在 PowerShell 双引号命令中写 `$axure`，必须写成 `` `$axure``；看到 `global.={...}`、`Expected ident`、`Unexpected token '='` 这类报错时，先判断为 shell quoting/变量展开问题，不要怀疑 `data/document.js` 已损坏。
+- 菜单验证脚本尽量只断言稳定 id/url/packageId；涉及中文页面名时，可输出码点或使用 Unicode 转义，避免把控制台编码问题误判为文件内容损坏。
+- 验证或写回脚本失败时，先区分“脚本 quoting/编码失败”和“项目文件真实失败”；不要因为校验脚本失败就重写 sitemap 或重复大范围搜索。
+
 ## UI 与业务
 
 - 默认移动端 C 端界面：信息层级清晰、可读、真实可用。
@@ -207,6 +215,8 @@ Axure 重新导出后，执行一条命令恢复菜单：
 - 写入 `data/document.js`、页面 `data.js` 或中文 HTML 后，至少做一次中文关键字/码点验证。
 - 不要把包含中文字符串的长脚本通过 PowerShell here-string 管道传给 Node/Python 后直接写入项目文件。
 - 不要在 PowerShell 双引号命令中直接写未转义的 `$axure`，否则可能被展开成空字符串并写坏 `data/document.js` 外壳。
+- 不要在 PowerShell 里反复试错混合单双引号的长 `node -e`；超过一行、含 `$`、含中文或需要写文件时，改用 `apply_patch` 或独立脚本。
+- 编辑 `data/document.js`、`scripts/ai-menu-snapshot.json` 这类带历史格式的文件时，尽量保留原有 BOM、尾部空行和换行风格，避免产生与功能无关的 diff。
 - 需要写中文内容时，优先使用 `apply_patch`；脚本写入时使用 Unicode 转义字符串生成 UTF-8。
 - 不假设系统一定存在 `git` 命令；需要恢复文件时优先用可用 Git 工具，必要时再从 `.git` 对象库读取。
 - 创建中文命名页面文件本身优先用 `apply_patch`，不要用 PowerShell/Node 脚本批量写中文文件名。
