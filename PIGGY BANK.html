@@ -4,11 +4,14 @@
     <title>PIGGY BANK</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
+    <meta http-equiv="Pragma" content="no-cache"/>
+    <meta http-equiv="Expires" content="0"/>
     <meta name="viewport" content="width=800, initial-scale=1"/>
     <link href="resources/css/axure_rp_page.css" type="text/css" rel="stylesheet"/>
     <link href="data/styles.css" type="text/css" rel="stylesheet"/>
-    <link href="files/PIGGY BANK/styles.css" type="text/css" rel="stylesheet"/>
-    <link href="custom/css/piggy-bank.css" type="text/css" rel="stylesheet"/>
+    <link href="files/PIGGY BANK/styles.css?v=20260709" type="text/css" rel="stylesheet"/>
+    <link href="custom/css/piggy-bank.css?v=20260709" type="text/css" rel="stylesheet"/>
     <script src="resources/scripts/jquery-3.2.1.min.js"></script>
     <script src="resources/scripts/axure/axQuery.js"></script>
     <script src="resources/scripts/axure/globals.js"></script>
@@ -40,10 +43,10 @@
     <script src="resources/scripts/axure/math.js"></script>
     <script src="resources/scripts/axure/jquery.nicescroll.min.js"></script>
     <script src="data/document.js"></script>
-    <script src="files/PIGGY BANK/data.js"></script>
+    <script src="files/PIGGY BANK/data.js?v=20260709"></script>
     <script src="custom/js/axure-custom-page-ready.js"></script>
     <script src="resources/scripts/axure/ios.js"></script>
-    <script src="custom/js/piggy-bank.js"></script>
+    <script src="custom/js/piggy-bank.js?v=20260709"></script>
     <script type="text/javascript">
       $axure.utils.getTransparentGifPath = function() { return 'resources/images/transparent.gif'; };
       $axure.utils.getOtherPath = function() { return 'resources/Other.html'; };
@@ -55,10 +58,7 @@
       <div class="piggy-bank-canvas">
         <main class="piggy-prototype" data-piggy-bank>
           <section class="piggy-screen is-active" data-piggy-screen="top" aria-label="PIGGY BANK main top">
-            <img class="piggy-shot" src="custom/assets/piggy-bank/piggy-bank-main-top.png" alt="PIGGY BANK main page"/>
-            <div class="piggy-shot-crop piggy-shot-crop--main-lower" aria-hidden="true">
-              <img class="piggy-shot" src="custom/assets/piggy-bank/piggy-bank-main-pending.png" alt=""/>
-            </div>
+            <img class="piggy-shot" src="custom/assets/piggy-bank/piggy-bank-main-stitched.png?v=20260709" alt="PIGGY BANK main page"/>
             <button class="hotspot hotspot--top-back" type="button" data-action="back" aria-label="Back"></button>
             <a class="hotspot hotspot--top-rules" href="#rules" data-screen-target="rules" aria-label="Open rules"></a>
             <a class="hotspot hotspot--top-history" href="#history" data-screen-target="history" aria-label="Open history"></a>
@@ -66,7 +66,6 @@
             <button class="hotspot hotspot--top-bet" type="button" data-toast-text="跳转首页即可" aria-label="Go to home"></button>
             <a class="hotspot hotspot--top-deposit-top" href="存款.html" aria-label="Deposit to add more bonus"></a>
             <a class="hotspot hotspot--top-deposit-vip" href="存款.html" aria-label="Recharge to unlock higher VIP"></a>
-            <a class="hotspot hotspot--top-guide-card" href="#complete" data-screen-target="complete" aria-label="Preview completed guide state"></a>
             <a class="hotspot hotspot--top-guide-bet" href="PIGGYBANK引导游戏.html" aria-label="Play guide mini game"></a>
           </section>
 
@@ -79,7 +78,6 @@
             <button class="hotspot hotspot--pending-bet" type="button" data-toast-text="跳转首页即可" aria-label="Go to home"></button>
             <a class="hotspot hotspot--pending-deposit-top" href="存款.html" aria-label="Deposit to add more bonus"></a>
             <a class="hotspot hotspot--pending-deposit-vip" href="存款.html" aria-label="Recharge to unlock higher VIP"></a>
-            <a class="hotspot hotspot--pending-guide-card" href="#complete" data-screen-target="complete" aria-label="Preview completed guide state"></a>
             <a class="hotspot hotspot--pending-guide-bet" href="PIGGYBANK引导游戏.html" aria-label="Play guide mini game"></a>
           </section>
 
@@ -154,6 +152,7 @@
           </section>
         </aside>
       </div>
+      <div class="piggy-scroll-spacer" aria-hidden="true"></div>
     </div>
   </body>
 </html>

@@ -39,7 +39,70 @@
     element.dispatchEvent(event);
   }
 
+  function notifyPlayerLayout() {
+    try {
+      if (window.parent && window.parent !== window && window.parent.$axure && window.parent.$axure.player) {
+        if (window.parent.$axure.player.resizeContent) {
+          window.parent.$axure.player.resizeContent(true);
+        }
+        if (window.parent.$axure.player.refreshViewPort) {
+          window.parent.$axure.player.refreshViewPort();
+        }
+      }
+    } catch (error) {
+      return;
+    }
+  }
+
+  function applyProfileCanvasCenter() {
+    var html = document.documentElement;
+    var body = document.body;
+    var base = document.getElementById("base");
+
+    if (!html || !body) {
+      return;
+    }
+
+    html.style.setProperty("width", "100%", "important");
+    html.style.setProperty("min-height", "100%", "important");
+    html.style.setProperty("display", "flex", "important");
+    html.style.setProperty("justify-content", "center", "important");
+    html.style.setProperty("background-color", "#0b1220", "important");
+
+    body.style.setProperty("position", "relative", "important");
+    body.style.setProperty("left", "auto", "important");
+    body.style.setProperty("width", "800px", "important");
+    body.style.setProperty("min-height", "926px", "important");
+    body.style.setProperty("flex", "0 0 800px", "important");
+    body.style.setProperty("margin", "0 auto", "important");
+    body.style.setProperty("text-align", "left", "important");
+
+    if (base) {
+      base.style.setProperty("width", "800px", "important");
+      base.style.setProperty("min-height", "926px", "important");
+    }
+
+    notifyPlayerLayout();
+  }
+
+  function scheduleProfileCanvasCenter() {
+    var runner = window.requestAnimationFrame || function (callback) {
+      window.setTimeout(callback, 16);
+    };
+
+    applyProfileCanvasCenter();
+    runner(applyProfileCanvasCenter);
+    window.setTimeout(applyProfileCanvasCenter, 80);
+    window.setTimeout(applyProfileCanvasCenter, 240);
+    window.setTimeout(applyProfileCanvasCenter, 600);
+  }
+
+  onReady(scheduleProfileCanvasCenter);
+  window.addEventListener("load", scheduleProfileCanvasCenter, { once: true });
+
   onReady(function () {
+    scheduleProfileCanvasCenter();
+
     var menuRoot = document.querySelector(".profile-menu-rebuild");
     if (!menuRoot) {
       return;

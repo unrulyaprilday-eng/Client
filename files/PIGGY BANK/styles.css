@@ -5,9 +5,12 @@ body {
   position:static;
   left:auto;
   width:800px;
+  height:auto;
+  min-height:1132px;
   margin-left:0;
   margin-right:0;
   text-align:left;
+  overflow-y:visible;
 }
 .form_sketch {
   border-color:transparent;
@@ -17,5 +20,5 @@ body {
   position:absolute;
   z-index:0;
   width:800px;
-  min-height:926px;
+  min-height:1132px;
 }

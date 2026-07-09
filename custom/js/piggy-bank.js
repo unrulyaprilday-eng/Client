@@ -8,6 +8,7 @@
   var currentScreen = DEFAULT_SCREEN;
   var lastMainScreen = DEFAULT_SCREEN;
   var toastTimer = 0;
+  var playerNotifyTimer = 0;
 
   function onReady(callback) {
     if (document.readyState === "loading") {
@@ -75,6 +76,28 @@
     }, 1800);
   }
 
+  function notifyPlayerResize() {
+    try {
+      if (window.parent && window.parent !== window && window.parent.$axure && window.parent.$axure.player) {
+        window.parent.$axure.player.resizeContent(true);
+        window.parent.$axure.player.refreshViewPort();
+      }
+    } catch (error) {
+      // Axure local preview can block parent access in some browsers.
+    }
+  }
+
+  function schedulePlayerResize() {
+    window.clearTimeout(playerNotifyTimer);
+    notifyPlayerResize();
+    playerNotifyTimer = window.setTimeout(function () {
+      notifyPlayerResize();
+    }, 120);
+    window.setTimeout(function () {
+      notifyPlayerResize();
+    }, 500);
+  }
+
   function closeModal() {
     showScreen(MAIN_SCREENS[lastMainScreen] ? lastMainScreen : DEFAULT_SCREEN);
   }
@@ -123,6 +146,7 @@
 
   onReady(function () {
     showScreen(screenFromHash(), true);
+    schedulePlayerResize();
     document.addEventListener("click", handleClick);
     window.addEventListener("hashchange", function () {
       showScreen(screenFromHash(), true);
@@ -130,6 +154,11 @@
     document.addEventListener("keydown", function (event) {
       if (event.key === "Escape" && !MAIN_SCREENS[currentScreen]) {
         closeModal();
+      }
+    });
+    queryAll(".piggy-shot").forEach(function (image) {
+      if (!image.complete) {
+        image.addEventListener("load", schedulePlayerResize, { once: true });
       }
     });
   });

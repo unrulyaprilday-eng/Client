@@ -4,7 +4,7 @@
     <title>Profile</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-    <meta name="viewport" content="width=428, initial-scale=1"/>
+    <meta name="viewport" content="width=800, initial-scale=1"/>
     <link href="resources/css/axure_rp_page.css" type="text/css" rel="stylesheet"/>
     <link href="data/styles.css" type="text/css" rel="stylesheet"/>
     <link href="files/profile/styles.css" type="text/css" rel="stylesheet"/>
@@ -2753,29 +2753,47 @@
           <p></p>
         </div>
       </div>
+
+      <aside class="profile-notes-panel" aria-label="Profile copy notes">
+        <section class="profile-note-card">
+          <h2>满级状态文案</h2>
+          <p>右侧不新增状态标识，满级时奖金位置直接显示满级状态。</p>
+          <dl>
+            <dt>中文</dt>
+            <dd>已满级</dd>
+            <dd><u>投注</u>享更多优惠</dd>
+            <dd><u>充值</u>享更多优惠</dd>
+            <dt>English</dt>
+            <dd>Max Level</dd>
+            <dd><u>Bet</u> for more offers</dd>
+            <dd><u>Deposit</u> for more offers</dd>
+          </dl>
+        </section>
+      </aside>
+
+      <nav class="profile-bottom-nav" aria-label="Bottom navigation">
+        <button class="profile-bottom-nav__item" type="button">
+          <span class="profile-bottom-nav__icon profile-bottom-nav__icon--home" aria-hidden="true"></span>
+          <span class="profile-bottom-nav__label">首页</span>
+        </button>
+        <a class="profile-bottom-nav__item" href="奖励动态.html">
+          <span class="profile-bottom-nav__icon profile-bottom-nav__icon--promo" aria-hidden="true"></span>
+          <span class="profile-bottom-nav__label">优惠</span>
+        </a>
+        <a class="profile-bottom-nav__item" href="存款.html">
+          <span class="profile-bottom-nav__icon profile-bottom-nav__icon--deposit" aria-hidden="true"></span>
+          <span class="profile-bottom-nav__label">存款</span>
+        </a>
+        <button class="profile-bottom-nav__item" type="button" data-action="open-withdraw">
+          <span class="profile-bottom-nav__icon profile-bottom-nav__icon--withdraw" aria-hidden="true"></span>
+          <span class="profile-bottom-nav__label">提现</span>
+        </button>
+        <a class="profile-bottom-nav__item is-active" href="profile.html" aria-current="page">
+          <span class="profile-bottom-nav__icon profile-bottom-nav__icon--profile" aria-hidden="true"></span>
+          <span class="profile-bottom-nav__label">我的</span>
+        </a>
+      </nav>
     </div>
-    <nav class="profile-bottom-nav" aria-label="Bottom navigation">
-      <button class="profile-bottom-nav__item" type="button">
-        <span class="profile-bottom-nav__icon profile-bottom-nav__icon--home" aria-hidden="true"></span>
-        <span class="profile-bottom-nav__label">首页</span>
-      </button>
-      <a class="profile-bottom-nav__item" href="奖励动态.html">
-        <span class="profile-bottom-nav__icon profile-bottom-nav__icon--promo" aria-hidden="true"></span>
-        <span class="profile-bottom-nav__label">优惠</span>
-      </a>
-      <a class="profile-bottom-nav__item" href="存款.html">
-        <span class="profile-bottom-nav__icon profile-bottom-nav__icon--deposit" aria-hidden="true"></span>
-        <span class="profile-bottom-nav__label">存款</span>
-      </a>
-      <button class="profile-bottom-nav__item" type="button" data-action="open-withdraw">
-        <span class="profile-bottom-nav__icon profile-bottom-nav__icon--withdraw" aria-hidden="true"></span>
-        <span class="profile-bottom-nav__label">提现</span>
-      </button>
-      <a class="profile-bottom-nav__item is-active" href="profile.html" aria-current="page">
-        <span class="profile-bottom-nav__icon profile-bottom-nav__icon--profile" aria-hidden="true"></span>
-        <span class="profile-bottom-nav__label">我的</span>
-      </a>
-    </nav>
     <script src="resources/scripts/axure/ios.js"></script>
   </body>
 </html>

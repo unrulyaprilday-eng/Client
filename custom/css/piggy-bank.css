@@ -3,15 +3,19 @@
 }
 
 html {
-  min-height: 100%;
+  height: auto;
+  min-height: 1132px;
   background: #f4f0ea;
+  overflow-y: auto;
 }
 
 body {
-  min-height: 100%;
+  height: auto;
+  min-height: 1132px;
   width: 800px;
   color: #fff4d6;
   font-family: "Arial", "Microsoft YaHei", "PingFang SC", sans-serif;
+  overflow-y: visible;
 }
 
 .piggy-bank-canvas {
@@ -21,11 +25,18 @@ body {
   background: #f4f0ea;
 }
 
+.piggy-scroll-spacer {
+  width: 1px;
+  height: 1132px;
+  pointer-events: none;
+  visibility: hidden;
+}
+
 .piggy-prototype {
   position: relative;
   width: 428px;
-  min-height: 926px;
-  overflow: hidden;
+  min-height: 1132px;
+  overflow: visible;
   background: #220003;
 }
 
@@ -45,21 +56,6 @@ body {
   height: auto;
   user-select: none;
   -webkit-user-drag: none;
-}
-
-.piggy-shot-crop {
-  position: relative;
-  width: 428px;
-  overflow: hidden;
-}
-
-.piggy-shot-crop--main-lower {
-  height: 371px;
-  margin-top: 0;
-}
-
-.piggy-shot-crop--main-lower .piggy-shot {
-  transform: translateY(-408px);
 }
 
 .hotspot {
@@ -161,20 +157,6 @@ body {
   top: 924px;
   width: 122px;
   height: 160px;
-}
-
-.hotspot--pending-guide-card {
-  left: 153px;
-  top: 571px;
-  width: 122px;
-  height: 116px;
-}
-
-.hotspot--top-guide-card {
-  left: 153px;
-  top: 924px;
-  width: 122px;
-  height: 116px;
 }
 
 .hotspot--pending-guide-bet {
