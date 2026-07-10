@@ -128,6 +128,27 @@
             "pageName": "存款",
             "type": "Wireframe",
             "url": "存款.html"
+          },
+          {
+            "id": "secure_account_username",
+            "pageName": "完善账户安全-账号",
+            "type": "Wireframe",
+            "url": "完善账户安全-账号.html",
+            "children": []
+          },
+          {
+            "id": "secure_account_phone",
+            "pageName": "完善账户安全-手机",
+            "type": "Wireframe",
+            "url": "完善账户安全-手机.html",
+            "children": []
+          },
+          {
+            "id": "secure_account_email",
+            "pageName": "完善账户安全-邮箱",
+            "type": "Wireframe",
+            "url": "完善账户安全-邮箱.html",
+            "children": []
           }
         ]
       },
