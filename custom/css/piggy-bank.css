@@ -201,11 +201,177 @@ body {
   height: 44px;
 }
 
-.hotspot--rules-close {
-  left: 365px;
-  top: 142px;
-  width: 45px;
-  height: 45px;
+.piggy-rule-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(8, 0, 1, 0.78);
+}
+
+.piggy-rule-dialog {
+  position: absolute;
+  left: 31px;
+  top: 126px;
+  width: 366px;
+  height: 606px;
+  overflow: hidden;
+  border: 2px solid #f7c85b;
+  border-radius: 12px;
+  background: #620008;
+  color: #ffe5df;
+  box-shadow: 0 4px 0 rgba(116, 39, 16, 0.8), 0 8px 20px rgba(0, 0, 0, 0.52);
+}
+
+.piggy-rule-header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 58px;
+  border-bottom: 1px solid rgba(255, 213, 190, 0.28);
+  background: #700009;
+}
+
+.piggy-rule-header h2 {
+  margin: 0;
+  color: #fff7ee;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 24px;
+}
+
+.piggy-rule-close {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #ffb3ad;
+  font: 300 36px/40px Arial, sans-serif;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.piggy-rule-close:focus-visible {
+  outline: 2px solid #ffe263;
+  outline-offset: -4px;
+}
+
+.piggy-rule-content {
+  height: calc(100% - 58px);
+  padding: 12px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-color: #d98b32 #4c0007;
+  scrollbar-width: thin;
+}
+
+.piggy-rule-content::-webkit-scrollbar {
+  width: 5px;
+}
+
+.piggy-rule-content::-webkit-scrollbar-track {
+  background: #4c0007;
+}
+
+.piggy-rule-content::-webkit-scrollbar-thumb {
+  border-radius: 3px;
+  background: #d98b32;
+}
+
+.piggy-rule-intro {
+  margin-bottom: 12px;
+  padding: 10px 12px;
+  border-left: 3px solid #f2be50;
+  background: #4b0006;
+}
+
+.piggy-rule-intro p {
+  margin: 0;
+  color: #ffe8df;
+  font-size: 12px;
+  line-height: 17px;
+}
+
+.piggy-rule-intro p + p {
+  margin-top: 6px;
+  color: #dca9a1;
+}
+
+.piggy-rate-card {
+  overflow: hidden;
+  margin-bottom: 12px;
+  border: 1px solid rgba(247, 200, 91, 0.54);
+  border-radius: 7px;
+  background: #4d0006;
+}
+
+.piggy-rate-card:last-child {
+  margin-bottom: 2px;
+}
+
+.piggy-rate-card > header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 38px;
+  padding: 7px 11px;
+  border-bottom: 1px solid rgba(247, 200, 91, 0.34);
+  background: #76000a;
+}
+
+.piggy-rate-card h3 {
+  margin: 0;
+  color: #ffd66e;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 20px;
+}
+
+.piggy-rate-card header span {
+  color: #dba8a0;
+  font-size: 11px;
+  line-height: 16px;
+}
+
+.piggy-rate-card table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  color: #ffd9d3;
+  font-size: 12px;
+  text-align: center;
+}
+
+.piggy-rate-card th,
+.piggy-rate-card td {
+  height: 31px;
+  padding: 5px 4px;
+  border-bottom: 1px solid rgba(255, 219, 210, 0.16);
+}
+
+.piggy-rate-card th {
+  color: #dba8a0;
+  font-size: 11px;
+  font-weight: 400;
+}
+
+.piggy-rate-card th:first-child,
+.piggy-rate-card td:first-child {
+  width: 50px;
+}
+
+.piggy-rate-card th:last-child,
+.piggy-rate-card td:last-child {
+  width: 92px;
+  color: #ffd05c;
+  font-weight: 700;
+}
+
+.piggy-rate-card tbody tr:last-child td {
+  border-bottom: 0;
 }
 
 .piggy-toast {

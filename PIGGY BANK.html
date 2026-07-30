@@ -11,7 +11,7 @@
     <link href="resources/css/axure_rp_page.css" type="text/css" rel="stylesheet"/>
     <link href="data/styles.css" type="text/css" rel="stylesheet"/>
     <link href="files/PIGGY BANK/styles.css?v=20260709" type="text/css" rel="stylesheet"/>
-    <link href="custom/css/piggy-bank.css?v=20260709" type="text/css" rel="stylesheet"/>
+    <link href="custom/css/piggy-bank.css?v=20260730" type="text/css" rel="stylesheet"/>
     <script src="resources/scripts/jquery-3.2.1.min.js"></script>
     <script src="resources/scripts/axure/axQuery.js"></script>
     <script src="resources/scripts/axure/globals.js"></script>
@@ -46,7 +46,7 @@
     <script src="files/PIGGY BANK/data.js?v=20260709"></script>
     <script src="custom/js/axure-custom-page-ready.js"></script>
     <script src="resources/scripts/axure/ios.js"></script>
-    <script src="custom/js/piggy-bank.js?v=20260709"></script>
+    <script src="custom/js/piggy-bank.js?v=20260730"></script>
     <script type="text/javascript">
       $axure.utils.getTransparentGifPath = function() { return 'resources/images/transparent.gif'; };
       $axure.utils.getOtherPath = function() { return 'resources/Other.html'; };
@@ -98,8 +98,119 @@
           </section>
 
           <section class="piggy-screen" data-piggy-screen="rules" hidden aria-label="PIGGY BANK rules">
-            <img class="piggy-shot" src="custom/assets/piggy-bank/piggy-bank-rules.png" alt="PIGGY BANK rules popup"/>
-            <button class="hotspot hotspot--rules-close" type="button" data-action="close-modal" aria-label="Close rules"></button>
+            <img class="piggy-shot" src="custom/assets/piggy-bank/piggy-bank-main-top.png" alt=""/>
+            <div class="piggy-rule-backdrop" aria-hidden="true"></div>
+            <section class="piggy-rule-dialog" role="dialog" aria-modal="true" aria-labelledby="piggy-rule-title">
+              <header class="piggy-rule-header">
+                <h2 id="piggy-rule-title">Rules</h2>
+                <button class="piggy-rule-close" type="button" data-action="close-modal" aria-label="Close rules">&times;</button>
+              </header>
+
+              <div class="piggy-rule-content" data-rule-scroll>
+                <div class="piggy-rule-intro">
+                  <p>Gullak Bonus is converted to balance according to the valid wager and Gullak Rate of each game type.</p>
+                  <p>Valid wager is calculated separately. When multiple tiers are reached, the highest qualified tier applies.</p>
+                </div>
+
+                <article class="piggy-rate-card">
+                  <header><h3>Card Games</h3><span>5 tiers</span></header>
+                  <table>
+                    <thead><tr><th>Tier</th><th>Valid Wager</th><th>Gullak Rate</th></tr></thead>
+                    <tbody>
+                      <tr><td>1</td><td>&ge; 10,000</td><td>5%</td></tr>
+                      <tr><td>2</td><td>&ge; 20,000</td><td>10%</td></tr>
+                      <tr><td>3</td><td>&ge; 50,000</td><td>20%</td></tr>
+                      <tr><td>4</td><td>&ge; 80,000</td><td>50%</td></tr>
+                      <tr><td>5</td><td>&ge; 100,000</td><td>60%</td></tr>
+                    </tbody>
+                  </table>
+                </article>
+
+                <article class="piggy-rate-card">
+                  <header><h3>Fishing</h3><span>5 tiers</span></header>
+                  <table>
+                    <thead><tr><th>Tier</th><th>Valid Wager</th><th>Gullak Rate</th></tr></thead>
+                    <tbody>
+                      <tr><td>1</td><td>&ge; 10,000</td><td>5%</td></tr>
+                      <tr><td>2</td><td>&ge; 20,000</td><td>10%</td></tr>
+                      <tr><td>3</td><td>&ge; 50,000</td><td>20%</td></tr>
+                      <tr><td>4</td><td>&ge; 80,000</td><td>50%</td></tr>
+                      <tr><td>5</td><td>&ge; 100,000</td><td>60%</td></tr>
+                    </tbody>
+                  </table>
+                </article>
+
+                <article class="piggy-rate-card">
+                  <header><h3>Slots</h3><span>5 tiers</span></header>
+                  <table>
+                    <thead><tr><th>Tier</th><th>Valid Wager</th><th>Gullak Rate</th></tr></thead>
+                    <tbody>
+                      <tr><td>1</td><td>&ge; 10,000</td><td>5%</td></tr>
+                      <tr><td>2</td><td>&ge; 20,000</td><td>10%</td></tr>
+                      <tr><td>3</td><td>&ge; 50,000</td><td>20%</td></tr>
+                      <tr><td>4</td><td>&ge; 80,000</td><td>50%</td></tr>
+                      <tr><td>5</td><td>&ge; 100,000</td><td>60%</td></tr>
+                    </tbody>
+                  </table>
+                </article>
+
+                <article class="piggy-rate-card">
+                  <header><h3>Sports</h3><span>5 tiers</span></header>
+                  <table>
+                    <thead><tr><th>Tier</th><th>Valid Wager</th><th>Gullak Rate</th></tr></thead>
+                    <tbody>
+                      <tr><td>1</td><td>&ge; 10,000</td><td>5%</td></tr>
+                      <tr><td>2</td><td>&ge; 20,000</td><td>10%</td></tr>
+                      <tr><td>3</td><td>&ge; 50,000</td><td>20%</td></tr>
+                      <tr><td>4</td><td>&ge; 80,000</td><td>50%</td></tr>
+                      <tr><td>5</td><td>&ge; 100,000</td><td>60%</td></tr>
+                    </tbody>
+                  </table>
+                </article>
+
+                <article class="piggy-rate-card">
+                  <header><h3>Live Casino</h3><span>5 tiers</span></header>
+                  <table>
+                    <thead><tr><th>Tier</th><th>Valid Wager</th><th>Gullak Rate</th></tr></thead>
+                    <tbody>
+                      <tr><td>1</td><td>&ge; 10,000</td><td>5%</td></tr>
+                      <tr><td>2</td><td>&ge; 20,000</td><td>10%</td></tr>
+                      <tr><td>3</td><td>&ge; 50,000</td><td>20%</td></tr>
+                      <tr><td>4</td><td>&ge; 80,000</td><td>50%</td></tr>
+                      <tr><td>5</td><td>&ge; 100,000</td><td>60%</td></tr>
+                    </tbody>
+                  </table>
+                </article>
+
+                <article class="piggy-rate-card">
+                  <header><h3>Lottery</h3><span>5 tiers</span></header>
+                  <table>
+                    <thead><tr><th>Tier</th><th>Valid Wager</th><th>Gullak Rate</th></tr></thead>
+                    <tbody>
+                      <tr><td>1</td><td>&ge; 10,000</td><td>5%</td></tr>
+                      <tr><td>2</td><td>&ge; 20,000</td><td>10%</td></tr>
+                      <tr><td>3</td><td>&ge; 50,000</td><td>20%</td></tr>
+                      <tr><td>4</td><td>&ge; 80,000</td><td>50%</td></tr>
+                      <tr><td>5</td><td>&ge; 100,000</td><td>60%</td></tr>
+                    </tbody>
+                  </table>
+                </article>
+
+                <article class="piggy-rate-card">
+                  <header><h3>Blockchain</h3><span>5 tiers</span></header>
+                  <table>
+                    <thead><tr><th>Tier</th><th>Valid Wager</th><th>Gullak Rate</th></tr></thead>
+                    <tbody>
+                      <tr><td>1</td><td>&ge; 10,000</td><td>5%</td></tr>
+                      <tr><td>2</td><td>&ge; 20,000</td><td>10%</td></tr>
+                      <tr><td>3</td><td>&ge; 50,000</td><td>20%</td></tr>
+                      <tr><td>4</td><td>&ge; 80,000</td><td>50%</td></tr>
+                      <tr><td>5</td><td>&ge; 100,000</td><td>60%</td></tr>
+                    </tbody>
+                  </table>
+                </article>
+              </div>
+            </section>
           </section>
 
           <div class="piggy-toast" data-piggy-toast hidden></div>
@@ -117,7 +228,7 @@
 
           <section class="piggy-note-card">
             <h2>页面背景</h2>
-            <p>画布背景、说明区域、说明卡片样式与 <strong>PIGGYBANK 引导游戏</strong> 保持一致；左侧手机页继续直接使用原始截图，不额外改图。</p>
+            <p>主页面继续使用原始截图；Rules 改为独立 HTML 弹窗，以支持按游戏类型展示多个动态档位。</p>
           </section>
 
           <section class="piggy-note-card">
@@ -134,8 +245,14 @@
             <ul>
               <li><strong>Bet</strong>：点击提示“跳转首页即可”。</li>
               <li><strong>Deposit</strong>：跳转到存款页。</li>
-              <li><strong>VIP Deposit</strong>：跳转到存款页，用于提升 VIP 后提高 Gullak Rate。</li>
+              <li><strong>VIP Deposit</strong>：跳转到存款页。</li>
             </ul>
+          </section>
+
+          <section class="piggy-note-card">
+            <h2>Gullak Rate 规则</h2>
+            <p>费率不再按 VIP 等级展示，改为按游戏类型分别配置。每个类型可配置多个有效投注档位，达到多个档位时按最高达标档位计算。</p>
+            <p>Rules 内全部类型默认展开，正文区域上下滚动；当前示例比例统一使用 <strong>%</strong>。</p>
           </section>
 
           <section class="piggy-note-card piggy-note-card--important">

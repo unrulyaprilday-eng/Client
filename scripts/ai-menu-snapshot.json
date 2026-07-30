@@ -103,6 +103,13 @@
           "type": "Wireframe",
           "url": "分享活动.html",
           "children": []
+        },
+        {
+          "id": "promotion_continuous_challenge",
+          "pageName": "连续挑战",
+          "type": "Wireframe",
+          "url": "pormotion/连续挑战.html",
+          "children": []
         }
       ]
     },

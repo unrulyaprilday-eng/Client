@@ -57,6 +57,12 @@
     });
     currentScreen = name;
     document.body.setAttribute("data-piggy-current", name);
+    if (name === "rules") {
+      var ruleScroll = document.querySelector("[data-rule-scroll]");
+      if (ruleScroll) {
+        ruleScroll.scrollTop = 0;
+      }
+    }
     if (!keepHash) {
       updateHash(name);
     }

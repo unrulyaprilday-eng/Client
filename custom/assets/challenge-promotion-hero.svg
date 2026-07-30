@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="400" viewBox="0 0 800 400" role="img" aria-labelledby="title desc">
+  <title id="title">连续挑战赢好礼</title>
+  <desc id="desc">三段连续任务路线通向奖励宝箱</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#15233f"/>
+      <stop offset="0.55" stop-color="#263e70"/>
+      <stop offset="1" stop-color="#14203a"/>
+    </linearGradient>
+    <linearGradient id="road" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ff8250"/>
+      <stop offset="1" stop-color="#ffd35e"/>
+    </linearGradient>
+    <linearGradient id="chest" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffd767"/>
+      <stop offset="1" stop-color="#ee8d32"/>
+    </linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="8" stdDeviation="8" flood-color="#071021" flood-opacity=".45"/>
+    </filter>
+  </defs>
+  <rect width="800" height="400" fill="url(#bg)"/>
+  <path d="M0 315C120 270 210 344 327 296S560 238 800 282V400H0Z" fill="#0d172b" opacity=".76"/>
+  <circle cx="668" cy="77" r="104" fill="#f7c957" opacity=".08"/>
+  <circle cx="668" cy="77" r="72" fill="#f7c957" opacity=".07"/>
+  <g fill="#fff" opacity=".55">
+    <circle cx="76" cy="76" r="2"/><circle cx="125" cy="132" r="3"/><circle cx="228" cy="58" r="2"/>
+    <circle cx="475" cy="82" r="2"/><circle cx="555" cy="48" r="3"/><circle cx="743" cy="160" r="2"/>
+  </g>
+  <text x="58" y="118" fill="#ffcf59" font-family="Arial, sans-serif" font-size="24" font-weight="700">DAILY CHALLENGE</text>
+  <text x="58" y="176" fill="#ffffff" font-family="Microsoft YaHei, Arial, sans-serif" font-size="48" font-weight="800">连续挑战赢好礼</text>
+  <text x="60" y="216" fill="#bfcbe3" font-family="Microsoft YaHei, Arial, sans-serif" font-size="22">完成连续任务 · 解锁多档奖励</text>
+  <path d="M100 290C210 238 308 316 416 266S593 204 691 220" fill="none" stroke="#ffffff" stroke-opacity=".18" stroke-width="20" stroke-linecap="round"/>
+  <path d="M100 290C210 238 308 316 416 266S593 204 691 220" fill="none" stroke="url(#road)" stroke-width="8" stroke-linecap="round" stroke-dasharray="18 13"/>
+  <g filter="url(#shadow)" font-family="Arial, sans-serif" font-size="22" font-weight="800" text-anchor="middle">
+    <circle cx="100" cy="290" r="27" fill="#37c985" stroke="#b9f5d7" stroke-width="4"/><text x="100" y="298" fill="#123b2c">1</text>
+    <circle cx="416" cy="266" r="27" fill="#ff7a3f" stroke="#ffd0b9" stroke-width="4"/><text x="416" y="274" fill="#fff">2</text>
+    <circle cx="691" cy="220" r="27" fill="#2e3d5d" stroke="#93a3c5" stroke-width="4"/><text x="691" y="228" fill="#fff">3</text>
+  </g>
+  <g transform="translate(629 103)" filter="url(#shadow)">
+    <path d="M8 35h112v76H8z" fill="url(#chest)" stroke="#9f5324" stroke-width="5"/>
+    <path d="M4 35C4 11 23 0 64 0s60 11 60 35z" fill="#ffc852" stroke="#9f5324" stroke-width="5"/>
+    <path d="M57 31h18v80H57z" fill="#fff0a7" opacity=".85"/>
+    <rect x="48" y="54" width="34" height="28" rx="6" fill="#73401e"/>
+    <circle cx="65" cy="67" r="5" fill="#ffd868"/>
+  </g>
+</svg>
