@@ -1,6 +1,7 @@
 (function () {
   var STORAGE_LANGUAGE = "profileMenuLanguage";
   var STORAGE_MUSIC = "profileMenuMusicOn";
+  var STORAGE_VIBRATION = "profileMenuVibrationOn";
 
   function onReady(callback) {
     if (document.readyState === "loading") {
@@ -111,6 +112,9 @@
     var els = {
       languageLabel: document.querySelector("[data-language-label]"),
       musicLabel: document.querySelector("[data-music-label]"),
+      vibrationLabel: document.querySelector("[data-vibration-label]"),
+      vibrationRow: document.querySelector("[data-action='toggle-vibration']"),
+      vibrationSwitch: document.querySelector("[data-vibration-switch]"),
       toast: document.querySelector("[data-toast]"),
       sheet: document.querySelector("[data-sheet]"),
       sheetEyebrow: document.querySelector("[data-sheet-eyebrow]"),
@@ -124,7 +128,8 @@
 
     var state = {
       language: readStorage(STORAGE_LANGUAGE, "Chinese"),
-      musicOn: readStorage(STORAGE_MUSIC, "true") !== "false"
+      musicOn: readStorage(STORAGE_MUSIC, "true") !== "false",
+      vibrationOn: readStorage(STORAGE_VIBRATION, "true") !== "false"
     };
 
     function renderMeta() {
@@ -133,6 +138,15 @@
       }
       if (els.musicLabel) {
         els.musicLabel.textContent = state.musicOn ? "已开启" : "已关闭";
+      }
+      if (els.vibrationLabel) {
+        els.vibrationLabel.textContent = state.vibrationOn ? "已开启" : "已关闭";
+      }
+      if (els.vibrationRow) {
+        els.vibrationRow.setAttribute("aria-pressed", state.vibrationOn ? "true" : "false");
+      }
+      if (els.vibrationSwitch) {
+        els.vibrationSwitch.classList.toggle("is-on", state.vibrationOn);
       }
     }
 
@@ -301,6 +315,15 @@
           writeStorage(STORAGE_MUSIC, state.musicOn ? "true" : "false");
           renderMeta();
           showToast(state.musicOn ? "音乐已开启" : "音乐已关闭");
+          break;
+        case "toggle-vibration":
+          state.vibrationOn = !state.vibrationOn;
+          writeStorage(STORAGE_VIBRATION, state.vibrationOn ? "true" : "false");
+          renderMeta();
+          if (state.vibrationOn && navigator.vibrate) {
+            navigator.vibrate(16);
+          }
+          showToast(state.vibrationOn ? "震动已开启" : "震动已关闭");
           break;
         case "open-faq":
           window.location.href = "客服弹窗.html";
