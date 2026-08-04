@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "savedAt": "2026-07-08T05:39:39.882Z",
+  "savedAt": "2026-08-04T06:38:56.834Z",
   "source": "data/document.js sitemap.rootNodes",
   "rootNodes": [
     {
@@ -42,6 +42,13 @@
           "pageName": "奖励动态",
           "type": "Wireframe",
           "url": "奖励动态.html"
+        },
+        {
+          "id": "home_app_install",
+          "pageName": "首页-APP安装",
+          "type": "Wireframe",
+          "url": "首页-APP安装.html",
+          "children": []
         }
       ]
     },
@@ -124,6 +131,27 @@
           "pageName": "存款",
           "type": "Wireframe",
           "url": "存款.html"
+        },
+        {
+          "id": "secure_account_username",
+          "pageName": "完善账户安全-账号",
+          "type": "Wireframe",
+          "url": "完善账户安全-账号.html",
+          "children": []
+        },
+        {
+          "id": "secure_account_phone",
+          "pageName": "完善账户安全-手机",
+          "type": "Wireframe",
+          "url": "完善账户安全-手机.html",
+          "children": []
+        },
+        {
+          "id": "secure_account_email",
+          "pageName": "完善账户安全-邮箱",
+          "type": "Wireframe",
+          "url": "完善账户安全-邮箱.html",
+          "children": []
         }
       ]
     },

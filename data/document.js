@@ -53,6 +53,13 @@
             "pageName": "奖励动态",
             "type": "Wireframe",
             "url": "奖励动态.html"
+          },
+          {
+            "id": "home_app_install",
+            "pageName": "首页-APP安装",
+            "type": "Wireframe",
+            "url": "首页-APP安装.html",
+            "children": []
           }
         ]
       },
