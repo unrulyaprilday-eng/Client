@@ -403,6 +403,29 @@ button {
   font-weight: 700;
 }
 
+.login-status {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 6px;
+  flex: 0 0 auto;
+  min-height: 30px;
+  margin: 0 !important;
+  padding: 0 10px;
+  border: 1px solid #c8ddd7;
+  border-radius: 7px;
+  background: #f1f8f6;
+  color: #43685f !important;
+  font-size: 10px !important;
+  font-weight: 700;
+}
+
+.login-status i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #4c877a;
+}
+
 .open-mini {
   border-color: #ff6728;
   background: #ff6728;
@@ -434,6 +457,80 @@ button {
   border: 1px solid #ffd5c3;
   border-radius: 8px;
   background: #fff1e9;
+}
+
+.top-download-bar {
+  position: relative;
+  z-index: 12;
+  width: 100%;
+  height: 78px;
+  min-height: 0;
+  margin: 0;
+  padding: 12px 40px 12px 12px;
+  border: 0;
+  border-top: 3px solid #ff6728;
+  border-bottom: 1px solid #f3c6b2;
+  border-radius: 0 0 10px 10px;
+  background: #fffaf7;
+  box-shadow: 0 12px 28px rgba(73, 43, 30, 0.2);
+  overflow: hidden;
+  animation: download-bar-push-in 320ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.top-download-bar.is-closing {
+  pointer-events: none;
+  animation: download-bar-pull-out 240ms ease both;
+}
+
+@keyframes download-bar-push-in {
+  from {
+    height: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    border-top-width: 0;
+    border-bottom-width: 0;
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    height: 78px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    border-top-width: 3px;
+    border-bottom-width: 1px;
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes download-bar-pull-out {
+  from {
+    height: 78px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    border-top-width: 3px;
+    border-bottom-width: 1px;
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    height: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    border-top-width: 0;
+    border-bottom-width: 0;
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}
+
+.download-eyebrow {
+  display: block;
+  margin-bottom: 2px;
+  color: #dc5a24;
+  font-size: 8px;
+  font-weight: 800;
+  line-height: 11px;
 }
 
 .compact-app-banner .app-icon,
@@ -471,7 +568,7 @@ button {
   line-height: 13px;
 }
 
-.compact-app-banner > button,
+.compact-app-banner > button:not(.banner-close),
 .upgrade-banner > button:not(.banner-close) {
   flex: 0 0 auto;
   height: 29px;
@@ -482,6 +579,23 @@ button {
   color: #ffffff;
   font-size: 10px;
   font-weight: 700;
+}
+
+.top-download-bar > button:not(.banner-close) {
+  min-width: 84px;
+  height: 34px;
+  padding: 0 9px;
+  white-space: normal;
+  line-height: 12px;
+}
+
+.top-download-bar .banner-close {
+  top: 6px;
+  right: 6px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #f6ebe5;
 }
 
 .banner-close,
@@ -836,20 +950,20 @@ button {
 
 .install-scrim {
   position: absolute;
-  z-index: 5;
-  inset: 0 0 66px;
+  z-index: 20;
+  inset: 0;
   background: rgba(56, 36, 27, 0.28);
 }
 
 .install-sheet {
   position: absolute;
-  z-index: 6;
+  z-index: 21;
   left: 0;
   right: 0;
   top: 0;
   padding: 18px 16px 14px;
   border: 1px solid #ffd5c3;
-  border-top: 0;
+  border-top: 3px solid #ff6728;
   border-radius: 0 0 10px 10px;
   background: #fffaf7;
   box-shadow: 0 16px 34px rgba(73, 43, 30, 0.2);
@@ -867,10 +981,10 @@ button {
 
 .sheet-close {
   z-index: 2;
-  top: 12px;
-  right: 12px;
-  width: 26px;
-  height: 26px;
+  top: 10px;
+  right: 10px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
   background: #f6ebe5;
 }

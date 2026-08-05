@@ -56,16 +56,27 @@
             <header class="state-heading">
               <div>
                 <span class="state-number">01</span>
-                <strong id="leftStateTitle">首次访问</strong>
+                <strong id="leftStateTitle">已登录首次访问</strong>
               </div>
-              <div class="state-switcher" role="group" aria-label="切换首次访问和 Web 登录状态">
-                <button class="active" type="button" data-left-state="first">首次访问</button>
-                <button type="button" data-left-state="web">Web 登录</button>
+              <div class="state-switcher" role="group" aria-label="切换已登录首次访问和 Web 使用状态">
+                <button class="active" type="button" data-left-state="first">首次打开</button>
+                <button type="button" data-left-state="web">继续 Web</button>
               </div>
-              <p id="leftStateRule">未安装客户端：APK 主推荐，PWA 作为次级入口。</p>
+              <p id="leftStateRule">Android Web 已登录，未安装客户端：APK 主推荐，PWA 作为次级入口。</p>
             </header>
 
-            <section class="phone-preview" data-phone="first" aria-label="首次访问状态">
+            <section class="phone-preview" data-phone="first" aria-label="已登录首次访问状态">
+              <section class="compact-app-banner top-download-bar" data-web-only hidden aria-label="Android APK 下载提示">
+                <button class="banner-close" type="button" data-action="dismiss-download-bar" aria-label="Close download bar" title="Close"></button>
+                <span class="app-icon" aria-hidden="true">P</span>
+                <div>
+                  <span class="download-eyebrow">OFFICIAL ANDROID APP</span>
+                  <strong>Faster play in the App</strong>
+                  <small>Download the official Android APK.</small>
+                </div>
+                <button type="button" data-action="download-apk">Download APK</button>
+              </section>
+
               <header class="app-header">
                 <span class="brand-mark">PLAY</span>
                 <div class="header-actions">
@@ -78,18 +89,9 @@
                 <section class="welcome-row">
                   <div>
                     <span>Welcome back</span>
-                    <strong>Find your next win</strong>
+                    <strong>Alex</strong>
                   </div>
-                  <button class="login-button" type="button">Log in</button>
-                </section>
-
-                <section class="compact-app-banner" data-web-only hidden>
-                  <span class="app-icon" aria-hidden="true">P</span>
-                  <div>
-                    <strong>Get the official Android App</strong>
-                    <small>Faster and more stable</small>
-                  </div>
-                  <button type="button" data-action="download-apk">Download</button>
+                  <span class="login-status"><i aria-hidden="true"></i>Signed in</span>
                 </section>
 
                 <img class="promo-visual" src="custom/assets/challenge-promotion-hero.svg" alt="Daily challenge promotion"/>
@@ -114,22 +116,22 @@
 
               <div class="install-scrim" data-first-only></div>
               <section class="install-sheet" data-first-only aria-label="下载官方客户端">
-                <button class="sheet-close" type="button" data-action="continue-web" aria-label="Close"></button>
+                <button class="sheet-close" type="button" data-action="continue-web" aria-label="Close download panel" title="Close"></button>
                 <div class="sheet-app-row">
                   <span class="large-app-icon" aria-hidden="true">P</span>
                   <div>
-                    <span class="recommended-label">RECOMMENDED</span>
-                    <h2>Download the Official App</h2>
+                    <span class="recommended-label">ANDROID APK / RECOMMENDED</span>
+                    <h2>Official Android App</h2>
                   </div>
                 </div>
-                <p class="sheet-description">Faster, smoother, and more stable.</p>
+                <p class="sheet-description">Download the Android APK for the fastest, most stable experience.</p>
                 <ul class="benefit-list">
                   <li>Reliable notifications and updates</li>
                   <li>Best performance on Android</li>
                   <li>More native features</li>
                 </ul>
-                <button class="primary-cta" type="button" data-action="download-apk">Download APK</button>
-                <button class="text-cta" type="button" data-action="install-pwa">Use PWA instead</button>
+                <button class="primary-cta" type="button" data-action="download-apk">Download Android APK</button>
+                <button class="text-cta" type="button" data-action="install-pwa">Install PWA instead</button>
                 <button class="quiet-cta" type="button" data-action="continue-web">Continue on Web</button>
               </section>
 
@@ -150,10 +152,21 @@
                 <strong>已安装 PWA</strong>
               </div>
               <span class="state-tag">正常使用</span>
-              <p>不再推荐 PWA；在合适时机用轻提示升级 APK，不每次启动弹窗。</p>
+              <p>不再推荐 PWA；每日首次登录时用轻提示升级 APK，不阻断正常使用。</p>
             </header>
 
             <section class="phone-preview" data-phone="pwa" aria-label="已安装 PWA 状态">
+              <section class="upgrade-banner top-download-bar" aria-label="Android APK 升级提示">
+                <button class="banner-close" type="button" data-action="dismiss-upgrade" aria-label="Close download bar" title="Close"></button>
+                <span class="app-icon" aria-hidden="true">P</span>
+                <div>
+                  <span class="download-eyebrow">OFFICIAL ANDROID APP</span>
+                  <strong>Upgrade from PWA</strong>
+                  <small>Get the best Android experience.</small>
+                </div>
+                <button type="button" data-action="download-apk">Download APK</button>
+              </section>
+
               <header class="app-header pwa-header">
                 <span class="brand-mark">PLAY</span>
                 <div class="header-actions">
@@ -169,16 +182,6 @@
                     <strong>Ready to play?</strong>
                   </div>
                   <span class="pwa-badge">PWA</span>
-                </section>
-
-                <section class="upgrade-banner">
-                  <button class="banner-close" type="button" data-action="dismiss-upgrade" aria-label="Dismiss"></button>
-                  <span class="app-icon" aria-hidden="true">P</span>
-                  <div>
-                    <strong>Try our official Android App</strong>
-                    <small>Get a faster, smoother experience.</small>
-                  </div>
-                  <button type="button" data-action="download-apk">Upgrade</button>
                 </section>
 
                 <img class="promo-visual" src="custom/assets/challenge-promotion-hero.svg" alt="Daily challenge promotion"/>
@@ -266,7 +269,7 @@
 
               <div class="install-scrim"></div>
               <section class="install-sheet open-app-sheet" aria-label="打开官方客户端">
-                <button class="sheet-close" type="button" data-action="continue-web" aria-label="Close"></button>
+                <button class="sheet-close" type="button" data-action="continue-web" aria-label="Close open App panel" title="Close"></button>
                 <div class="sheet-app-row">
                   <span class="large-app-icon" aria-hidden="true">P</span>
                   <div>

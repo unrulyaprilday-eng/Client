@@ -4,7 +4,7 @@
     <title>奖励动态</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="viewport" content="width=800, initial-scale=1"/>
     <link href="resources/css/axure_rp_page.css" type="text/css" rel="stylesheet"/>
     <link href="data/styles.css" type="text/css" rel="stylesheet"/>
     <link href="files/奖励动态/styles.css" type="text/css" rel="stylesheet"/>
@@ -103,7 +103,138 @@
                   </div>
                 </div>
               </section>
+
+              <section class="surface-card game-feed-card">
+                <div class="surface-head">
+                  <strong>横向混合款</strong>
+                  <span>按类型交互</span>
+                </div>
+                <div class="component-title">中奖动态</div>
+                <div class="game-win-strip" aria-label="游戏、活动、任务和系统奖励动态">
+                  <div class="game-win-track" id="gameWinTrack">
+                    <div class="game-win-group" data-game-win-group>
+                      <button class="game-win-item" type="button"
+                        data-source-type="game"
+                        data-item-id="pinata-fiesta"
+                        data-title="Pinata Fiesta"
+                        data-category="PG SOFT"
+                        data-description="Open the winner's game and play now."
+                        data-action-label="Play Now"
+                        data-login-required="true"
+                        data-image="images/拼多多转盘/regen/u11-0.png"
+                        data-url="拼多多转盘.html">
+                        <img src="images/拼多多转盘/regen/u11-0.png" alt="Pinata Fiesta"/>
+                        <span class="game-win-copy">
+                          <b>A***6</b>
+                          <strong>Won ₹6,420</strong>
+                        </span>
+                        <span class="game-win-arrow" aria-hidden="true"></span>
+                      </button>
+                      <button class="game-win-item" type="button"
+                        data-source-type="game"
+                        data-item-id="lucky-wheel"
+                        data-title="Lucky Wheel"
+                        data-category="PLAY"
+                        data-description="Open the winner's game and play now."
+                        data-action-label="Play Now"
+                        data-login-required="true"
+                        data-image="images/拼多多转盘/regen/u172.png"
+                        data-url="拼多多转盘.html">
+                        <img src="images/拼多多转盘/regen/u172.png" alt="Lucky Wheel"/>
+                        <span class="game-win-copy">
+                          <b>M***8</b>
+                          <strong>Won ₹2,188</strong>
+                        </span>
+                        <span class="game-win-arrow" aria-hidden="true"></span>
+                      </button>
+                      <button class="game-win-item" type="button"
+                        data-source-type="activity"
+                        data-item-id="weekend-cashback"
+                        data-title="Weekend Cashback"
+                        data-category="Promotion reward"
+                        data-description="The activity reward has been credited to the account."
+                        data-action-label="View Activity"
+                        data-icon="🎁"
+                        data-url="优惠.html">
+                        <span class="game-win-type-icon game-win-type-icon--activity" aria-hidden="true">🎁</span>
+                        <span class="game-win-copy">
+                          <b>K***9</b>
+                          <strong>Claimed ₹300</strong>
+                        </span>
+                        <span class="game-win-arrow" aria-hidden="true"></span>
+                      </button>
+                      <button class="game-win-item" type="button"
+                        data-source-type="task"
+                        data-item-id="daily-challenge"
+                        data-title="Daily Challenge"
+                        data-category="Task reward"
+                        data-description="Continue the challenge to unlock the next reward."
+                        data-action-label="Go to Task"
+                        data-icon="✓"
+                        data-url="pormotion/连续挑战.html">
+                        <span class="game-win-type-icon game-win-type-icon--task" aria-hidden="true">✓</span>
+                        <span class="game-win-copy">
+                          <b>P***8</b>
+                          <strong>Completed ₹88</strong>
+                        </span>
+                        <span class="game-win-arrow" aria-hidden="true"></span>
+                      </button>
+                      <article class="game-win-item game-win-item--static" aria-label="系统奖励已到账">
+                        <span class="game-win-type-icon game-win-type-icon--system" aria-hidden="true">★</span>
+                        <span class="game-win-copy">
+                          <b>System reward</b>
+                          <strong>Bonus ₹188</strong>
+                        </span>
+                        <span class="game-win-status" aria-hidden="true"></span>
+                      </article>
+                    </div>
+                  </div>
+                </div>
+              </section>
             </div>
+
+            <div class="phone-overlay" id="feedItemModal" hidden>
+              <section class="feed-preview-modal" role="dialog" aria-modal="true" aria-labelledby="feedModalTitle">
+                <button class="modal-close" type="button" data-close-modal="feedItemModal" aria-label="Close"></button>
+                <div class="game-preview-main">
+                  <div class="feed-preview-media">
+                    <img id="feedModalImage" src="images/拼多多转盘/regen/u11-0.png" alt="Pinata Fiesta"/>
+                    <span class="feed-modal-type-icon" id="feedModalIcon" aria-hidden="true" hidden>🎁</span>
+                  </div>
+                  <div class="game-preview-copy">
+                    <h3 id="feedModalTitle">Pinata Fiesta</h3>
+                    <p id="feedModalCategory">PG SOFT</p>
+                    <span id="feedModalDescription">Open the winner's game and play now.</span>
+                  </div>
+                </div>
+                <button class="enter-game-button" id="feedActionButton" type="button">
+                  <span class="action-symbol action-symbol--game" id="feedActionIcon" aria-hidden="true"></span>
+                  <span id="feedActionLabel">Play Now</span>
+                </button>
+              </section>
+            </div>
+
+            <div class="phone-overlay" id="loginModal" hidden>
+              <section class="login-modal" role="dialog" aria-modal="true" aria-labelledby="loginModalTitle">
+                <button class="modal-close" type="button" data-close-modal="loginModal" aria-label="Close"></button>
+                <span class="login-brand" aria-hidden="true">P</span>
+                <h3 id="loginModalTitle">Log in to play</h3>
+                <p>Use your account to continue to the game.</p>
+                <form id="gameLoginForm">
+                  <label>
+                    <span>Phone or email</span>
+                    <input type="text" name="account" autocomplete="username" placeholder="Enter phone or email" required/>
+                  </label>
+                  <label>
+                    <span>Password</span>
+                    <input type="password" name="password" autocomplete="current-password" placeholder="Enter password" required/>
+                  </label>
+                  <button class="login-submit" type="submit">Log in &amp; play</button>
+                </form>
+              </section>
+            </div>
+
+            <div class="phone-toast" id="gameFeedToast" role="status" aria-live="polite"></div>
           </section>
         </div>
 
@@ -119,6 +250,10 @@
               <span>显示图标</span>
               <button class="switch on" id="iconToggle" type="button" data-on="true" aria-label="显示图标"></button>
             </div>
+            <div class="toggle-row">
+              <span>模拟已登录</span>
+              <button class="switch" id="loginStateToggle" type="button" data-on="false" aria-label="模拟已登录"></button>
+            </div>
             <label class="field">
               <span>滚动间隔</span>
               <select id="intervalSelect">
@@ -130,6 +265,13 @@
                 <option>8 秒</option>
               </select>
             </label>
+            <dl class="type-rules">
+              <dt>类型映射</dt>
+              <dd><i class="type-dot type-dot--game"></i>游戏：游戏图，进入前校验登录</dd>
+              <dd><i class="type-dot type-dot--activity"></i>活动：活动图或礼物图，查看活动</dd>
+              <dd><i class="type-dot type-dot--task"></i>任务：任务图，去完成任务</dd>
+              <dd><i class="type-dot type-dot--system"></i>系统：默认奖励图标，仅展示</dd>
+            </dl>
           </div>
           <div class="callout-arrow" aria-hidden="true"></div>
         </aside>

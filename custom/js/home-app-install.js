@@ -21,6 +21,18 @@
     }, 1800);
   }
 
+  function closeDownloadBar(bar) {
+    if (!bar || bar.classList.contains("is-closing")) {
+      return;
+    }
+
+    bar.classList.add("is-closing");
+    window.setTimeout(function () {
+      bar.hidden = true;
+      bar.classList.remove("is-closing");
+    }, 240);
+  }
+
   function setLeftState(root, state) {
     var firstPhone = root.querySelector('[data-phone="first"]');
     var title = root.querySelector("#leftStateTitle");
@@ -36,19 +48,19 @@
     firstPhone.querySelectorAll("[data-web-only]").forEach(function (element) {
       element.hidden = isFirstVisit;
     });
-    firstPhone.setAttribute("aria-label", isFirstVisit ? "首次访问状态" : "Web 登录状态");
+    firstPhone.setAttribute("aria-label", isFirstVisit ? "已登录首次访问状态" : "已登录 Web 状态");
 
     root.querySelectorAll("[data-left-state]").forEach(function (button) {
       button.classList.toggle("active", button.getAttribute("data-left-state") === state);
     });
 
     if (title) {
-      title.textContent = isFirstVisit ? "首次访问" : "Web 登录";
+      title.textContent = isFirstVisit ? "已登录首次访问" : "已登录 Web";
     }
     if (rule) {
       rule.textContent = isFirstVisit
-        ? "未安装客户端：APK 主推荐，PWA 作为次级入口。"
-        : "可直接游玩；使用首页轻提示持续推荐 APK，不阻断登录。";
+        ? "Android Web 已登录，未安装客户端：APK 主推荐，PWA 作为次级入口。"
+        : "保持 Web 登录并可直接游玩；顶部下载栏持续推荐 APK，不阻断使用。";
     }
   }
 
@@ -86,10 +98,15 @@
 
         if (action === "dismiss-upgrade") {
           var banner = button.closest(".upgrade-banner");
-          if (banner) {
-            banner.hidden = true;
-          }
+          closeDownloadBar(banner);
           showToast(phone, "Upgrade reminder dismissed");
+          return;
+        }
+
+        if (action === "dismiss-download-bar") {
+          var downloadBar = button.closest(".top-download-bar");
+          closeDownloadBar(downloadBar);
+          showToast(phone, "Download reminder closed");
           return;
         }
 
