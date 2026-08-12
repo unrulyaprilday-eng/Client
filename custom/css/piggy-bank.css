@@ -58,6 +58,157 @@ body {
   -webkit-user-drag: none;
 }
 
+.piggy-recharge-overlays {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.piggy-recharge-badge {
+  position: absolute;
+  left: 76px;
+  top: 236px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 106px;
+  height: 94px;
+  padding: 8px 13px;
+  border: 3px solid #e7a62e;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #d43c27, #95140f 72%);
+  color: #ffe6a0;
+  font-size: 13px;
+  font-weight: 800;
+  line-height: 15px;
+  text-align: center;
+  text-shadow: 0 1px 1px rgba(80, 0, 0, 0.78);
+  transform: rotate(-12deg);
+  box-shadow: 0 3px 5px rgba(31, 0, 0, 0.54);
+}
+
+.piggy-recharge-copy {
+  position: absolute;
+  left: 20px;
+  top: 655px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 388px;
+  min-height: 44px;
+  padding: 4px 10px;
+  background: #220003;
+  color: #e18b9a;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 22px;
+  text-align: center;
+}
+
+.piggy-recharge-card-cover {
+  position: absolute;
+  left: 11px;
+  top: 916px;
+  width: 140px;
+  height: 177px;
+  background: #220003;
+}
+
+.piggy-recharge-card {
+  position: absolute;
+  left: 18px;
+  top: 924px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 122px;
+  height: 160px;
+  padding: 17px 8px 8px;
+  border: 1px solid #8c5b09;
+  border-radius: 7px;
+  background: linear-gradient(145deg, #3d0008, #210004 72%);
+  color: #f0d6d2;
+  text-align: center;
+  box-shadow: inset 18px 0 0 rgba(115, 0, 9, 0.08), inset -18px 0 0 rgba(115, 0, 9, 0.08);
+}
+
+.piggy-recharge-card__icon {
+  display: block;
+  width: 48px;
+  height: 46px;
+  margin-bottom: 6px;
+}
+
+.piggy-recharge-card__icon--deposit {
+  background-image: url("../assets/piggy-bank/piggy-bank-main-stitched.png");
+  background-repeat: no-repeat;
+  background-position: -315px -767px;
+  background-size: 428px 1132px;
+}
+
+.piggy-recharge-card strong {
+  display: block;
+  min-height: 53px;
+  color: #f0d6d2;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 17px;
+}
+
+.piggy-recharge-card__action {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 106px;
+  height: 31px;
+  margin-top: auto;
+  border-radius: 6px;
+  background: #b6001b;
+  color: #f6c6c5;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 20px;
+}
+
+.piggy-recharge-quick-copy {
+  position: absolute;
+  top: 812px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 112px;
+  height: 98px;
+  padding: 4px 3px 5px;
+  background: #350005;
+  color: #f0d6d2;
+  text-align: center;
+}
+
+.piggy-recharge-quick-copy--wager-entry {
+  left: 158px;
+}
+
+.piggy-recharge-quick-copy--recharge-unlock {
+  left: 293px;
+}
+
+.piggy-recharge-quick-copy strong {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 56px;
+  color: #f0d6d2;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 15px;
+}
+
+.piggy-recharge-quick-copy .piggy-recharge-card__action {
+  height: 30px;
+  margin-top: auto;
+}
+
 .hotspot {
   position: absolute;
   display: block;
@@ -476,6 +627,18 @@ body {
 
 .piggy-note-card strong {
   color: #a62d1f;
+}
+
+.piggy-note-link {
+  color: #a62d1f;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.piggy-note-link:hover,
+.piggy-note-link:focus-visible {
+  color: #7e2018;
+  text-decoration: underline;
 }
 
 .piggy-note-card--important {

@@ -11,7 +11,7 @@
     <link href="resources/css/axure_rp_page.css" type="text/css" rel="stylesheet"/>
     <link href="data/styles.css" type="text/css" rel="stylesheet"/>
     <link href="files/PIGGY BANK/styles.css?v=20260709" type="text/css" rel="stylesheet"/>
-    <link href="custom/css/piggy-bank.css?v=20260730" type="text/css" rel="stylesheet"/>
+    <link href="custom/css/piggy-bank.css?v=20260812" type="text/css" rel="stylesheet"/>
     <script src="resources/scripts/jquery-3.2.1.min.js"></script>
     <script src="resources/scripts/axure/axQuery.js"></script>
     <script src="resources/scripts/axure/globals.js"></script>
@@ -56,8 +56,8 @@
   <body data-axure-page-id="piggy_bank_original_hotspots">
     <div id="base" class="">
       <div class="piggy-bank-canvas">
-        <main class="piggy-prototype" data-piggy-bank>
-          <section class="piggy-screen is-active" data-piggy-screen="top" aria-label="PIGGY BANK main top">
+        <main class="piggy-prototype piggy-prototype--wager" data-piggy-bank data-piggy-config-mode="wager" data-piggy-entry-source="recharge-activity">
+          <section class="piggy-screen is-active" data-piggy-screen="top" aria-label="PIGGY BANK recharge or activity bonus entry, wager unlock">
             <img class="piggy-shot" src="custom/assets/piggy-bank/piggy-bank-main-stitched.png?v=20260709" alt="PIGGY BANK main page"/>
             <button class="hotspot hotspot--top-back" type="button" data-action="back" aria-label="Back"></button>
             <a class="hotspot hotspot--top-rules" href="#rules" data-screen-target="rules" aria-label="Open rules"></a>
@@ -108,104 +108,30 @@
 
               <div class="piggy-rule-content" data-rule-scroll>
                 <div class="piggy-rule-intro">
-                  <p>Gullak Bonus is converted to balance according to the valid wager and Gullak Rate of each game type.</p>
-                  <p>Valid wager is calculated separately. When multiple tiers are reached, the highest qualified tier applies.</p>
+                  <p>Gullak Bonus is unlocked according to your current VIP level and its configured unlock ratio.</p>
+                  <p>Each VIP level uses its own configured ratio. When your VIP level changes, the applicable ratio changes with it.</p>
                 </div>
 
                 <article class="piggy-rate-card">
-                  <header><h3>Card Games</h3><span>5 tiers</span></header>
+                  <header><h3>VIP unlock ratio</h3><span>15 levels</span></header>
                   <table>
-                    <thead><tr><th>Tier</th><th>Valid Wager</th><th>Gullak Rate</th></tr></thead>
+                    <thead><tr><th>VIP Level</th><th>Unlock Ratio</th></tr></thead>
                     <tbody>
-                      <tr><td>1</td><td>&ge; 10,000</td><td>5%</td></tr>
-                      <tr><td>2</td><td>&ge; 20,000</td><td>10%</td></tr>
-                      <tr><td>3</td><td>&ge; 50,000</td><td>20%</td></tr>
-                      <tr><td>4</td><td>&ge; 80,000</td><td>50%</td></tr>
-                      <tr><td>5</td><td>&ge; 100,000</td><td>60%</td></tr>
-                    </tbody>
-                  </table>
-                </article>
-
-                <article class="piggy-rate-card">
-                  <header><h3>Fishing</h3><span>5 tiers</span></header>
-                  <table>
-                    <thead><tr><th>Tier</th><th>Valid Wager</th><th>Gullak Rate</th></tr></thead>
-                    <tbody>
-                      <tr><td>1</td><td>&ge; 10,000</td><td>5%</td></tr>
-                      <tr><td>2</td><td>&ge; 20,000</td><td>10%</td></tr>
-                      <tr><td>3</td><td>&ge; 50,000</td><td>20%</td></tr>
-                      <tr><td>4</td><td>&ge; 80,000</td><td>50%</td></tr>
-                      <tr><td>5</td><td>&ge; 100,000</td><td>60%</td></tr>
-                    </tbody>
-                  </table>
-                </article>
-
-                <article class="piggy-rate-card">
-                  <header><h3>Slots</h3><span>5 tiers</span></header>
-                  <table>
-                    <thead><tr><th>Tier</th><th>Valid Wager</th><th>Gullak Rate</th></tr></thead>
-                    <tbody>
-                      <tr><td>1</td><td>&ge; 10,000</td><td>5%</td></tr>
-                      <tr><td>2</td><td>&ge; 20,000</td><td>10%</td></tr>
-                      <tr><td>3</td><td>&ge; 50,000</td><td>20%</td></tr>
-                      <tr><td>4</td><td>&ge; 80,000</td><td>50%</td></tr>
-                      <tr><td>5</td><td>&ge; 100,000</td><td>60%</td></tr>
-                    </tbody>
-                  </table>
-                </article>
-
-                <article class="piggy-rate-card">
-                  <header><h3>Sports</h3><span>5 tiers</span></header>
-                  <table>
-                    <thead><tr><th>Tier</th><th>Valid Wager</th><th>Gullak Rate</th></tr></thead>
-                    <tbody>
-                      <tr><td>1</td><td>&ge; 10,000</td><td>5%</td></tr>
-                      <tr><td>2</td><td>&ge; 20,000</td><td>10%</td></tr>
-                      <tr><td>3</td><td>&ge; 50,000</td><td>20%</td></tr>
-                      <tr><td>4</td><td>&ge; 80,000</td><td>50%</td></tr>
-                      <tr><td>5</td><td>&ge; 100,000</td><td>60%</td></tr>
-                    </tbody>
-                  </table>
-                </article>
-
-                <article class="piggy-rate-card">
-                  <header><h3>Live Casino</h3><span>5 tiers</span></header>
-                  <table>
-                    <thead><tr><th>Tier</th><th>Valid Wager</th><th>Gullak Rate</th></tr></thead>
-                    <tbody>
-                      <tr><td>1</td><td>&ge; 10,000</td><td>5%</td></tr>
-                      <tr><td>2</td><td>&ge; 20,000</td><td>10%</td></tr>
-                      <tr><td>3</td><td>&ge; 50,000</td><td>20%</td></tr>
-                      <tr><td>4</td><td>&ge; 80,000</td><td>50%</td></tr>
-                      <tr><td>5</td><td>&ge; 100,000</td><td>60%</td></tr>
-                    </tbody>
-                  </table>
-                </article>
-
-                <article class="piggy-rate-card">
-                  <header><h3>Lottery</h3><span>5 tiers</span></header>
-                  <table>
-                    <thead><tr><th>Tier</th><th>Valid Wager</th><th>Gullak Rate</th></tr></thead>
-                    <tbody>
-                      <tr><td>1</td><td>&ge; 10,000</td><td>5%</td></tr>
-                      <tr><td>2</td><td>&ge; 20,000</td><td>10%</td></tr>
-                      <tr><td>3</td><td>&ge; 50,000</td><td>20%</td></tr>
-                      <tr><td>4</td><td>&ge; 80,000</td><td>50%</td></tr>
-                      <tr><td>5</td><td>&ge; 100,000</td><td>60%</td></tr>
-                    </tbody>
-                  </table>
-                </article>
-
-                <article class="piggy-rate-card">
-                  <header><h3>Blockchain</h3><span>5 tiers</span></header>
-                  <table>
-                    <thead><tr><th>Tier</th><th>Valid Wager</th><th>Gullak Rate</th></tr></thead>
-                    <tbody>
-                      <tr><td>1</td><td>&ge; 10,000</td><td>5%</td></tr>
-                      <tr><td>2</td><td>&ge; 20,000</td><td>10%</td></tr>
-                      <tr><td>3</td><td>&ge; 50,000</td><td>20%</td></tr>
-                      <tr><td>4</td><td>&ge; 80,000</td><td>50%</td></tr>
-                      <tr><td>5</td><td>&ge; 100,000</td><td>60%</td></tr>
+                      <tr><td>VIP1</td><td>0.30%</td></tr>
+                      <tr><td>VIP2</td><td>0.40%</td></tr>
+                      <tr><td>VIP3</td><td>0.55%</td></tr>
+                      <tr><td>VIP4</td><td>0.70%</td></tr>
+                      <tr><td>VIP5</td><td>0.90%</td></tr>
+                      <tr><td>VIP6</td><td>1.10%</td></tr>
+                      <tr><td>VIP7</td><td>1.30%</td></tr>
+                      <tr><td>VIP8</td><td>1.50%</td></tr>
+                      <tr><td>VIP9</td><td>1.80%</td></tr>
+                      <tr><td>VIP10</td><td>2.10%</td></tr>
+                      <tr><td>VIP11</td><td>2.40%</td></tr>
+                      <tr><td>VIP12</td><td>2.70%</td></tr>
+                      <tr><td>VIP13</td><td>3.00%</td></tr>
+                      <tr><td>VIP14</td><td>3.50%</td></tr>
+                      <tr><td>VIP15</td><td>4.00%</td></tr>
                     </tbody>
                   </table>
                 </article>
@@ -227,8 +153,9 @@
           </header>
 
           <section class="piggy-note-card">
-            <h2>页面背景</h2>
-            <p>主页面继续使用原始截图；Rules 改为独立 HTML 弹窗，以支持按游戏类型展示多个动态档位。</p>
+            <h2>进入与解锁方式</h2>
+            <p>充值或活动赠送的 PIGGY BANK 余额进入本页，按 B 端“打码按比例”配置，使用玩家当前 VIP 等级对应的解锁比例。</p>
+            <p><a class="piggy-note-link" href="PIGGY BANK充值解锁.html">查看另一种状态：打码后进入充值解锁 →</a></p>
           </section>
 
           <section class="piggy-note-card">
@@ -250,9 +177,9 @@
           </section>
 
           <section class="piggy-note-card">
-            <h2>Gullak Rate 规则</h2>
-            <p>费率不再按 VIP 等级展示，改为按游戏类型分别配置。每个类型可配置多个有效投注档位，达到多个档位时按最高达标档位计算。</p>
-            <p>Rules 内全部类型默认展开，正文区域上下滚动；当前示例比例统一使用 <strong>%</strong>。</p>
+            <h2>VIP 解锁规则</h2>
+            <p>解锁比例按 B 端配置的 VIP 等级逐级生效，Rules 内展示 VIP1 至 VIP15 的比例。</p>
+            <p>当前示例沿用配置页的 0.30% 至 4.00% 比例，单位统一使用 <strong>%</strong>。</p>
           </section>
 
           <section class="piggy-note-card piggy-note-card--important">

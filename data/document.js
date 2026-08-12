@@ -1,4 +1,4 @@
-﻿$axure.loadDocument({
+$axure.loadDocument({
   "configuration": {
     "showPageNotes": true,
     "showPageNoteNames": false,
@@ -77,6 +77,13 @@
             "children": []
           },
           {
+            "id": "piggy_bank_recharge_mode",
+            "pageName": "PIGGY BANK充值解锁",
+            "type": "Wireframe",
+            "url": "PIGGY BANK充值解锁.html",
+            "children": []
+          },
+          {
             "id": "piggybank_guide_game",
             "pageName": "PIGGYBANK引导游戏",
             "type": "Wireframe",
@@ -127,6 +134,13 @@
             "pageName": "连续挑战",
             "type": "Wireframe",
             "url": "pormotion/连续挑战.html",
+            "children": []
+          },
+          {
+            "id": "promotion_red_packet_rain",
+            "pageName": "红包雨",
+            "type": "Wireframe",
+            "url": "红包雨.html",
             "children": []
           }
         ]

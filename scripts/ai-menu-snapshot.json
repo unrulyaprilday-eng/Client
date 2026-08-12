@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "savedAt": "2026-08-04T06:38:56.834Z",
+  "savedAt": "2026-08-11T10:14:34.088Z",
   "source": "data/document.js sitemap.rootNodes",
   "rootNodes": [
     {
@@ -66,6 +66,13 @@
           "children": []
         },
         {
+          "id": "piggy_bank_recharge_mode",
+          "pageName": "PIGGY BANK充值解锁",
+          "type": "Wireframe",
+          "url": "PIGGY BANK充值解锁.html",
+          "children": []
+        },
+        {
           "id": "piggybank_guide_game",
           "pageName": "PIGGYBANK引导游戏",
           "type": "Wireframe",
@@ -116,6 +123,13 @@
           "pageName": "连续挑战",
           "type": "Wireframe",
           "url": "pormotion/连续挑战.html",
+          "children": []
+        },
+        {
+          "id": "promotion_red_packet_rain",
+          "pageName": "红包雨",
+          "type": "Wireframe",
+          "url": "红包雨.html",
           "children": []
         }
       ]

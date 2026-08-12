@@ -636,6 +636,8 @@ body {
 }
 
 .promo-detail-btn {
+  display: inline-grid;
+  place-items: center;
   min-width: 70px;
   height: 28px;
   padding: 0 16px;
@@ -645,6 +647,7 @@ body {
   color: #ff7a2a;
   font-size: 12px;
   cursor: pointer;
+  text-decoration: none;
 }
 
 .promo-empty {
