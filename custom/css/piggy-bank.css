@@ -226,6 +226,29 @@ body {
   outline-offset: -2px;
 }
 
+.piggy-claim-hint {
+  position: absolute;
+  z-index: 3;
+  left: 48px;
+  width: 332px;
+  min-height: 17px;
+  padding: 0 4px;
+  color: #ef9ca8;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 17px;
+  text-align: center;
+  pointer-events: none;
+}
+
+.piggy-claim-hint--top {
+  top: 523px;
+}
+
+.piggy-claim-hint--compact {
+  top: 173px;
+}
+
 .hotspot--top-back,
 .hotspot--pending-back,
 .hotspot--complete-back {

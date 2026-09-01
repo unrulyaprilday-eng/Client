@@ -62,7 +62,8 @@
             <button class="hotspot hotspot--top-back" type="button" data-action="back" aria-label="Back"></button>
             <a class="hotspot hotspot--top-rules" href="#rules" data-screen-target="rules" aria-label="Open rules"></a>
             <a class="hotspot hotspot--top-history" href="#history" data-screen-target="history" aria-label="Open history"></a>
-            <button class="hotspot hotspot--top-claim" type="button" data-toast-text="No claimable balance yet" aria-label="Claim"></button>
+            <div class="piggy-claim-hint piggy-claim-hint--top" role="status">Claim at least $1</div>
+            <button class="hotspot hotspot--top-claim" type="button" data-toast-text="Claim at least $1" aria-label="Claim"></button>
             <button class="hotspot hotspot--top-bet" type="button" data-toast-text="跳转首页即可" aria-label="Go to home"></button>
             <a class="hotspot hotspot--top-deposit-top" href="存款.html" aria-label="Deposit to add more bonus"></a>
             <a class="hotspot hotspot--top-deposit-vip" href="存款.html" aria-label="Recharge to unlock higher VIP"></a>
@@ -74,7 +75,8 @@
             <a class="hotspot hotspot--pending-back" href="#top" data-screen-target="top" aria-label="Back to top"></a>
             <a class="hotspot hotspot--pending-rules" href="#rules" data-screen-target="rules" aria-label="Open rules"></a>
             <a class="hotspot hotspot--pending-history" href="#history" data-screen-target="history" aria-label="Open history"></a>
-            <button class="hotspot hotspot--pending-claim" type="button" data-toast-text="No claimable balance yet" aria-label="Claim"></button>
+            <div class="piggy-claim-hint piggy-claim-hint--compact" role="status">Claim at least $1</div>
+            <button class="hotspot hotspot--pending-claim" type="button" data-toast-text="Claim at least $1" aria-label="Claim"></button>
             <button class="hotspot hotspot--pending-bet" type="button" data-toast-text="跳转首页即可" aria-label="Go to home"></button>
             <a class="hotspot hotspot--pending-deposit-top" href="存款.html" aria-label="Deposit to add more bonus"></a>
             <a class="hotspot hotspot--pending-deposit-vip" href="存款.html" aria-label="Recharge to unlock higher VIP"></a>
@@ -86,7 +88,8 @@
             <a class="hotspot hotspot--complete-back" href="#top" data-screen-target="top" aria-label="Back to top"></a>
             <a class="hotspot hotspot--complete-rules" href="#rules" data-screen-target="rules" aria-label="Open rules"></a>
             <a class="hotspot hotspot--complete-history" href="#history" data-screen-target="history" aria-label="Open history"></a>
-            <button class="hotspot hotspot--complete-claim" type="button" data-toast-text="No claimable balance yet" aria-label="Claim"></button>
+            <div class="piggy-claim-hint piggy-claim-hint--compact" role="status">Claim at least $1</div>
+            <button class="hotspot hotspot--complete-claim" type="button" data-toast-text="Claim at least $1" aria-label="Claim"></button>
             <button class="hotspot hotspot--complete-bet" type="button" data-toast-text="跳转首页即可" aria-label="Go to home"></button>
             <a class="hotspot hotspot--complete-deposit-top" href="存款.html" aria-label="Deposit to add more bonus"></a>
             <a class="hotspot hotspot--complete-deposit-vip" href="存款.html" aria-label="Recharge to unlock higher VIP"></a>
@@ -163,7 +166,7 @@
             <ul>
               <li><strong>?</strong>：点击打开 Rules 规则弹窗。</li>
               <li><strong>History</strong>：点击打开 History 记录弹窗。</li>
-              <li><strong>Claim</strong>：可领取金额为 0 时保持不可领取提示；有可领取金额时走领取流程。</li>
+              <li><strong>Claim</strong>：解锁后可领取金额未达到最低领取金额时，按钮上方显示不可领取提示。</li>
             </ul>
           </section>
 

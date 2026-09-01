@@ -25,13 +25,16 @@
 
     var state = {
       frame: "start",
-      spinCount: Number(flow.getAttribute("data-spin-count")) || 5
+      spinCount: Number(flow.getAttribute("data-spin-count")) || 5,
+      completionDestination: "piggybank"
     };
 
     var frameImage = flow.querySelector("[data-flow-frame]");
     var spinButton = flow.querySelector("[data-flow-spin]");
     var nextButton = flow.querySelector("[data-flow-next]");
     var gullakButton = flow.querySelector("[data-flow-gullak]");
+    var balanceCompleteModal = flow.querySelector("[data-balance-complete-modal]");
+    var completionDestinationButtons = document.querySelectorAll("[data-completion-destination]");
     var piggyBankButton = root.querySelector("[data-go-piggybank]");
     var helpButton = flow.querySelector("[data-flow-help]");
     var helpPanel = flow.querySelector("[data-flow-help-panel]");
@@ -52,13 +55,33 @@
     function setFrame(name) {
       state.frame = name;
 
-      if (frameImage && frames[name]) {
-        frameImage.src = frames[name];
+      var frameName = name;
+
+      if (name === "complete" && state.completionDestination === "balance") {
+        frameName = "playing";
+      }
+
+      if (frameImage && frames[frameName]) {
+        frameImage.src = frames[frameName];
       }
 
       setHidden(spinButton, !(name === "start" || name === "keepPlaying" || name === "playing"));
       setHidden(nextButton, name !== "saved");
-      setHidden(gullakButton, name !== "complete");
+      setHidden(gullakButton, name !== "complete" || state.completionDestination !== "piggybank");
+      setHidden(balanceCompleteModal, name !== "complete" || state.completionDestination !== "balance");
+    }
+
+    function setCompletionDestination(destination) {
+      state.completionDestination = destination === "balance" ? "balance" : "piggybank";
+
+      completionDestinationButtons.forEach(function (button) {
+        button.classList.toggle(
+          "is-active",
+          button.getAttribute("data-completion-destination") === state.completionDestination
+        );
+      });
+
+      setFrame("complete");
     }
 
     function showToast(message) {
@@ -145,6 +168,12 @@
     if (piggyBankButton) {
       piggyBankButton.addEventListener("click", goToPiggyBank);
     }
+
+    completionDestinationButtons.forEach(function (button) {
+      button.addEventListener("click", function () {
+        setCompletionDestination(button.getAttribute("data-completion-destination"));
+      });
+    });
 
     if (helpButton) {
       helpButton.addEventListener("click", openHelp);

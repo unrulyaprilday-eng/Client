@@ -77,6 +77,39 @@ button {
   background: #fff8e9;
 }
 
+.axis-note-card--completion-state {
+  border-color: #e8c57e;
+  background: #fff4d8;
+}
+
+.completion-state-switcher {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  margin-bottom: 9px;
+}
+
+.completion-state-switcher button {
+  min-height: 35px;
+  padding: 5px 6px;
+  border: 1px solid #dcb879;
+  border-radius: 5px;
+  color: #77401f;
+  background: #fffdf8;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1.2;
+  cursor: pointer;
+}
+
+.completion-state-switcher button.is-active {
+  border-color: #9e391d;
+  color: #fff9ed;
+  background: #a23a20;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.26);
+}
+
 .axis-note-card h2 {
   margin: 0 0 8px;
   color: #8d391f;
@@ -888,6 +921,117 @@ button {
   padding-top: 238px;
   background: rgba(6, 2, 10, 0.5);
   box-sizing: border-box;
+}
+
+.balance-complete-backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: 71;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 214px;
+  background: rgba(6, 2, 10, 0.58);
+  box-sizing: border-box;
+}
+
+.balance-complete-dialog {
+  width: 336px;
+  min-height: 464px;
+  padding: 0 20px 25px;
+  border: 2px solid #e2b166;
+  border-radius: 8px;
+  color: #f4d9dc;
+  background: linear-gradient(180deg, #5b1320, #330810);
+  box-sizing: border-box;
+  text-align: center;
+  box-shadow: 0 18px 28px rgba(0, 0, 0, 0.52);
+}
+
+.balance-complete-dialog h2 {
+  height: 62px;
+  margin: 0 -20px 25px;
+  border-bottom: 1px solid rgba(221, 114, 117, 0.22);
+  color: #e7dadb;
+  font-size: 24px;
+  font-weight: 900;
+  line-height: 62px;
+  letter-spacing: 1px;
+}
+
+.balance-reward-icon {
+  position: relative;
+  width: 64px;
+  height: 58px;
+  margin: 0 auto 10px;
+}
+
+.balance-reward-icon__coin {
+  position: absolute;
+  top: 8px;
+  width: 43px;
+  height: 43px;
+  border: 3px solid #ffe698;
+  border-radius: 50%;
+  box-sizing: border-box;
+  background: radial-gradient(circle at 34% 28%, #fff6b6 0 8%, #efc052 34%, #9b3f16 78%);
+  box-shadow: inset 0 0 0 3px rgba(141, 54, 18, 0.42), 0 0 8px rgba(255, 203, 79, 0.45);
+}
+
+.balance-reward-icon__coin--back {
+  left: 5px;
+  top: 14px;
+  opacity: 0.8;
+}
+
+.balance-reward-icon__coin--front {
+  right: 4px;
+}
+
+.balance-reward-icon__check {
+  position: absolute;
+  right: -1px;
+  bottom: 0;
+  width: 22px;
+  height: 22px;
+  border: 2px solid #f6e99a;
+  border-radius: 50%;
+  color: #123a1c;
+  background: #4bc84c;
+  box-sizing: border-box;
+  font-size: 16px;
+  font-weight: 900;
+  line-height: 18px;
+}
+
+.balance-complete-amount {
+  display: block;
+  margin-bottom: 13px;
+  color: #fff226;
+  font-size: 26px;
+  font-weight: 900;
+}
+
+.balance-complete-dialog p {
+  margin: 0 auto 8px;
+  max-width: 292px;
+  color: #e8d7da;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.28;
+}
+
+.balance-complete-dialog p strong {
+  color: #fff226;
+}
+
+.balance-complete-dialog__farewell {
+  color: #ffe2a6 !important;
+}
+
+.balance-complete-dialog__action {
+  width: 166px;
+  margin-top: 17px;
 }
 
 .complete-dialog {
