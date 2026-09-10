@@ -93,6 +93,21 @@ $axure.loadDocument({
         ]
       },
       {
+        "id": "withdrawal_group",
+        "pageName": "提款",
+        "type": "Folder",
+        "url": "",
+        "children": [
+          {
+            "id": "withdrawal_rewards_notices",
+            "pageName": "提现与奖励提示",
+            "type": "Wireframe",
+            "url": "withdrawal-rewards-notices.html",
+            "children": []
+          }
+        ]
+      },
+      {
         "id": "onbtmf",
         "pageName": "VIP CLUB",
         "type": "Wireframe",
