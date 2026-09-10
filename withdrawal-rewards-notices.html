@@ -10,6 +10,7 @@
     <meta name="viewport" content="width=1800, initial-scale=1"/>
     <link href="resources/css/axure_rp_page.css" type="text/css" rel="stylesheet"/>
     <link href="data/styles.css" type="text/css" rel="stylesheet"/>
+    <link href="custom/css/home-app-install.css?v=20260910" type="text/css" rel="stylesheet"/>
     <link href="files/withdrawal-rewards-notices/styles.css?v=20260910" type="text/css" rel="stylesheet"/>
     <link href="custom/css/withdrawal-rewards-notices.css?v=20260910" type="text/css" rel="stylesheet"/>
     <script src="resources/scripts/jquery-3.2.1.min.js"></script>
@@ -57,25 +58,19 @@
     <div id="base">
       <div class="notice-board">
         <section class="notice-phone" data-notice-card="ready" aria-label="提现达到条件提示">
-          <div class="phone-status"><span>9:41</span><span>▮▮▮ ◔ 100%</span></div>
-          <header class="phone-header">
-            <button class="phone-back" type="button" aria-label="返回">‹</button>
-            <h1>Withdraw</h1>
-            <span class="phone-header-spacer" aria-hidden="true"></span>
-          </header>
-          <main class="phone-content">
-            <div class="account-chip"><span class="avatar">A</span><span>Free member</span><span class="chip-dot"></span></div>
-            <section class="balance-card">
-              <span class="balance-label">Available earnings</span>
-              <strong class="balance-value">$86.00</strong>
-              <span class="balance-caption">Withdrawal amount · $50.00 minimum</span>
-            </section>
-            <button class="withdraw-trigger" type="button" data-action="open-modal">Withdraw</button>
-            <div class="activity-list">
-              <div><span class="activity-icon">🎮</span><span>Play rewards</span><strong>+$86.00</strong></div>
-              <div><span class="activity-icon">🎁</span><span>Free bonus</span><strong>Ready to unlock</strong></div>
+          <div class="home-background">
+            <header class="app-header">
+              <span class="brand-mark">PLAY</span>
+              <div class="header-actions"><span class="balance-chip"><small>Balance</small><b>10.18</b></span><button class="circle-button bell-icon" type="button" aria-label="Notifications"></button></div>
+            </header>
+            <div class="home-content">
+              <section class="welcome-row"><div><span>Welcome back</span><strong>Alex</strong></div><span class="login-status"><i aria-hidden="true"></i>Signed in</span></section>
+              <img class="promo-visual" src="custom/assets/challenge-promotion-hero.svg" alt="Daily challenge promotion"/>
+              <nav class="game-tabs" aria-label="Game categories"><button class="active" type="button">Popular</button><button type="button">Slots</button><button type="button">Live</button><button type="button">Sports</button></nav>
+              <section class="game-section"><div class="section-title"><strong>Popular Games</strong><button type="button">See all</button></div><div class="game-grid"><article class="game-tile game-one"><span>HOT</span><strong>Golden Rush</strong></article><article class="game-tile game-two"><span>NEW</span><strong>Lucky Vault</strong></article><article class="game-tile game-three"><strong>Dragon Spin</strong></article><article class="game-tile game-four"><strong>Fortune Live</strong></article></div></section>
             </div>
-          </main>
+            <nav class="bottom-nav" aria-label="Main navigation"><button class="active" type="button"><span class="nav-home" aria-hidden="true"></span>Home</button><button type="button"><span class="nav-grid" aria-hidden="true"></span>Games</button><button type="button"><span class="nav-wallet" aria-hidden="true"></span>Wallet</button><button type="button"><span class="nav-user" aria-hidden="true"></span>Profile</button></nav>
+          </div>
           <div class="notice-modal is-open" data-modal>
             <div class="notice-backdrop" data-action="close-modal"></div>
             <section class="notice-dialog" role="dialog" aria-modal="true" aria-labelledby="ready-title">
@@ -91,60 +86,34 @@
         </section>
 
         <section class="notice-phone" data-notice-card="short" aria-label="提现未达到条件提示">
-          <div class="phone-status"><span>9:41</span><span>▮▮▮ ◔ 100%</span></div>
-          <header class="phone-header">
-            <button class="phone-back" type="button" aria-label="返回">‹</button>
-            <h1>Withdraw</h1>
-            <span class="phone-header-spacer" aria-hidden="true"></span>
-          </header>
-          <main class="phone-content">
-            <div class="account-chip"><span class="avatar">A</span><span>Free member</span><span class="chip-dot"></span></div>
-            <section class="balance-card balance-card--dim">
-              <span class="balance-label">Available earnings</span>
-              <strong class="balance-value">$18.00</strong>
-              <span class="balance-caption">$32.00 more to reach the minimum</span>
-            </section>
-            <button class="withdraw-trigger" type="button" data-action="open-modal">Withdraw</button>
-            <div class="progress-block">
-              <div class="progress-head"><span>Withdrawal progress</span><strong>36%</strong></div>
-              <div class="progress-track"><span style="width:36%"></span></div>
-              <p>Keep playing to grow your free earnings.</p>
-            </div>
-          </main>
+          <div class="home-background">
+            <header class="app-header"><span class="brand-mark">PLAY</span><div class="header-actions"><span class="balance-chip"><small>Balance</small><b>10.18</b></span><button class="circle-button bell-icon" type="button" aria-label="Notifications"></button></div></header>
+            <div class="home-content"><section class="welcome-row"><div><span>Welcome back</span><strong>Alex</strong></div><span class="login-status"><i aria-hidden="true"></i>Signed in</span></section><img class="promo-visual" src="custom/assets/challenge-promotion-hero.svg" alt="Daily challenge promotion"/><nav class="game-tabs" aria-label="Game categories"><button class="active" type="button">Popular</button><button type="button">Slots</button><button type="button">Live</button><button type="button">Sports</button></nav><section class="game-section"><div class="section-title"><strong>Popular Games</strong><button type="button">See all</button></div><div class="game-grid"><article class="game-tile game-one"><span>HOT</span><strong>Golden Rush</strong></article><article class="game-tile game-two"><span>NEW</span><strong>Lucky Vault</strong></article><article class="game-tile game-three"><strong>Dragon Spin</strong></article><article class="game-tile game-four"><strong>Fortune Live</strong></article></div></section></div>
+            <nav class="bottom-nav" aria-label="Main navigation"><button class="active" type="button"><span class="nav-home" aria-hidden="true"></span>Home</button><button type="button"><span class="nav-grid" aria-hidden="true"></span>Games</button><button type="button"><span class="nav-wallet" aria-hidden="true"></span>Wallet</button><button type="button"><span class="nav-user" aria-hidden="true"></span>Profile</button></nav>
+          </div>
           <div class="notice-modal is-open" data-modal>
             <div class="notice-backdrop" data-action="close-modal"></div>
             <section class="notice-dialog" role="dialog" aria-modal="true" aria-labelledby="short-title">
               <button class="notice-close" type="button" data-action="close-modal" aria-label="Close">×</button>
               <div class="notice-icon notice-icon--purple" aria-hidden="true">🎮</div>
               <p class="notice-eyebrow">Withdrawal status</p>
-              <h2 id="short-title">Keep playing! 🎮</h2>
-              <p class="notice-copy">You need <strong>$32.00 more</strong> to reach the withdrawal amount.</p>
-              <button class="notice-button" type="button" data-action="keep-playing">Keep Playing</button>
+              <h2 id="short-title">Keep Playing! 🎮</h2>
+              <p class="notice-copy">Continue playing or make a deposit to unlock your free earnings.</p>
+              <div class="notice-actions notice-actions--split">
+                <button class="notice-button notice-button--secondary" type="button" data-action="keep-playing">Keep Playing</button>
+                <a class="notice-button" href="存款.html">Deposit Now</a>
+              </div>
             </section>
           </div>
           <div class="notice-toast" data-toast role="status" aria-live="polite"></div>
         </section>
 
         <section class="notice-phone" data-notice-card="success" aria-label="充值成功后奖励进入存钱罐提示">
-          <div class="phone-status"><span>9:41</span><span>▮▮▮ ◔ 100%</span></div>
-          <header class="phone-header">
-            <button class="phone-back" type="button" aria-label="返回">‹</button>
-            <h1>Deposit</h1>
-            <span class="phone-header-spacer" aria-hidden="true"></span>
-          </header>
-          <main class="phone-content">
-            <div class="account-chip"><span class="avatar">A</span><span>Free member</span><span class="chip-dot"></span></div>
-            <section class="deposit-card">
-              <div class="deposit-check">✓</div>
-              <div><span class="balance-label">Deposit amount</span><strong class="deposit-value">$20.00</strong></div>
-              <span class="deposit-status">Completed</span>
-            </section>
-            <button class="piggy-entry" type="button" data-action="open-piggy">Piggy Bank <span>›</span></button>
-            <div class="activity-list activity-list--success">
-              <div><span class="activity-icon">🪙</span><span>Free earnings</span><strong>$86.00</strong></div>
-              <div><span class="activity-icon">🔒</span><span>Unlock status</span><strong>In Piggy Bank</strong></div>
-            </div>
-          </main>
+          <div class="home-background">
+            <header class="app-header"><span class="brand-mark">PLAY</span><div class="header-actions"><span class="balance-chip"><small>Balance</small><b>30.18</b></span><button class="circle-button bell-icon" type="button" aria-label="Notifications"></button></div></header>
+            <div class="home-content"><section class="welcome-row"><div><span>Welcome back</span><strong>Alex</strong></div><span class="login-status"><i aria-hidden="true"></i>Signed in</span></section><img class="promo-visual" src="custom/assets/challenge-promotion-hero.svg" alt="Daily challenge promotion"/><nav class="game-tabs" aria-label="Game categories"><button class="active" type="button">Popular</button><button type="button">Slots</button><button type="button">Live</button><button type="button">Sports</button></nav><section class="game-section"><div class="section-title"><strong>Popular Games</strong><button type="button">See all</button></div><div class="game-grid"><article class="game-tile game-one"><span>HOT</span><strong>Golden Rush</strong></article><article class="game-tile game-two"><span>NEW</span><strong>Lucky Vault</strong></article><article class="game-tile game-three"><strong>Dragon Spin</strong></article><article class="game-tile game-four"><strong>Fortune Live</strong></article></div></section></div>
+            <nav class="bottom-nav" aria-label="Main navigation"><button class="active" type="button"><span class="nav-home" aria-hidden="true"></span>Home</button><button type="button"><span class="nav-grid" aria-hidden="true"></span>Games</button><button type="button"><span class="nav-wallet" aria-hidden="true"></span>Wallet</button><button type="button"><span class="nav-user" aria-hidden="true"></span>Profile</button></nav>
+          </div>
           <div class="notice-modal is-open" data-modal>
             <div class="notice-backdrop" data-action="close-modal"></div>
             <section class="notice-dialog" role="dialog" aria-modal="true" aria-labelledby="success-title">
@@ -182,7 +151,8 @@
             <h3>提现提示分支</h3>
             <ul>
               <li>达到条件：引导 Deposit Now，完成充值后开始提现。</li>
-              <li>未达到条件：展示还差金额，Keep Playing 留在当前流程。</li>
+              <li>未达到条件：提示继续游戏或充值解锁免费收益。</li>
+              <li>Keep Playing 关闭弹窗并留在当前首页；Deposit Now 跳转存款页。</li>
             </ul>
           </section>
           <div class="notes-legend"><span class="legend-dot legend-dot--gold"></span>需充值解锁 <span class="legend-dot legend-dot--purple"></span>继续游戏 <span class="legend-dot legend-dot--green"></span>已充值</div>
