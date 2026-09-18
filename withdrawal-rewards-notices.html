@@ -76,7 +76,7 @@
             <section class="notice-dialog notice-dialog--conversion" role="dialog" aria-modal="true" aria-labelledby="ready-title">
               <button class="notice-close" type="button" data-action="close-modal" aria-label="Close">×</button>
               <div class="notice-icon notice-icon--gold" aria-hidden="true">$</div>
-              <h2 id="ready-title">Move to Bonus Bank?</h2>
+              <h2 id="ready-title">Move It to Bonus Bank?</h2>
               <div class="balance-transfer" aria-label="Move free play balance to bonus bank">
                 <div class="balance-transfer__side">
                   <strong>$20.00</strong>
@@ -88,10 +88,10 @@
                   <span>Bonus Bank</span>
                 </div>
               </div>
-              <p class="notice-emphasis">Deposit required to unlock</p>
-              <p class="notice-copy notice-copy--compact">Each $1 deposited unlocks $1 of this bonus.</p>
-              <p class="notice-legal">This removes $20.00 from your Free Play balance.<br/>Playthrough and redemption requirements apply.</p>
-              <a class="notice-button" href="存款.html">Convert $20.00 &rarr; $2.00</a>
+              <p class="notice-emphasis">Deposit $2.00 to move it over</p>
+              <p class="notice-copy notice-copy--compact">Put in $2.00 and the full $2.00 bonus goes into Bonus Bank.</p>
+              <p class="notice-legal">This takes $20.00 out of Free Play.<br/>Playthrough and redemption rules still apply.</p>
+              <a class="notice-button" href="存款.html">Deposit $2.00 &rarr; $2.00 Bonus</a>
               <button class="notice-button notice-button--text" type="button" data-action="close-modal">Not now</button>
             </section>
           </div>
@@ -102,7 +102,7 @@
           <div class="home-background">
             <header class="app-header">
               <span class="brand-mark">PLAY</span>
-              <div class="header-actions"><span class="balance-chip"><small>Balance</small><b>30.18</b></span><button class="circle-button bell-icon" type="button" aria-label="Notifications"></button></div>
+              <div class="header-actions"><span class="balance-chip"><small>Balance</small><b>12.18</b></span><button class="circle-button bell-icon" type="button" aria-label="Notifications"></button></div>
             </header>
             <div class="home-content">
               <section class="welcome-row"><div><span>Welcome back</span><strong>Alex</strong></div><span class="login-status"><i aria-hidden="true"></i>Signed in</span></section>
@@ -117,7 +117,7 @@
             <section class="notice-dialog notice-dialog--conversion" role="dialog" aria-modal="true" aria-labelledby="success-title">
               <button class="notice-close" type="button" data-action="close-modal" aria-label="Close">×</button>
               <div class="notice-icon notice-icon--green" aria-hidden="true">✓</div>
-              <h2 id="success-title">Transferred to Bonus Bank!</h2>
+              <h2 id="success-title">Nice! Your Bonus Is In!</h2>
               <div class="balance-transfer" aria-label="Free play balance moved to bonus bank">
                 <div class="balance-transfer__side">
                   <strong>$20.00</strong>
@@ -129,10 +129,10 @@
                   <span>Bonus Bank</span>
                 </div>
               </div>
-              <p class="notice-emphasis notice-emphasis--success">Your deposit moved this amount to Bonus Bank</p>
-              <p class="notice-copy notice-copy--compact">The $2.00 Bonus Bank amount is now ready for playthrough.</p>
-              <p class="notice-legal">Playthrough and redemption requirements apply.</p>
-              <a class="notice-button" href="PIGGY BANK.html">View Bonus Bank</a>
+              <p class="notice-emphasis notice-emphasis--success">$2.00 is now in Bonus Bank</p>
+              <p class="notice-copy notice-copy--compact">Your $2.00 deposit went through. The full bonus is ready to play through.</p>
+              <p class="notice-legal">Playthrough and redemption rules still apply.</p>
+              <a class="notice-button" href="PIGGY BANK.html">Open Bonus Bank</a>
             </section>
           </div>
           <div class="notice-toast" data-toast role="status" aria-live="polite"></div>
@@ -151,8 +151,8 @@
           <section class="notes-card">
             <h3>免费玩家存款提示</h3>
             <ul>
-              <li>免费余额先展示为 Free Play，弹窗明确转入 Bonus Bank 后的金额。</li>
-              <li>Convert $20.00 → $2.00 跳转存款页；Not now 和关闭按钮只关闭提示。</li>
+              <li>Free Play $20.00 需要充值 $2.00，完整 $2.00 奖励转入 Bonus Bank。</li>
+              <li>Deposit $2.00 → $2.00 Bonus 跳转存款页；Not now 和关闭按钮只关闭提示。</li>
               <li>存款与打码、兑换条件仍按平台规则执行。</li>
             </ul>
           </section>
@@ -160,17 +160,17 @@
             <h3>充值后的统一处理</h3>
             <p class="rule-emphasis">充值后，免费余额进入 Bonus Bank。</p>
             <ul>
-              <li>充值完成后展示第三个成功态，内容仍沿用同一组转入金额。</li>
+              <li>充值完成后展示第三个成功态，成功后的 Balance 为 $12.18。</li>
               <li>免费余额转入 Bonus Bank，按打码和兑换规则处理。</li>
-              <li>View Bonus Bank 跳转现有 PIGGY BANK 页面。</li>
+              <li>Open Bonus Bank 跳转现有 PIGGY BANK 页面。</li>
             </ul>
           </section>
           <section class="notes-card">
-            <h3>提现提示分支</h3>
+            <h3>充值流程状态</h3>
             <ul>
-              <li>达到条件：引导 Deposit Now，完成充值后开始提现。</li>
-              <li>所有相关入口均展示同一转入提示。</li>
-              <li>Convert $20.00 → $2.00 跳转存款页。</li>
+              <li>充值前：显示 Move It to Bonus Bank? 提示。</li>
+              <li>充值成功：显示 Nice! Your Bonus Is In!，Balance 更新为 $12.18。</li>
+              <li>Deposit $2.00 → $2.00 Bonus 跳转存款页；Open Bonus Bank 跳转 PIGGY BANK。</li>
             </ul>
           </section>
           <div class="notes-legend"><span class="legend-dot legend-dot--gold"></span>需充值转入</div>
