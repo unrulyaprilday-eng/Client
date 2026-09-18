@@ -1,14 +1,13 @@
 * { box-sizing: border-box; }
 
-html, body { margin: 0; min-width: 1800px; min-height: 926px; background: #ebe8f0; color: #26233b; font-family: Arial, "Helvetica Neue", "PingFang SC", "Microsoft YaHei", sans-serif; }
-body { width: 1800px; position: static; overflow-y: hidden; }
-#base { position: relative; width: 1800px; min-height: 926px; z-index: 1; }
+html, body { margin: 0; min-width: 1248px; min-height: 926px; background: #ebe8f0; color: #26233b; font-family: Arial, "Helvetica Neue", "PingFang SC", "Microsoft YaHei", sans-serif; }
+body { width: 1248px; position: static; overflow-y: hidden; }
+#base { position: relative; width: 1248px; min-height: 926px; z-index: 1; }
 
-.notice-board { display: grid; grid-template-columns: 428px 428px 428px 326px; grid-template-rows: 926px; align-items: start; gap: 22px; width: 1800px; min-height: 926px; padding: 0 24px; }
+.notice-board { display: grid; grid-template-columns: 428px 428px 324px; grid-template-rows: 926px; align-items: start; gap: 22px; width: 1248px; min-height: 926px; padding: 0 12px; }
 .notice-phone { position: relative; flex: 0 0 428px; width: 428px; height: 926px; overflow: hidden; border: 1px solid #d4d0dc; border-radius: 30px; background: #f8f7fb; box-shadow: 0 16px 34px rgba(45, 38, 76, .16); }
 .notice-phone[data-notice-card="ready"] { grid-column: 1; grid-row: 1; }
-.notice-phone[data-notice-card="short"] { grid-column: 2; grid-row: 1; }
-.notice-phone[data-notice-card="success"] { grid-column: 3; grid-row: 1; }
+.notice-phone[data-notice-card="success"] { grid-column: 2; grid-row: 1; }
 .home-background { position: relative; width: 100%; height: 926px; overflow: hidden; background: #fff7f3; }
 .home-background .app-header { height: 60px; }
 .home-background .home-content { height: 800px; }
@@ -50,6 +49,7 @@ body { width: 1800px; position: static; overflow-y: hidden; }
 .notice-modal:not(.is-open) { display: none; }
 .notice-backdrop { position: absolute; inset: 0; background: rgba(34, 30, 57, .58); }
 .notice-dialog { position: relative; z-index: 1; width: 100%; padding: 32px 26px 26px; border: 1px solid rgba(255,255,255,.62); border-radius: 22px; background: #fff; box-shadow: 0 20px 44px rgba(29, 26, 54, .25); text-align: center; }
+.notice-dialog--conversion { padding: 26px 20px 18px; }
 .notice-close { position: absolute; top: 10px; right: 14px; width: 30px; height: 30px; border: 0; background: transparent; color: #8d899e; font-size: 25px; line-height: 25px; cursor: pointer; }
 .notice-icon { display: inline-flex; align-items: center; justify-content: center; width: 62px; height: 62px; border-radius: 20px; font-size: 29px; font-weight: 700; }
 .notice-icon--gold { background: #fff2cf; color: #d08a13; }
@@ -59,16 +59,24 @@ body { width: 1800px; position: static; overflow-y: hidden; }
 .notice-dialog h2 { margin: 0; color: #25213a; font-size: 22px; line-height: 1.28; }
 .notice-copy { margin: 15px 0 22px; color: #6f6a80; font-size: 14px; line-height: 1.62; }
 .notice-copy strong { color: #413b64; }
+.balance-transfer { display: grid; grid-template-columns: minmax(0, 1fr) 30px minmax(0, 1fr); align-items: center; gap: 6px; margin: 18px 0 17px; padding: 16px 10px 14px; border: 1px solid #ded9eb; border-radius: 16px; background: #faf9fd; }
+.balance-transfer__side { min-width: 0; }
+.balance-transfer__side strong { display: block; color: #302b4a; font-size: 27px; line-height: 1.1; }
+.balance-transfer__side span { display: block; margin-top: 7px; color: #78728c; font-size: 12px; font-weight: 600; line-height: 1.2; }
+.balance-transfer__side--bonus strong { color: #2f9a73; }
+.balance-transfer__arrow { color: #918aa9; font-size: 26px; line-height: 1; }
+.notice-emphasis { margin: 0; color: #a86b1f; font-size: 15px; font-weight: 800; line-height: 1.35; }
+.notice-emphasis--success { color: #238c68; }
+.notice-copy--compact { margin: 8px 0 13px; }
+.notice-legal { margin: 0 0 18px; color: #89839b; font-size: 12px; line-height: 1.65; }
 .notice-button { display: inline-flex; align-items: center; justify-content: center; width: 100%; min-height: 48px; padding: 0 16px; border: 0; border-radius: 13px; background: #6d61d9; color: #fff; font-size: 15px; font-weight: 700; text-decoration: none; cursor: pointer; }
 .notice-button:hover { background: #5e53c5; }
-.notice-actions { display: flex; gap: 10px; }
-.notice-actions--split .notice-button { flex: 1 1 0; width: auto; padding: 0 10px; font-size: 13px; white-space: nowrap; }
-.notice-button--secondary { border: 1px solid #d8d3ee; background: #f1effb; color: #5d54ba; }
-.notice-button--secondary:hover { background: #e8e4f8; }
+.notice-button--text { min-height: 34px; margin-top: 7px; background: transparent; color: #77718a; font-size: 13px; font-weight: 600; }
+.notice-button--text:hover { background: #f5f3fa; color: #5d54ba; }
 .notice-toast { position: absolute; left: 50%; bottom: 30px; z-index: 8; max-width: 82%; padding: 10px 15px; border-radius: 12px; background: rgba(38, 34, 61, .92); color: #fff; font-size: 12px; opacity: 0; transform: translate(-50%, 12px); transition: opacity .18s ease, transform .18s ease; pointer-events: none; }
 .notice-toast.is-visible { opacity: 1; transform: translate(-50%, 0); }
 
-.notice-notes { grid-column: 4; grid-row: 1; align-self: start; width: 326px; min-height: 874px; padding: 24px 20px; border: 1px solid #ddd8e8; border-radius: 20px; background: #fffdf7; box-shadow: 0 12px 28px rgba(68, 54, 76, .09); }
+.notice-notes { grid-column: 3; grid-row: 1; align-self: start; width: 324px; min-height: 874px; padding: 24px 20px; border: 1px solid #ddd8e8; border-radius: 20px; background: #fffdf7; box-shadow: 0 12px 28px rgba(68, 54, 76, .09); }
 .notes-kicker { color: #a17037; font-size: 11px; font-weight: 800; letter-spacing: 1.5px; }
 .notice-notes h2 { margin: 8px 0 0; color: #3f2f35; font-size: 24px; }
 .notes-intro { margin: 10px 0 18px; color: #7d6d70; font-size: 12px; line-height: 1.6; }
@@ -90,7 +98,7 @@ body { width: 1800px; position: static; overflow-y: hidden; }
 .legend-dot--purple { background: #6d61d9; }
 .legend-dot--green { background: #2d9a74; }
 
-@media (max-width: 1799px) {
+@media (max-width: 1247px) {
   html, body { min-width: 0; }
   body, #base, .notice-board { width: 100%; }
   .notice-board { overflow-x: auto; }

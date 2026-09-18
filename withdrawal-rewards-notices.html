@@ -7,12 +7,12 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
     <meta http-equiv="Pragma" content="no-cache"/>
     <meta http-equiv="Expires" content="0"/>
-    <meta name="viewport" content="width=1800, initial-scale=1"/>
+    <meta name="viewport" content="width=1248, initial-scale=1"/>
     <link href="resources/css/axure_rp_page.css" type="text/css" rel="stylesheet"/>
     <link href="data/styles.css" type="text/css" rel="stylesheet"/>
     <link href="custom/css/home-app-install.css?v=20260910" type="text/css" rel="stylesheet"/>
     <link href="files/withdrawal-rewards-notices/styles.css?v=20260910" type="text/css" rel="stylesheet"/>
-    <link href="custom/css/withdrawal-rewards-notices.css?v=20260910" type="text/css" rel="stylesheet"/>
+    <link href="custom/css/withdrawal-rewards-notices.css?v=20260918" type="text/css" rel="stylesheet"/>
     <script src="resources/scripts/jquery-3.2.1.min.js"></script>
     <script src="resources/scripts/axure/axQuery.js"></script>
     <script src="resources/scripts/axure/globals.js"></script>
@@ -57,11 +57,11 @@
   <body data-axure-page-id="withdrawal_rewards_notices">
     <div id="base">
       <div class="notice-board">
-        <section class="notice-phone" data-notice-card="ready" aria-label="提现达到条件提示">
+        <section class="notice-phone" data-notice-card="ready" aria-label="免费玩家存款提示">
           <div class="home-background">
             <header class="app-header">
               <span class="brand-mark">PLAY</span>
-              <div class="header-actions"><span class="balance-chip"><small>Balance</small><b>10.18</b></span><button class="circle-button bell-icon" type="button" aria-label="Notifications"></button></div>
+              <div class="header-actions"><span class="balance-chip"><small>Free Play</small><b>20.00</b></span><button class="circle-button bell-icon" type="button" aria-label="Notifications"></button></div>
             </header>
             <div class="home-content">
               <section class="welcome-row"><div><span>Welcome back</span><strong>Alex</strong></div><span class="login-status"><i aria-hidden="true"></i>Signed in</span></section>
@@ -73,56 +73,66 @@
           </div>
           <div class="notice-modal is-open" data-modal>
             <div class="notice-backdrop" data-action="close-modal"></div>
-            <section class="notice-dialog" role="dialog" aria-modal="true" aria-labelledby="ready-title">
+            <section class="notice-dialog notice-dialog--conversion" role="dialog" aria-modal="true" aria-labelledby="ready-title">
               <button class="notice-close" type="button" data-action="close-modal" aria-label="Close">×</button>
               <div class="notice-icon notice-icon--gold" aria-hidden="true">$</div>
-              <p class="notice-eyebrow">Withdrawal status</p>
-              <h2 id="ready-title">🎉 Your Earnings Are Ready!</h2>
-              <p class="notice-copy">You’ve earned enough to cash out.<br/>Make a deposit to unlock your earnings and start your withdrawal.</p>
-              <a class="notice-button" href="存款.html">Deposit Now</a>
-            </section>
-          </div>
-          <div class="notice-toast" data-toast role="status" aria-live="polite"></div>
-        </section>
-
-        <section class="notice-phone" data-notice-card="short" aria-label="提现未达到条件提示">
-          <div class="home-background">
-            <header class="app-header"><span class="brand-mark">PLAY</span><div class="header-actions"><span class="balance-chip"><small>Balance</small><b>10.18</b></span><button class="circle-button bell-icon" type="button" aria-label="Notifications"></button></div></header>
-            <div class="home-content"><section class="welcome-row"><div><span>Welcome back</span><strong>Alex</strong></div><span class="login-status"><i aria-hidden="true"></i>Signed in</span></section><img class="promo-visual" src="custom/assets/challenge-promotion-hero.svg" alt="Daily challenge promotion"/><nav class="game-tabs" aria-label="Game categories"><button class="active" type="button">Popular</button><button type="button">Slots</button><button type="button">Live</button><button type="button">Sports</button></nav><section class="game-section"><div class="section-title"><strong>Popular Games</strong><button type="button">See all</button></div><div class="game-grid"><article class="game-tile game-one"><span>HOT</span><strong>Golden Rush</strong></article><article class="game-tile game-two"><span>NEW</span><strong>Lucky Vault</strong></article><article class="game-tile game-three"><strong>Dragon Spin</strong></article><article class="game-tile game-four"><strong>Fortune Live</strong></article></div></section></div>
-            <nav class="bottom-nav" aria-label="Main navigation"><button class="active" type="button"><span class="nav-home" aria-hidden="true"></span>Home</button><button type="button"><span class="nav-grid" aria-hidden="true"></span>Games</button><button type="button"><span class="nav-wallet" aria-hidden="true"></span>Wallet</button><button type="button"><span class="nav-user" aria-hidden="true"></span>Profile</button></nav>
-          </div>
-          <div class="notice-modal is-open" data-modal>
-            <div class="notice-backdrop" data-action="close-modal"></div>
-            <section class="notice-dialog" role="dialog" aria-modal="true" aria-labelledby="short-title">
-              <button class="notice-close" type="button" data-action="close-modal" aria-label="Close">×</button>
-              <div class="notice-icon notice-icon--purple" aria-hidden="true">🎮</div>
-              <p class="notice-eyebrow">Withdrawal status</p>
-              <h2 id="short-title">Keep Playing! 🎮</h2>
-              <p class="notice-copy">Continue playing or make a deposit to unlock your free earnings.</p>
-              <div class="notice-actions notice-actions--split">
-                <button class="notice-button notice-button--secondary" type="button" data-action="keep-playing">Keep Playing</button>
-                <a class="notice-button" href="存款.html">Deposit Now</a>
+              <h2 id="ready-title">Move to Bonus Bank?</h2>
+              <div class="balance-transfer" aria-label="Move free play balance to bonus bank">
+                <div class="balance-transfer__side">
+                  <strong>$20.00</strong>
+                  <span>Free Play</span>
+                </div>
+                <span class="balance-transfer__arrow" aria-hidden="true">&rarr;</span>
+                <div class="balance-transfer__side balance-transfer__side--bonus">
+                  <strong>$2.00</strong>
+                  <span>Bonus Bank</span>
+                </div>
               </div>
+              <p class="notice-emphasis">Deposit required to unlock</p>
+              <p class="notice-copy notice-copy--compact">Each $1 deposited unlocks $1 of this bonus.</p>
+              <p class="notice-legal">This removes $20.00 from your Free Play balance.<br/>Playthrough and redemption requirements apply.</p>
+              <a class="notice-button" href="存款.html">Convert $20.00 &rarr; $2.00</a>
+              <button class="notice-button notice-button--text" type="button" data-action="close-modal">Not now</button>
             </section>
           </div>
           <div class="notice-toast" data-toast role="status" aria-live="polite"></div>
         </section>
 
-        <section class="notice-phone" data-notice-card="success" aria-label="充值成功后奖励进入存钱罐提示">
+        <section class="notice-phone" data-notice-card="success" aria-label="充值成功后 Bonus Bank 转入提示">
           <div class="home-background">
-            <header class="app-header"><span class="brand-mark">PLAY</span><div class="header-actions"><span class="balance-chip"><small>Balance</small><b>30.18</b></span><button class="circle-button bell-icon" type="button" aria-label="Notifications"></button></div></header>
-            <div class="home-content"><section class="welcome-row"><div><span>Welcome back</span><strong>Alex</strong></div><span class="login-status"><i aria-hidden="true"></i>Signed in</span></section><img class="promo-visual" src="custom/assets/challenge-promotion-hero.svg" alt="Daily challenge promotion"/><nav class="game-tabs" aria-label="Game categories"><button class="active" type="button">Popular</button><button type="button">Slots</button><button type="button">Live</button><button type="button">Sports</button></nav><section class="game-section"><div class="section-title"><strong>Popular Games</strong><button type="button">See all</button></div><div class="game-grid"><article class="game-tile game-one"><span>HOT</span><strong>Golden Rush</strong></article><article class="game-tile game-two"><span>NEW</span><strong>Lucky Vault</strong></article><article class="game-tile game-three"><strong>Dragon Spin</strong></article><article class="game-tile game-four"><strong>Fortune Live</strong></article></div></section></div>
+            <header class="app-header">
+              <span class="brand-mark">PLAY</span>
+              <div class="header-actions"><span class="balance-chip"><small>Balance</small><b>30.18</b></span><button class="circle-button bell-icon" type="button" aria-label="Notifications"></button></div>
+            </header>
+            <div class="home-content">
+              <section class="welcome-row"><div><span>Welcome back</span><strong>Alex</strong></div><span class="login-status"><i aria-hidden="true"></i>Signed in</span></section>
+              <img class="promo-visual" src="custom/assets/challenge-promotion-hero.svg" alt="Daily challenge promotion"/>
+              <nav class="game-tabs" aria-label="Game categories"><button class="active" type="button">Popular</button><button type="button">Slots</button><button type="button">Live</button><button type="button">Sports</button></nav>
+              <section class="game-section"><div class="section-title"><strong>Popular Games</strong><button type="button">See all</button></div><div class="game-grid"><article class="game-tile game-one"><span>HOT</span><strong>Golden Rush</strong></article><article class="game-tile game-two"><span>NEW</span><strong>Lucky Vault</strong></article><article class="game-tile game-three"><strong>Dragon Spin</strong></article><article class="game-tile game-four"><strong>Fortune Live</strong></article></div></section>
+            </div>
             <nav class="bottom-nav" aria-label="Main navigation"><button class="active" type="button"><span class="nav-home" aria-hidden="true"></span>Home</button><button type="button"><span class="nav-grid" aria-hidden="true"></span>Games</button><button type="button"><span class="nav-wallet" aria-hidden="true"></span>Wallet</button><button type="button"><span class="nav-user" aria-hidden="true"></span>Profile</button></nav>
           </div>
           <div class="notice-modal is-open" data-modal>
             <div class="notice-backdrop" data-action="close-modal"></div>
-            <section class="notice-dialog" role="dialog" aria-modal="true" aria-labelledby="success-title">
+            <section class="notice-dialog notice-dialog--conversion" role="dialog" aria-modal="true" aria-labelledby="success-title">
               <button class="notice-close" type="button" data-action="close-modal" aria-label="Close">×</button>
               <div class="notice-icon notice-icon--green" aria-hidden="true">✓</div>
-              <p class="notice-eyebrow">Deposit status</p>
-              <h2 id="success-title">Deposit Successful! 🎉</h2>
-              <p class="notice-copy">Your free earnings are now in your Piggy Bank.<br/>Keep playing to unlock them.</p>
-              <a class="notice-button" href="PIGGY BANK.html">View Piggy Bank</a>
+              <h2 id="success-title">Transferred to Bonus Bank!</h2>
+              <div class="balance-transfer" aria-label="Free play balance moved to bonus bank">
+                <div class="balance-transfer__side">
+                  <strong>$20.00</strong>
+                  <span>Free Play</span>
+                </div>
+                <span class="balance-transfer__arrow" aria-hidden="true">&rarr;</span>
+                <div class="balance-transfer__side balance-transfer__side--bonus">
+                  <strong>$2.00</strong>
+                  <span>Bonus Bank</span>
+                </div>
+              </div>
+              <p class="notice-emphasis notice-emphasis--success">Your deposit moved this amount to Bonus Bank</p>
+              <p class="notice-copy notice-copy--compact">The $2.00 Bonus Bank amount is now ready for playthrough.</p>
+              <p class="notice-legal">Playthrough and redemption requirements apply.</p>
+              <a class="notice-button" href="PIGGY BANK.html">View Bonus Bank</a>
             </section>
           </div>
           <div class="notice-toast" data-toast role="status" aria-live="polite"></div>
@@ -131,7 +141,7 @@
         <aside class="notice-notes" aria-label="提现与奖励提示规则说明">
           <div class="notes-kicker">PRODUCT RULES</div>
           <h2>提现与奖励提示</h2>
-          <p class="notes-intro">三种关键状态并排展示，右侧说明用于评审与开发，不属于 C 端用户界面。</p>
+          <p class="notes-intro">统一转入提示，右侧说明用于评审与开发，不属于 C 端用户界面。</p>
           <section class="notes-card notes-card--accent">
             <h3>独立规则下</h3>
             <p>系统奖励跟随配置：</p>
@@ -139,23 +149,31 @@
             <small>奖励去向由后台开关独立控制，不与提现门槛写死绑定。</small>
           </section>
           <section class="notes-card">
-            <h3>充值后的统一处理</h3>
-            <p class="rule-emphasis">充值后，所有奖励进入存钱罐。</p>
+            <h3>免费玩家存款提示</h3>
             <ul>
-              <li>充值成功后立即展示第三种成功提示。</li>
-              <li>免费奖励保留在 Piggy Bank，继续游戏后再解锁。</li>
-              <li>View Piggy Bank 跳转现有 Piggy Bank 页面。</li>
+              <li>免费余额先展示为 Free Play，弹窗明确转入 Bonus Bank 后的金额。</li>
+              <li>Convert $20.00 → $2.00 跳转存款页；Not now 和关闭按钮只关闭提示。</li>
+              <li>存款与打码、兑换条件仍按平台规则执行。</li>
+            </ul>
+          </section>
+          <section class="notes-card">
+            <h3>充值后的统一处理</h3>
+            <p class="rule-emphasis">充值后，免费余额进入 Bonus Bank。</p>
+            <ul>
+              <li>充值完成后展示第三个成功态，内容仍沿用同一组转入金额。</li>
+              <li>免费余额转入 Bonus Bank，按打码和兑换规则处理。</li>
+              <li>View Bonus Bank 跳转现有 PIGGY BANK 页面。</li>
             </ul>
           </section>
           <section class="notes-card">
             <h3>提现提示分支</h3>
             <ul>
               <li>达到条件：引导 Deposit Now，完成充值后开始提现。</li>
-              <li>未达到条件：提示继续游戏或充值解锁免费收益。</li>
-              <li>Keep Playing 关闭弹窗并留在当前首页；Deposit Now 跳转存款页。</li>
+              <li>所有相关入口均展示同一转入提示。</li>
+              <li>Convert $20.00 → $2.00 跳转存款页。</li>
             </ul>
           </section>
-          <div class="notes-legend"><span class="legend-dot legend-dot--gold"></span>需充值解锁 <span class="legend-dot legend-dot--purple"></span>继续游戏 <span class="legend-dot legend-dot--green"></span>已充值</div>
+          <div class="notes-legend"><span class="legend-dot legend-dot--gold"></span>需充值转入</div>
         </aside>
       </div>
     </div>

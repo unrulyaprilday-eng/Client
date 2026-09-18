@@ -1,0 +1,441 @@
+.piggy-direct-canvas {
+  min-height: 926px;
+}
+
+.piggy-direct-canvas .piggy-scroll-spacer {
+  height: 926px;
+}
+
+.piggy-prototype--direct {
+  min-height: 926px;
+  color: #fff4d6;
+  background: #220003;
+  overflow: visible;
+}
+
+.direct-credit-screen {
+  position: relative;
+  width: 428px;
+  min-height: 760px;
+  padding: 16px 18px 34px;
+  background: #220003;
+}
+
+.direct-credit-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 52px;
+}
+
+.direct-credit-header h1 {
+  margin: 0;
+  color: #fff8e9;
+  font-size: 27px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: 0;
+}
+
+.direct-credit-icon-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #f9d47a;
+  font-size: 33px;
+  line-height: 1;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.direct-credit-icon-button:last-child {
+  font-size: 28px;
+}
+
+.direct-credit-icon-button:focus-visible,
+.direct-credit-submit:focus-visible,
+.direct-credit-option:focus-visible,
+.direct-credit-history__dialog button:focus-visible {
+  outline: 2px solid #ffe263;
+  outline-offset: 2px;
+}
+
+.direct-credit-balance {
+  padding: 8px 0 0;
+  text-align: center;
+}
+
+.direct-credit-vault {
+  position: relative;
+  width: 64px;
+  height: 56px;
+  margin: 0 auto 9px;
+  border: 3px solid #f2be50;
+  border-radius: 8px 8px 5px 5px;
+  background: #3d0008;
+  box-shadow: inset 0 0 0 3px #5e240d;
+}
+
+.direct-credit-vault::before,
+.direct-credit-vault::after {
+  content: "";
+  position: absolute;
+  bottom: -9px;
+  width: 13px;
+  height: 7px;
+  border: 3px solid #f2be50;
+  border-top: 0;
+  background: #3d0008;
+}
+
+.direct-credit-vault::before {
+  left: 7px;
+}
+
+.direct-credit-vault::after {
+  right: 7px;
+}
+
+.direct-credit-vault span {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 26px;
+  height: 26px;
+  border: 3px solid #f2be50;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.direct-credit-vault span::before,
+.direct-credit-vault span::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  background: #f2be50;
+  transform: translate(-50%, -50%);
+}
+
+.direct-credit-vault span::before {
+  width: 5px;
+  height: 26px;
+}
+
+.direct-credit-vault span::after {
+  width: 26px;
+  height: 5px;
+}
+
+.direct-credit-balance h2 {
+  margin: 0;
+  color: #f6d4bb;
+  font-size: 19px;
+  font-weight: 500;
+  line-height: 27px;
+}
+
+.direct-credit-balance__amount {
+  display: block;
+  margin-top: 1px;
+  color: #fff8e9;
+  font-size: 56px;
+  font-weight: 800;
+  line-height: 67px;
+}
+
+.direct-credit-balance p {
+  margin: 0;
+  color: #e8a899;
+  font-size: 17px;
+  line-height: 25px;
+}
+
+.direct-credit-intro {
+  margin-top: 18px;
+  text-align: center;
+}
+
+.direct-credit-intro h2 {
+  margin: 0;
+  color: #fff8e9;
+  font-size: 21px;
+  font-weight: 800;
+  line-height: 29px;
+}
+
+.direct-credit-intro p {
+  margin: 6px 0 0;
+  color: #edc9bb;
+  font-size: 13px;
+  line-height: 19px;
+}
+
+.direct-credit-options {
+  margin-top: 20px;
+}
+
+.direct-credit-option-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 7px;
+}
+
+.direct-credit-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  min-height: 78px;
+  padding: 8px 4px;
+  border: 1px solid #7f4a1b;
+  border-radius: 8px;
+  background: #2f0008;
+  color: #fff8e9;
+  cursor: pointer;
+  transition: background-color 120ms ease, border-color 120ms ease;
+}
+
+.direct-credit-option:hover {
+  border-color: #d39a32;
+  background: #43000a;
+}
+
+.direct-credit-option.is-selected {
+  border-color: #ffe39a;
+  background: linear-gradient(145deg, #f2be50, #c47c25);
+  color: #2c0904;
+  box-shadow: 0 2px 0 rgba(116, 39, 16, 0.5);
+}
+
+.direct-credit-option strong {
+  display: block;
+  font-size: 20px;
+  font-weight: 800;
+  line-height: 26px;
+}
+
+.direct-credit-option span {
+  display: block;
+  margin-top: 3px;
+  color: #e8c6b8;
+  font-size: 10px;
+  line-height: 14px;
+  white-space: nowrap;
+}
+
+.direct-credit-option.is-selected span {
+  color: #4b2a12;
+}
+
+.direct-credit-summary {
+  margin-top: 14px;
+  padding: 13px 13px 0;
+  border: 1px solid #7f4a1b;
+  border-radius: 9px;
+  background: #2f0008;
+}
+
+.direct-credit-summary__grid {
+  display: grid;
+  grid-template-columns: 1fr 19px 1fr 19px 1fr;
+  align-items: center;
+  min-height: 72px;
+  text-align: center;
+}
+
+.direct-credit-summary__grid div {
+  min-width: 0;
+}
+
+.direct-credit-summary__grid strong {
+  display: block;
+  color: #fff8e9;
+  font-size: 22px;
+  font-weight: 800;
+  line-height: 29px;
+}
+
+.direct-credit-summary__grid strong.is-bank {
+  color: #75e0b1;
+}
+
+.direct-credit-summary__grid strong.is-bonus {
+  color: #f4c66c;
+}
+
+.direct-credit-summary__grid span {
+  display: block;
+  margin-top: 3px;
+  color: #dca9a1;
+  font-size: 10px;
+  line-height: 14px;
+}
+
+.direct-credit-summary__grid b {
+  color: #b68e7a;
+  font-size: 23px;
+  font-weight: 400;
+}
+
+.direct-credit-summary__total {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 9px;
+  padding: 13px 5px 12px;
+  border-top: 1px solid rgba(255, 219, 210, 0.2);
+  border-bottom: 1px solid rgba(255, 219, 210, 0.2);
+}
+
+.direct-credit-summary__total span {
+  color: #f4ded6;
+  font-size: 15px;
+  line-height: 21px;
+}
+
+.direct-credit-summary__total strong {
+  color: #fff8e9;
+  font-size: 30px;
+  font-weight: 800;
+  line-height: 35px;
+}
+
+.direct-credit-summary__remaining {
+  margin: 0;
+  padding: 11px 0 12px;
+  color: #dca9a1;
+  font-size: 12px;
+  line-height: 17px;
+  text-align: center;
+}
+
+.direct-credit-submit {
+  display: block;
+  width: 100%;
+  min-height: 55px;
+  margin-top: 16px;
+  padding: 10px 16px;
+  border: 1px solid #ffdf8d;
+  border-radius: 9px;
+  background: linear-gradient(145deg, #f2be50, #bd741e);
+  color: #2b0803;
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 22px;
+  cursor: pointer;
+  box-shadow: 0 3px 0 rgba(116, 39, 16, 0.84);
+}
+
+.direct-credit-submit:hover {
+  background: linear-gradient(145deg, #ffdb7f, #d88c2c);
+}
+
+.direct-credit-submit.is-submitted {
+  border-color: #79e5b6;
+  background: #1c805f;
+  color: #f3fff9;
+  box-shadow: 0 3px 0 rgba(10, 60, 41, 0.84);
+}
+
+.direct-credit-status {
+  min-height: 18px;
+  margin: 10px 0 0;
+  color: #dca9a1;
+  font-size: 12px;
+  line-height: 18px;
+  text-align: center;
+}
+
+.direct-credit-history {
+  position: absolute;
+  inset: 0 auto auto 0;
+  z-index: 12;
+  width: 428px;
+  min-height: 760px;
+}
+
+.direct-credit-history[hidden] {
+  display: none !important;
+}
+
+.direct-credit-history__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(8, 0, 1, 0.78);
+}
+
+.direct-credit-history__dialog {
+  position: absolute;
+  left: 31px;
+  top: 306px;
+  width: 366px;
+  min-height: 175px;
+  padding: 0 15px 18px;
+  border: 1px solid #a87327;
+  border-radius: 8px;
+  background: #4d0006;
+  box-shadow: 0 4px 0 rgba(116, 39, 16, 0.8), 0 8px 20px rgba(0, 0, 0, 0.52);
+}
+
+.direct-credit-history__dialog header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 48px;
+  margin: 0 -15px 15px;
+  padding: 0 15px;
+  background: #76000a;
+}
+
+.direct-credit-history__dialog h2 {
+  margin: 0;
+  color: #fff7ee;
+  font-size: 18px;
+  line-height: 24px;
+}
+
+.direct-credit-history__dialog header button {
+  position: absolute;
+  top: 5px;
+  right: 6px;
+  width: 35px;
+  height: 35px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #ffe4a8;
+  font-size: 25px;
+  cursor: pointer;
+}
+
+.direct-credit-history__dialog p {
+  margin: 0;
+  color: #fff0dc;
+  font-size: 14px;
+  line-height: 21px;
+  text-align: center;
+}
+
+.direct-credit-history__dialog > span {
+  display: block;
+  margin-top: 8px;
+  color: #dba8a0;
+  font-size: 12px;
+  line-height: 18px;
+  text-align: center;
+}
+
+.direct-credit-toast {
+  bottom: 86px;
+}
+
+.piggy-direct-notes {
+  min-height: 936px;
+}

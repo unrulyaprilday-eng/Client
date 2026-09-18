@@ -708,3 +708,78 @@ body {
 .piggy-note-arrow--actions {
   top: 748px;
 }
+
+.piggy-prototype--recharge {
+  min-height: 1270px;
+}
+
+.piggy-prototype--recharge .piggy-screen[data-piggy-screen="top"] {
+  min-height: 1270px;
+}
+
+.piggy-recharge-direct-banner {
+  position: absolute;
+  left: 18px;
+  top: 1150px;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 392px;
+  min-height: 82px;
+  padding: 12px 13px;
+  border: 1px solid #b67d20;
+  border-radius: 8px;
+  background: linear-gradient(145deg, #4d0008, #2b0005 76%);
+  box-shadow: 0 3px 0 rgba(116, 39, 16, 0.76);
+}
+
+.piggy-recharge-direct-banner div {
+  min-width: 0;
+  padding-right: 9px;
+}
+
+.piggy-recharge-direct-banner strong {
+  display: block;
+  color: #ffe2a0;
+  font-size: 13px;
+  font-weight: 800;
+  line-height: 18px;
+}
+
+.piggy-recharge-direct-banner div span {
+  display: block;
+  margin-top: 4px;
+  color: #dca9a1;
+  font-size: 11px;
+  line-height: 15px;
+}
+
+.piggy-recharge-direct-banner a {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  min-width: 105px;
+  min-height: 34px;
+  padding: 6px 9px;
+  border-radius: 6px;
+  background: #b6001b;
+  color: #ffe4c4;
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 17px;
+  text-decoration: none;
+}
+
+.piggy-recharge-direct-banner a span {
+  margin-left: 4px;
+  font-size: 15px;
+}
+
+.piggy-recharge-direct-banner a:hover,
+.piggy-recharge-direct-banner a:focus-visible {
+  background: #d1222f;
+  outline: 2px solid #ffe263;
+  outline-offset: 2px;
+}

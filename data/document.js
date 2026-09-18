@@ -84,6 +84,13 @@ $axure.loadDocument({
             "children": []
           },
           {
+            "id": "piggy_bank_direct_credit",
+            "pageName": "PIGGY BANK直接到账",
+            "type": "Wireframe",
+            "url": "PIGGY BANK直接到账.html",
+            "children": []
+          },
+          {
             "id": "piggybank_guide_game",
             "pageName": "PIGGYBANK引导游戏",
             "type": "Wireframe",

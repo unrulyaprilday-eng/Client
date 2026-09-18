@@ -1,17 +1,6 @@
 (function () {
   "use strict";
 
-  function showToast(card, text) {
-    var toast = card.querySelector("[data-toast]");
-    if (!toast) return;
-    toast.textContent = text;
-    toast.classList.add("is-visible");
-    window.clearTimeout(toast._timer);
-    toast._timer = window.setTimeout(function () {
-      toast.classList.remove("is-visible");
-    }, 1800);
-  }
-
   function setModal(card, open) {
     var modal = card.querySelector("[data-modal]");
     if (!modal) return;
@@ -30,9 +19,6 @@
           setModal(card, true);
         } else if (action === "close-modal") {
           setModal(card, false);
-        } else if (action === "keep-playing") {
-          setModal(card, false);
-          showToast(card, "Keep playing to earn more!");
         } else if (action === "open-piggy") {
           window.location.href = "PIGGY BANK.html";
         }
