@@ -62,7 +62,10 @@
             <header class="direct-credit-header">
               <a class="direct-credit-icon-button" href="PIGGY BANK充值解锁.html" aria-label="Back to recharge unlock"><span aria-hidden="true">&#8592;</span></a>
               <h1>Bonus Bank</h1>
-              <button class="direct-credit-icon-button" type="button" data-direct-action="history" aria-label="Open credit history"><span aria-hidden="true">&#8635;</span></button>
+              <div class="direct-credit-header-actions">
+                <button class="direct-credit-icon-button direct-credit-icon-button--question" type="button" data-direct-action="rules" aria-label="Open unlock rules">?</button>
+                <button class="direct-credit-icon-button direct-credit-icon-button--history" type="button" data-direct-action="history" aria-label="Open credit history"><span aria-hidden="true">&#8635;</span></button>
+              </div>
             </header>
 
             <section class="direct-credit-balance" aria-labelledby="direct-credit-balance-title">
@@ -79,32 +82,44 @@
             </section>
 
             <section class="direct-credit-options" aria-label="Choose a deposit amount">
-              <div class="direct-credit-option-list">
-                <button class="direct-credit-option is-selected" type="button" aria-pressed="true" data-direct-option data-deposit="9.99" data-bonus-rate="0.30">
-                  <strong>$9.99</strong><span>+30% deposit bonus</span>
+              <div class="direct-credit-option-list" data-direct-options>
+                <button class="direct-credit-option is-selected" type="button" aria-pressed="true" data-direct-option data-deposit="500" data-bonus-rate="0.30">
+                  <strong>$500.00</strong><span>+30% deposit bonus</span>
                 </button>
-                <button class="direct-credit-option" type="button" aria-pressed="false" data-direct-option data-deposit="19.99" data-bonus-rate="0.40">
-                  <strong>$19.99</strong><span>+40% deposit bonus</span>
+                <button class="direct-credit-option" type="button" aria-pressed="false" data-direct-option data-deposit="1500" data-bonus-rate="0.40">
+                  <strong>$1,500.00</strong><span>+40% deposit bonus</span>
                 </button>
-                <button class="direct-credit-option" type="button" aria-pressed="false" data-direct-option data-deposit="29.99" data-bonus-rate="0.50">
-                  <strong>$29.99</strong><span>+50% deposit bonus</span>
+                <button class="direct-credit-option" type="button" aria-pressed="false" data-direct-option data-deposit="3000" data-bonus-rate="0.50">
+                  <strong>$3,000.00</strong><span>+50% deposit bonus</span>
                 </button>
+              </div>
+              <div class="direct-credit-options-empty" data-direct-empty hidden>
+                <strong>No quick deposit amount is configured</strong>
+                <span>Enter a custom deposit amount on Deposit.</span>
+                <a href="存款.html">Open Deposit</a>
               </div>
             </section>
 
-            <section class="direct-credit-summary" aria-labelledby="direct-credit-summary-title">
+            <section class="direct-credit-summary" data-direct-summary aria-label="Direct credit calculation">
               <div class="direct-credit-summary__grid">
-                <div><strong data-credit-deposit>$9.99</strong><span>You deposit</span></div>
+                <div><strong data-credit-deposit>$500.00</strong><span>You deposit</span></div>
                 <b aria-hidden="true">+</b>
-                <div><strong class="is-bank" data-credit-bank>$9.99</strong><span>Bank bonus</span></div>
+                <div class="direct-credit-summary__item--bank">
+                  <strong class="is-bank" data-credit-bank>$20.00</strong>
+                  <span class="direct-credit-summary__label"><span>Bank bonus</span><button class="direct-credit-tip" type="button" data-direct-action="unlock-tip" aria-expanded="false" aria-label="Explain bank bonus">?</button></span>
+                  <div class="direct-credit-tip-popover" data-direct-tip hidden>
+                    <strong data-direct-tip-title>Current tier 1</strong>
+                    <span data-direct-tip-detail>0 &lt; amount &le; 1,000 · 5.000%</span>
+                  </div>
+                </div>
                 <b aria-hidden="true">+</b>
-                <div><strong class="is-bonus" data-credit-bonus>$2.99</strong><span>Deposit bonus</span></div>
+                <div><strong class="is-bonus" data-credit-bonus>$150.00</strong><span>Deposit bonus</span></div>
               </div>
-              <div class="direct-credit-summary__total"><span>Total to play</span><strong data-credit-total>$22.97</strong></div>
-              <p class="direct-credit-summary__remaining" data-credit-remaining>$10.01 stays in your Bonus Bank</p>
+              <div class="direct-credit-summary__total"><span>Total to play</span><strong data-credit-total>$670.00</strong></div>
+              <p class="direct-credit-summary__remaining" data-credit-remaining>$0.00 stays in your Bonus Bank</p>
             </section>
 
-            <button class="direct-credit-submit" type="button" data-direct-action="confirm">Deposit $9.99 · Play with $22.97</button>
+            <button class="direct-credit-submit" type="button" data-direct-action="confirm">Deposit $500.00 · Play with $670.00</button>
           </section>
 
           <section class="direct-credit-history" data-direct-history hidden aria-labelledby="direct-history-title">
@@ -114,6 +129,33 @@
               <p>No direct credit records yet.</p>
               <span>Completed deposits will appear here.</span>
             </div>
+          </section>
+
+          <section class="direct-credit-rules" data-direct-rules hidden aria-labelledby="direct-rules-title">
+            <div class="piggy-rule-backdrop" data-direct-action="close-rules"></div>
+            <section class="piggy-rule-dialog direct-credit-rules__dialog" role="dialog" aria-modal="true" aria-labelledby="direct-rules-title">
+              <header class="piggy-rule-header">
+                <h2 id="direct-rules-title">Rules</h2>
+                <button class="piggy-rule-close" type="button" data-direct-action="close-rules" aria-label="Close unlock rules">&times;</button>
+              </header>
+              <div class="piggy-rule-content direct-credit-rules__content">
+                <div class="piggy-rule-intro">
+                  <p>Gullak Bonus is unlocked according to the recharge amount tier configured by the platform.</p>
+                  <p>Unlock amount = a single recharge amount multiplied by the ratio of its tier.</p>
+                </div>
+                <article class="piggy-rate-card">
+                  <header><h3>Recharge unlock ratio</h3><span>6 tiers</span></header>
+                  <table>
+                    <thead><tr><th>Tier</th><th>Recharge Amount</th><th>Unlock Ratio</th></tr></thead>
+                    <tbody data-direct-rules-table></tbody>
+                  </table>
+                </article>
+                <div class="piggy-rule-intro">
+                  <p>Fixed ratios show the calculated amount. When a ratio is configured as a range, Bank bonus and Total to play are shown with Up To.</p>
+                  <p>Quick deposit amounts come from the default channel configuration. If no shortcuts are configured, use Deposit to enter a custom amount.</p>
+                </div>
+              </div>
+            </section>
           </section>
 
           <div class="piggy-toast direct-credit-toast" data-direct-toast hidden></div>

@@ -1,5 +1,20 @@
 (function () {
   var BANK_BALANCE = 20;
+  var DEFAULT_CHANNEL = {
+    shortcuts: [
+      { amount: 500, bonusRate: 0.30 },
+      { amount: 1500, bonusRate: 0.40 },
+      { amount: 3000, bonusRate: 0.50 }
+    ],
+    unlockTiers: [
+      { min: 0, max: 1000, ratioMin: 0.05, ratioMax: 0.05 },
+      { min: 1000, max: 2000, ratioMin: 0.20, ratioMax: 0.20001 },
+      { min: 2000, max: 3000, ratioMin: 0.30, ratioMax: 0.30001 },
+      { min: 3000, max: 4000, ratioMin: 0.20888, ratioMax: 0.20889 },
+      { min: 4000, max: 5000, ratioMin: 0.20880, ratioMax: 0.20880 },
+      { min: 5000, max: null, ratioMin: 0.20880, ratioMax: 0.20880 }
+    ]
+  };
   var selectedOption = null;
   var toastTimer = 0;
 
@@ -27,16 +42,69 @@
     return "$" + Number(value).toFixed(2);
   }
 
+  function amountLabel(value) {
+    return Number(value).toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+  }
+
+  function findUnlockTier(deposit) {
+    for (var index = 0; index < DEFAULT_CHANNEL.unlockTiers.length; index += 1) {
+      var tier = DEFAULT_CHANNEL.unlockTiers[index];
+      var aboveMin = deposit > tier.min;
+      var atOrBelowMax = tier.max === null || deposit <= tier.max;
+      if (aboveMin && atOrBelowMax) return tier;
+    }
+    return DEFAULT_CHANNEL.unlockTiers[0];
+  }
+
+  function findUnlockTierIndex(tier) {
+    return DEFAULT_CHANNEL.unlockTiers.indexOf(tier) + 1;
+  }
+
   function calculate(deposit, bonusRate) {
-    var bankCredit = Math.min(deposit, BANK_BALANCE);
+    var tier = findUnlockTier(deposit);
+    var unlockMin = Math.min(BANK_BALANCE, floorCents(deposit * tier.ratioMin));
+    var unlockMax = Math.min(BANK_BALANCE, floorCents(deposit * tier.ratioMax));
+    var isRange = tier.ratioMax > tier.ratioMin;
     var depositBonus = floorCents(deposit * bonusRate);
     return {
       deposit: deposit,
-      bankCredit: bankCredit,
+      bankCredit: unlockMin,
+      unlockMin: unlockMin,
+      unlockMax: unlockMax,
+      isRange: isRange,
       depositBonus: depositBonus,
-      total: deposit + bankCredit + depositBonus,
-      remaining: BANK_BALANCE - bankCredit
+      total: deposit + unlockMin + depositBonus,
+      totalMax: deposit + unlockMax + depositBonus,
+      remaining: BANK_BALANCE - unlockMin,
+      tier: tier
     };
+  }
+
+  function tierLabel(tier) {
+    return tierRangeLabel(tier) + " · " + tierRatioLabel(tier);
+  }
+
+  function tierRangeLabel(tier) {
+    return tier.max === null
+      ? "> " + amountLabel(tier.min)
+      : amountLabel(tier.min) + " < amount ≤ " + amountLabel(tier.max);
+  }
+
+  function tierRatioLabel(tier) {
+    return tier.ratioMin === tier.ratioMax
+      ? (tier.ratioMin * 100).toFixed(3) + "%"
+      : (tier.ratioMin * 100).toFixed(3) + "% - " + (tier.ratioMax * 100).toFixed(3) + "%";
+  }
+
+  function renderTierTable(table, currentTier) {
+    if (!table) return;
+    table.innerHTML = "";
+    DEFAULT_CHANNEL.unlockTiers.forEach(function (tier, index) {
+      var row = document.createElement("tr");
+      row.className = tier === currentTier ? "is-current" : "";
+      row.innerHTML = "<td>" + (index + 1) + "</td><td>" + tierRangeLabel(tier) + "</td><td>" + tierRatioLabel(tier) + "</td>";
+      table.appendChild(row);
+    });
   }
 
   function notifyPlayerResize() {
@@ -75,18 +143,30 @@
     var total = query("[data-credit-total]");
     var remaining = query("[data-credit-remaining]");
     var submit = query("[data-direct-action='confirm']");
-    var status = query("[data-credit-status]");
+    var tipTitle = query("[data-direct-tip-title]");
+    var tipDetail = query("[data-direct-tip-detail]");
+    var rulesTable = query("[data-direct-rules-table]");
+    var bankText = money(data.bankCredit);
+    var totalText = money(data.total);
+    if (data.isRange) {
+      bankText = "Up To " + money(data.unlockMax);
+      totalText = "Up To " + money(data.totalMax);
+    }
 
     if (deposit) deposit.textContent = money(data.deposit);
-    if (bank) bank.textContent = money(data.bankCredit);
+    if (bank) bank.textContent = bankText;
     if (bonus) bonus.textContent = "+" + money(data.depositBonus);
-    if (total) total.textContent = money(data.total);
+    if (total) total.textContent = totalText;
     if (remaining) remaining.textContent = money(data.remaining) + " stays in your Bonus Bank";
+    if (bank) bank.classList.toggle("is-up-to", data.isRange);
+    if (total) total.classList.toggle("is-up-to", data.isRange);
+    renderTierTable(rulesTable, data.tier);
+    if (tipTitle) tipTitle.textContent = "Current tier " + findUnlockTierIndex(data.tier);
+    if (tipDetail) tipDetail.textContent = tierLabel(data.tier);
     if (submit) {
-      submit.textContent = "Deposit " + money(data.deposit) + " · Play with " + money(data.total);
+      submit.textContent = "Deposit " + money(data.deposit) + " · Play with " + totalText;
       submit.classList.remove("is-submitted");
     }
-    if (status) status.textContent = "Ready to credit directly to your balance.";
   }
 
   function selectOption(row) {
@@ -103,6 +183,40 @@
     updateSummary(selectedOption);
   }
 
+  function renderDefaultChannel() {
+    var options = query("[data-direct-options]");
+    var empty = query("[data-direct-empty]");
+    var summary = query("[data-direct-summary]");
+    var submit = query("[data-direct-action='confirm']");
+    if (!options || !empty) return;
+
+    options.innerHTML = "";
+    if (!DEFAULT_CHANNEL.shortcuts.length) {
+      options.hidden = true;
+      empty.hidden = false;
+      if (summary) summary.hidden = true;
+      if (submit) submit.hidden = true;
+      selectedOption = null;
+      return;
+    }
+
+    options.hidden = false;
+    empty.hidden = true;
+    if (summary) summary.hidden = false;
+    if (submit) submit.hidden = false;
+    DEFAULT_CHANNEL.shortcuts.forEach(function (shortcut, index) {
+      var button = document.createElement("button");
+      button.type = "button";
+      button.className = "direct-credit-option" + (index === 0 ? " is-selected" : "");
+      button.setAttribute("aria-pressed", index === 0 ? "true" : "false");
+      button.setAttribute("data-direct-option", "");
+      button.setAttribute("data-deposit", String(shortcut.amount));
+      button.setAttribute("data-bonus-rate", String(shortcut.bonusRate));
+      button.innerHTML = "<strong>" + money(shortcut.amount) + "</strong><span>+" + (shortcut.bonusRate * 100).toFixed(0) + "% deposit bonus</span>";
+      options.appendChild(button);
+    });
+  }
+
   function openHistory() {
     var history = query("[data-direct-history]");
     if (history) history.hidden = false;
@@ -111,6 +225,24 @@
   function closeHistory() {
     var history = query("[data-direct-history]");
     if (history) history.hidden = true;
+  }
+
+  function openRules() {
+    var rules = query("[data-direct-rules]");
+    if (rules) rules.hidden = false;
+  }
+
+  function closeRules() {
+    var rules = query("[data-direct-rules]");
+    if (rules) rules.hidden = true;
+  }
+
+  function toggleUnlockTip(button) {
+    var tip = query("[data-direct-tip]");
+    if (!tip) return;
+    var shouldOpen = tip.hidden;
+    tip.hidden = !shouldOpen;
+    button.setAttribute("aria-expanded", shouldOpen ? "true" : "false");
   }
 
   function confirmCredit() {
@@ -139,9 +271,18 @@
     if (action === "history") {
       event.preventDefault();
       openHistory();
+    } else if (action === "rules") {
+      event.preventDefault();
+      openRules();
     } else if (action === "close-history") {
       event.preventDefault();
       closeHistory();
+    } else if (action === "close-rules") {
+      event.preventDefault();
+      closeRules();
+    } else if (action === "unlock-tip") {
+      event.preventDefault();
+      toggleUnlockTip(actionTarget);
     } else if (action === "confirm") {
       event.preventDefault();
       confirmCredit();
@@ -154,10 +295,14 @@
       event.preventDefault();
       selectOption(option);
     }
-    if (event.key === "Escape") closeHistory();
+    if (event.key === "Escape") {
+      closeHistory();
+      closeRules();
+    }
   }
 
   onReady(function () {
+    renderDefaultChannel();
     var firstOption = query("[data-direct-option]");
     if (firstOption) selectOption(firstOption);
     document.addEventListener("click", handleClick);
