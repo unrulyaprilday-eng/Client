@@ -66,7 +66,7 @@ body { width: 1248px; position: static; overflow-y: hidden; }
 .balance-transfer__side--bonus strong { color: #2f9a73; }
 .balance-transfer__arrow { color: #918aa9; font-size: 26px; line-height: 1; }
 .notice-emphasis { margin: 0; color: #a86b1f; font-size: 15px; font-weight: 800; line-height: 1.35; }
-.notice-emphasis--success { color: #238c68; }
+.notice-emphasis--success { margin-top: 18px; color: #238c68; }
 .notice-copy--compact { margin: 8px 0 13px; }
 .notice-legal { margin: 0 0 18px; color: #89839b; font-size: 12px; line-height: 1.65; }
 .notice-button { display: inline-flex; align-items: center; justify-content: center; width: 100%; min-height: 48px; padding: 0 16px; border: 0; border-radius: 13px; background: #6d61d9; color: #fff; font-size: 15px; font-weight: 700; text-decoration: none; cursor: pointer; }
