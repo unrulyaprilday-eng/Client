@@ -60,20 +60,20 @@
           <section class="piggy-screen is-active" data-piggy-screen="top" aria-label="PIGGY BANK wager entry, recharge unlock">
             <img class="piggy-shot" src="custom/assets/piggy-bank/piggy-bank-main-stitched.png?v=20260811" alt="PIGGY BANK recharge unlock state"/>
             <div class="piggy-recharge-overlays" aria-hidden="true">
-              <div class="piggy-recharge-badge">Recharge<br/>to unlock<br/>Gullak Bonus</div>
-              <div class="piggy-recharge-copy">Recharge to unlock more Gullak Bonus</div>
+              <div class="piggy-recharge-badge">Deposit<br/>to unlock<br/>Gullak Bonus</div>
+              <div class="piggy-recharge-copy">Every deposit unlocks the corresponding Gullak Bonus</div>
               <div class="piggy-recharge-quick-copy piggy-recharge-quick-copy--wager-entry">
                 <strong>Bet to add more<br/>bonus to your Gullak</strong>
                 <span class="piggy-recharge-card__action">Bet</span>
               </div>
               <div class="piggy-recharge-quick-copy piggy-recharge-quick-copy--recharge-unlock">
-                <strong>Recharge to unlock<br/>claimable balance</strong>
+                <strong>Each deposit unlocks<br/>claimable balance</strong>
                 <span class="piggy-recharge-card__action">Deposit</span>
               </div>
               <div class="piggy-recharge-card-cover"></div>
               <div class="piggy-recharge-card">
                 <span class="piggy-recharge-card__icon piggy-recharge-card__icon--deposit" aria-hidden="true"></span>
-                <strong>Higher recharge amount<br/>unlocks faster</strong>
+                <strong>Every deposit unlocks<br/>its matching balance</strong>
                 <span class="piggy-recharge-card__action">Deposit</span>
               </div>
             </div>
@@ -110,8 +110,8 @@
 
               <div class="piggy-rule-content" data-rule-scroll>
                 <div class="piggy-rule-intro">
-                  <p>Gullak Bonus is unlocked according to the recharge amount tier configured by the platform.</p>
-                  <p>Unlock amount = a single recharge amount multiplied by the ratio of its tier.</p>
+                  <p>Each completed deposit immediately unlocks the Gullak Bonus amount configured for its deposit tier.</p>
+                  <p>Unlock amount = that deposit amount multiplied by the ratio of its tier. There is no separate first or second transfer.</p>
                 </div>
 
                 <article class="piggy-rate-card">
@@ -128,7 +128,7 @@
                 </article>
 
                 <div class="piggy-rule-intro">
-                  <p>Example: a recharge of 500 unlocks 40% of the amount eligible for this PIGGY BANK cycle.</p>
+                  <p>Example: every deposit of 500 unlocks 40% of that deposit for the PIGGY BANK balance.</p>
                 </div>
               </div>
             </section>
@@ -149,7 +149,7 @@
 
           <section class="piggy-note-card">
             <h2>进入与解锁方式</h2>
-            <p>玩家完成打码后进入本页，按 B 端“充值”配置，以单次充值金额所在档位使用对应解锁比例。</p>
+            <p>玩家完成打码后进入本页，每笔充值按 B 端“充值”配置，以该笔金额所在档位立即解锁对应 PIGGY BANK 余额。</p>
             <p><a class="piggy-note-link" href="PIGGY BANK.html">查看另一种状态：充值或活动赠送进入打码解锁 →</a></p>
           </section>
 
@@ -157,7 +157,7 @@
             <h2>主页面表现</h2>
             <ul>
               <li>主视觉强调充值金额档位，而不是 VIP 等级。</li>
-              <li>Quick Actions 中间卡仅用于增加 Gullak Bonus；右侧与下方卡片仅用于充值解锁。</li>
+              <li>Quick Actions 中间卡仅用于增加 Gullak Bonus；右侧与下方卡片的每次充值都会立即解锁对应余额。</li>
               <li>Rules 展示 1-499、500-999、1000-4999、5000+ 四档。</li>
             </ul>
           </section>
@@ -173,14 +173,14 @@
             <ul>
               <li><strong>?</strong>：点击打开充值档位 Rules。</li>
               <li><strong>History</strong>：点击打开 History 记录弹窗。</li>
-              <li><strong>Claim</strong>：可领取金额为 0 时保持不可领取提示。</li>
+              <li><strong>Claim</strong>：无可领取余额时保持不可领取提示；充值解锁后按每笔充值更新余额。</li>
             </ul>
           </section>
 
           <section class="piggy-note-card piggy-note-card--important">
             <h2>与 B 端的关系</h2>
             <p>本页只做独立原型展示，不读取 B 端页面状态，也不与 B 端联动。</p>
-            <div class="piggy-note-formula">打码后 → 充值档位解锁<br/>充值/活动赠送 → VIP 比例打码解锁</div>
+            <div class="piggy-note-formula">打码后 → 每笔充值按档位立即解锁<br/>充值/活动赠送 → VIP 比例打码解锁</div>
           </section>
 
           <section class="piggy-note-card">

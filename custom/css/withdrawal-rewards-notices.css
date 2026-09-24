@@ -1,13 +1,12 @@
 * { box-sizing: border-box; }
 
-html, body { margin: 0; min-width: 1248px; min-height: 926px; background: #ebe8f0; color: #26233b; font-family: Arial, "Helvetica Neue", "PingFang SC", "Microsoft YaHei", sans-serif; }
-body { width: 1248px; position: static; overflow-y: hidden; }
-#base { position: relative; width: 1248px; min-height: 926px; z-index: 1; }
+html, body { margin: 0; min-width: 800px; min-height: 926px; background: #ebe8f0; color: #26233b; font-family: Arial, "Helvetica Neue", "PingFang SC", "Microsoft YaHei", sans-serif; }
+body { width: 800px; position: static; overflow-y: hidden; }
+#base { position: relative; width: 800px; min-height: 926px; z-index: 1; }
 
-.notice-board { display: grid; grid-template-columns: 428px 428px 324px; grid-template-rows: 926px; align-items: start; gap: 22px; width: 1248px; min-height: 926px; padding: 0 12px; }
+.notice-board { display: grid; grid-template-columns: 428px 324px; grid-template-rows: 926px; align-items: start; gap: 22px; width: 800px; min-height: 926px; padding: 0 12px; }
 .notice-phone { position: relative; flex: 0 0 428px; width: 428px; height: 926px; overflow: hidden; border: 1px solid #d4d0dc; border-radius: 30px; background: #f8f7fb; box-shadow: 0 16px 34px rgba(45, 38, 76, .16); }
 .notice-phone[data-notice-card="ready"] { grid-column: 1; grid-row: 1; }
-.notice-phone[data-notice-card="success"] { grid-column: 2; grid-row: 1; }
 .home-background { position: relative; width: 100%; height: 926px; overflow: hidden; background: #fff7f3; }
 .home-background .app-header { height: 60px; }
 .home-background .home-content { height: 800px; }
@@ -20,6 +19,15 @@ body { width: 1248px; position: static; overflow-y: hidden; }
 .account-chip { display: inline-flex; align-items: center; gap: 8px; padding: 7px 11px 7px 7px; border-radius: 20px; background: #efedf6; color: #6a6680; font-size: 12px; font-weight: 700; }
 .avatar { display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; border-radius: 50%; background: #6d61d9; color: #fff; font-size: 12px; }
 .chip-dot { width: 6px; height: 6px; margin-left: 2px; border-radius: 50%; background: #62bf83; }
+.wallet-panel { margin-bottom: 14px; }
+.wallet-panel__heading { display: flex; align-items: center; justify-content: space-between; min-height: 28px; }
+.wallet-panel__heading strong { color: #342a26; font-size: 15px; }
+.wallet-panel__heading span { padding: 5px 8px; border: 1px solid #c8ddd7; border-radius: 7px; background: #f1f8f6; color: #43685f; font-size: 10px; font-weight: 700; }
+.wallet-panel .balance-card { margin-top: 8px; padding: 16px; border-radius: 14px; }
+.wallet-panel .balance-value { margin-top: 7px; font-size: 31px; }
+.wallet-panel .balance-caption { margin-top: 6px; }
+.wallet-panel .withdraw-trigger { margin-top: 11px; height: 44px; }
+.wallet-panel .piggy-entry { margin-top: 9px; height: 45px; }
 .balance-card, .deposit-card { margin-top: 18px; padding: 22px; border-radius: 18px; background: linear-gradient(135deg, #6257cf, #8a74ea); color: #fff; box-shadow: 0 12px 24px rgba(99, 84, 204, .22); }
 .balance-card--dim { background: linear-gradient(135deg, #675f9b, #9082bb); }
 .balance-label { display: block; font-size: 12px; opacity: .78; }
@@ -76,7 +84,7 @@ body { width: 1248px; position: static; overflow-y: hidden; }
 .notice-toast { position: absolute; left: 50%; bottom: 30px; z-index: 8; max-width: 82%; padding: 10px 15px; border-radius: 12px; background: rgba(38, 34, 61, .92); color: #fff; font-size: 12px; opacity: 0; transform: translate(-50%, 12px); transition: opacity .18s ease, transform .18s ease; pointer-events: none; }
 .notice-toast.is-visible { opacity: 1; transform: translate(-50%, 0); }
 
-.notice-notes { grid-column: 3; grid-row: 1; align-self: start; width: 324px; min-height: 874px; padding: 24px 20px; border: 1px solid #ddd8e8; border-radius: 20px; background: #fffdf7; box-shadow: 0 12px 28px rgba(68, 54, 76, .09); }
+.notice-notes { grid-column: 2; grid-row: 1; align-self: start; width: 324px; min-height: 874px; padding: 24px 20px; border: 1px solid #ddd8e8; border-radius: 20px; background: #fffdf7; box-shadow: 0 12px 28px rgba(68, 54, 76, .09); }
 .notes-kicker { color: #a17037; font-size: 11px; font-weight: 800; letter-spacing: 1.5px; }
 .notice-notes h2 { margin: 8px 0 0; color: #3f2f35; font-size: 24px; }
 .notes-intro { margin: 10px 0 18px; color: #7d6d70; font-size: 12px; line-height: 1.6; }
@@ -98,7 +106,7 @@ body { width: 1248px; position: static; overflow-y: hidden; }
 .legend-dot--purple { background: #6d61d9; }
 .legend-dot--green { background: #2d9a74; }
 
-@media (max-width: 1247px) {
+@media (max-width: 799px) {
   html, body { min-width: 0; }
   body, #base, .notice-board { width: 100%; }
   .notice-board { overflow-x: auto; }
