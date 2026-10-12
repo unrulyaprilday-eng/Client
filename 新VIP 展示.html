@@ -68,7 +68,6 @@
       </nav>
       <div class="vip-level-navigation"><span id="view-context">Viewing VIP 2 · Upgrade preview</span><button type="button" data-dialog="levels">All levels ›</button></div>
       <div class="vip-content">
-        <p class="vip-account-notice" id="deposit-status" role="status" hidden></p>
         <section id="preview-panel" aria-label="Other level benefits preview">
           <button type="button" id="return-current" class="vip-current-reward"><span><strong id="current-reward-title">VIP 1 daily reward · $5</strong><small id="current-reward-detail">Available now · View your benefits</small></span><span aria-hidden="true">›</span></button>
           <div class="vip-preview-card">
@@ -94,7 +93,7 @@
       <p class="vip-sr" id="vip-status" role="status"></p>
     </main>
     <aside class="vip-notes" lang="zh-CN"><span class="vip-note-kicker">VIP / 页面方案 05</span><h2>新VIP 展示</h2><p class="vip-note-intro">以最初截图为布局参考，聚焦原型的福利内容、状态与操作层级。</p>
-      <section><h3>切换评审状态</h3><div class="vip-demo-switch"><button type="button" data-demo="unpaid" aria-pressed="true">未充值 · VIP1</button><button type="button" data-demo="paid" aria-pressed="false">已充值 · VIP2</button><button type="button" data-demo="pending" aria-pressed="false">充值处理中</button><button type="button" data-demo="failed" aria-pressed="false">充值失败</button></div><p>状态切换仅供演示，不出现在玩家界面。</p></section>
+      <section><h3>切换评审状态</h3><div class="vip-demo-switch"><button type="button" data-demo="unpaid" aria-pressed="true">未充值 · VIP1</button><button type="button" data-demo="paid" aria-pressed="false">已充值 · VIP2</button></div><p>状态切换仅供演示，不出现在玩家界面。</p></section>
       <section><h3>01 · 未充值：先看升级福利</h3><p>当前 VIP1，默认选中 VIP2 预览。主卡清楚展示还需充值金额、每日 Free Play、每日提现次数、单次金额及提现条件；金色主按钮引导充值升级。还需金额按目标门槛减本周已到账充值展示，不重复显示总门槛。</p><p>若 VIP1 今日可领取，轻提示保留当前福利入口；领取后提示隐藏，仍可从 VIP1 Tab 查看。预览任何等级都不会改变实际等级或领取资格。</p></section>
       <section><h3>02 · 已充值：先领取，再提现</h3><p>默认展示实际当前等级，先每日领取，再今日剩余提现次数及单次金额。提现条件、清除本次对应免费余额的说明留在待遇旁，进度弹层演示提现引导。</p><button type="button" id="reset-demo">重置领取演示</button><button type="button" id="fail-demo">演示领取失败</button><button type="button" id="claim-lock-demo" aria-pressed="false">领取资格受限</button><button type="button" id="cash-deposit-demo" aria-pressed="false">提现需先充值</button><button type="button" id="cash-ready-demo">提现条件已满足</button><button type="button" id="cash-limit-demo">今日次数用完</button></section>
       <section><h3>03 · 15 级与规则收纳</h3><p>顶部直接切换 VIP1–VIP15，Current 表示实际等级，选中态表示正在查看。All levels 用于快速定位；Compare all levels 对比当前与任意等级；Upgrade rules 点击查看升级、领取及提现说明。</p><p>每日提现次数与每周充值门槛分别展示，没有 Free Tab、有效期或保级模块。原有升降级规则口径不变。</p></section>

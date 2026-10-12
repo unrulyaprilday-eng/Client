@@ -82,13 +82,11 @@ click(get('return-current')); assert.equal(get('claim-button').textContent, 'Cla
 click(get('fail-demo')); click(get('claim-button')); runClaim();
 assert.equal(get('claim-button').disabled, false); assert.match(get('vip-toast').textContent, /Unable to claim/);
 click(get('claim-button')); runClaim(); assert.equal(get('claim-button').textContent, 'Claimed today');
-demo('paid'); click(get('claim-button')); demo('pending'); runClaim();
+demo('paid'); click(get('claim-button')); demo('unpaid'); runClaim();
 assert.equal(get('benefits-panel').hidden, true); assert.equal(get('current-badge').textContent, 'VIP 1');
 assert.equal(get('preview-title').textContent, 'VIP 2');
 assert.equal(get('claim-button').disabled, false);
 assert.notEqual(get('claim-button').textContent, 'Claimed today');
-assert.match(get('deposit-status').textContent, /processing/);
-demo('failed'); assert.match(get('deposit-status').textContent, /unsuccessful/);
 click(groups.dialog.find(item => item.dataset.dialog === 'compare'));
 assert.match(get('dialog-content').innerHTML, /class="vip-compare-table"/);
 assert.match(get('dialog-content').innerHTML, /value="0"[^>]*>Free</);

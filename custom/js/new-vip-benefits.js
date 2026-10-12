@@ -51,8 +51,6 @@
     el('deposit-link').href = '存款.html?targetVip=' + selected + '&source=vip-benefits';
     el('deposit-link').hidden = !higher;
     el('upgrade-foot').hidden = !higher;
-    el('deposit-status').hidden = mode !== 'pending' && mode !== 'failed';
-    el('deposit-status').textContent = mode === 'pending' ? 'Your deposit is processing. Your current level has not changed.' : mode === 'failed' ? 'Your deposit was unsuccessful. No upgrade has been applied.' : '';
     var actual = levels[current];
     el('daily-amount').textContent = money(actual.daily);
     el('claim-button').disabled = busy || claimed || !claimEligible || cashBusy;
