@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>新提款页面</title>
+  <meta name="viewport" content="width=800, initial-scale=1">
+  <link href="resources/css/axure_rp_page.css" rel="stylesheet">
+  <link href="data/styles.css" rel="stylesheet">
+  <link href="files/新提款页面/styles.css" rel="stylesheet">
+  <link href="custom/css/new-cash-out.css" rel="stylesheet">
+  <script src="resources/scripts/jquery-3.2.1.min.js"></script>
+  <script src="resources/scripts/axure/axQuery.js"></script>
+  <script src="resources/scripts/axure/globals.js"></script>
+  <script src="resources/scripts/axutils.js"></script>
+  <script src="resources/scripts/axure/annotation.js"></script>
+  <script src="resources/scripts/axure/axQuery.std.js"></script>
+  <script src="resources/scripts/axure/doc.js"></script>
+  <script src="resources/scripts/messagecenter.js"></script>
+  <script src="resources/scripts/axure/events.js"></script>
+  <script src="resources/scripts/axure/recording.js"></script>
+  <script src="resources/scripts/axure/action.js"></script>
+  <script src="resources/scripts/axure/expr.js"></script>
+  <script src="resources/scripts/axure/geometry.js"></script>
+  <script src="resources/scripts/axure/flyout.js"></script>
+  <script src="resources/scripts/axure/model.js"></script>
+  <script src="resources/scripts/axure/repeater.js"></script>
+  <script src="resources/scripts/axure/sto.js"></script>
+  <script src="resources/scripts/axure/utils.temp.js"></script>
+  <script src="resources/scripts/axure/variables.js"></script>
+  <script src="resources/scripts/axure/drag.js"></script>
+  <script src="resources/scripts/axure/move.js"></script>
+  <script src="resources/scripts/axure/visibility.js"></script>
+  <script src="resources/scripts/axure/style.js"></script>
+  <script src="resources/scripts/axure/adaptive.js"></script>
+  <script src="resources/scripts/axure/tree.js"></script>
+  <script src="resources/scripts/axure/init.temp.js"></script>
+  <script src="resources/scripts/axure/legacy.js"></script>
+  <script src="resources/scripts/axure/viewer.js"></script>
+  <script src="resources/scripts/axure/math.js"></script>
+  <script src="resources/scripts/axure/jquery.nicescroll.min.js"></script>
+  <script src="data/document.js"></script>
+  <script src="files/新提款页面/data.js"></script>
+  <script src="custom/js/axure-custom-page-ready.js"></script>
+  <script src="resources/scripts/axure/ios.js"></script>
+  <script src="custom/js/new-cash-out-model.js"></script>
+  <script src="custom/js/new-cash-out.js" defer></script>
+  <script>
+    $axure.utils.getTransparentGifPath = function () { return 'resources/images/transparent.gif'; };
+    $axure.utils.getOtherPath = function () { return 'resources/Other.html'; };
+    $axure.utils.getReloadPath = function () { return 'resources/reload.html'; };
+  </script>
+</head>
+<body data-axure-page-id="new_cash_out">
+  <div id="base"></div>
+  <main class="co-board">
+    <section class="co-phone" aria-label="Cash Out">
+      <header class="co-header"><a class="co-back" href="首页-APP安装.html" aria-label="Back to home"><svg class="co-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 4-8 8 8 8"/></svg></a><h1>Cash Out</h1></header>
+      <nav class="co-tabs" role="tablist" aria-label="Balance type">
+        <button type="button" id="free-tab" role="tab" aria-selected="true" aria-controls="co-content" data-tab="free">Free Play</button>
+        <button type="button" id="deposit-tab" role="tab" aria-selected="false" aria-controls="co-content" data-tab="deposit">Deposit Balance</button>
+      </nav>
+      <div class="co-content" id="co-content" role="tabpanel" aria-labelledby="free-tab">
+        <section class="co-card co-balance"><span class="co-label">Free Play balance</span><strong class="co-amount">$126.50</strong></section>
+        <section class="co-card co-vip-card">
+          <div class="co-topline"><div class="co-offer"><span class="co-vip">VIP 2</span><div><small>Cash-out amount</small><strong>$10</strong></div></div><span class="co-badge ready">Ready to request</span></div>
+          <div class="co-rows"><div class="co-row"><span>Free Play balance</span><strong>$126.50 / $100.00</strong></div><div class="co-progress-line"><div class="co-progress complete"><span style="width:100%"></span></div><span>100%</span></div><div class="co-row"><span>Playthrough left</span><strong>$0.00</strong></div><div class="co-row"><span>Cash-outs left this week</span><strong>2 of 3</strong></div></div>
+          <section class="co-outcome"><h3>On success</h3><div class="co-row"><span>Free Play:</span><strong>$126.50 → $0</strong></div><div class="co-row"><span>Deposit balance:</span><strong>unchanged</strong></div></section>
+          <button class="co-primary" type="button" disabled>Request $10</button><div class="co-footnote">Review and confirm next.</div>
+        </section>
+        <noscript><div class="co-condition">Enable JavaScript to review and request a cash-out.</div></noscript>
+      </div>
+      <div class="co-modal" id="co-modal" hidden><section class="co-dialog" role="dialog" aria-modal="true" aria-labelledby="co-dialog-title" tabindex="-1" id="co-dialog"></section></div>
+    </section>
+    <aside class="co-notes" lang="zh-CN" aria-label="原型演示与后台说明">
+      <div class="co-kicker">CASH OUT · PROTOTYPE</div>
+      <h2>新提款页面</h2>
+      <p>以参考图为基准。左侧为玩家界面，右侧仅供评审；数据为示例，未接后台或真实支付。</p>
+      <section class="co-note accent">
+        <h3>页面状态</h3>
+        <label for="co-scenario">切换会重置本页演示数据</label>
+        <select id="co-scenario">
+          <optgroup label="Free Play">
+            <option value="regular">普通会员 · VIP required</option>
+            <option value="free-unmet">VIP 未达标 · 余额及流水不足</option>
+            <option value="free-ready" selected>VIP 已达标 · 固定兑换 $10</option>
+            <option value="exhausted">VIP 本周次数用完</option>
+          </optgroup>
+          <optgroup label="Deposit Balance">
+            <option value="deposit-unmet">未达标 · 余额 $21</option>
+            <option value="deposit-ready">已达标 · 自动兑换 $40</option>
+            <option value="deposit-120">超上限 · 到账 $100 / 清除 $20</option>
+          </optgroup>
+        </select>
+        <p>点击主按钮 → 核对收款账户和余额变化 → 确认提交。</p>
+        <details>
+          <summary>申请后演示（可选）</summary>
+          <p>先在左侧提交申请，再模拟以下事件。此处不属于玩家功能。</p>
+          <div class="co-demo-actions">
+            <button type="button" data-demo="progress" disabled>推进处理进度</button><button type="button" data-demo="unknown" disabled>支付超时待核对</button>
+            <button type="button" data-demo="reward" disabled>新奖励 +$10</button><button type="button" data-demo="win" disabled>免费游戏净赢 +$5</button>
+            <button type="button" data-demo="deposit" disabled>新充值 +$10</button><button type="button" data-demo="success" disabled>确认最终成功</button>
+            <button type="button" data-demo="failed" disabled>拒绝并原路释放</button><button type="button" data-demo="reset">重置当前示例</button>
+          </div>
+        </details>
+        <div class="co-demo-result" id="co-demo-result" role="status">可直接体验左侧申请流程。</div>
+      </section>
+      <section class="co-note">
+        <h3>交互说明</h3>
+        <ul><li>Free Play 固定金额、Deposit 自动计算；未达标禁用按钮，只提示未完成条件。</li><li>主页面保留参考图必要信息。超上限提前提示清除金额，冻结明细在确认弹窗查看。</li><li>缺账户时先补账户再确认；修改后回到确认，取消修改不改变原账户。</li><li>处理中显示进度；成功或退款显示结果，不与申请表单重复堆叠。</li></ul>
+        <p>加载与加载失败沿用通用框架，本页不单独设计。</p>
+      </section>
+      <section class="co-note accent">
+        <h3>后台内容 · 独立说明</h3>
+        <p>成功只结算本申请锁定的资金，失败原路释放。任何期间新增资金都不受旧申请影响。</p>
+        <details><summary>资格与金额</summary><ul><li>Free Play 读取 VIP 固定金额、余额门槛、剩余流水、次数和重置时间。</li><li>Deposit 满足 3 倍余额、10 倍流水后，到账取符合条件余额与剩余兑换上限的较小值。</li><li>剩余上限 = 对应充值 × 10 − 已使用 − 处理中占用。金额、条件与状态取同一后台口径。</li></ul></details>
+        <details><summary>资金、冻结与退款</summary><ul><li>充值、免费奖励、Bonus Bank 分账；冻结保留来源和规则版本。</li><li>冻结完整对应余额。$120 例中到账 $100、待清除 $20，失败则完整退回 $120。</li><li>冻结、占用资格、创建申请原子执行；提交与回调幂等。超时结果不明继续处理中。</li><li>失败退款不算充值、不发赠送、不加 VIP 累计、不重置流水；补资料或人工审核要求仍保留。</li></ul></details>
+        <details><summary>演示边界与待定口径</summary><p>单笔充值、VIP 2 及周重置时间均为示例；演示采用同账号一笔处理中、成功清除超额、不另扣手续费。新充值单独记账，不加入旧批次资格。</p><p>多笔充值归属、Free Play 来源范围、跨周恢复、并发和费用以正式规则为准。收款账户仅演示填写和返回流程，不代表后台验证通过。</p></details>
+        <a class="co-doc-link" href="custom/docs/new-cash-out-backend.md" target="_blank" rel="noopener">完整后台需求清单 ↗</a>
+      </section>
+    </aside>
+  </main>
+</body>
+</html>

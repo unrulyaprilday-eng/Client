@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "savedAt": "2026-10-10T10:01:41.308Z",
+  "savedAt": "2026-10-12T07:39:46.588Z",
   "source": "data/document.js sitemap.rootNodes",
   "rootNodes": [
     {
@@ -99,6 +99,13 @@
           "pageName": "提现与奖励提示",
           "type": "Wireframe",
           "url": "withdrawal-rewards-notices.html",
+          "children": []
+        },
+        {
+          "id": "new_cash_out",
+          "pageName": "新提款页面",
+          "type": "Wireframe",
+          "url": "新提款页面.html",
           "children": []
         }
       ]

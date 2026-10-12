@@ -111,6 +111,13 @@ $axure.loadDocument({
             "type": "Wireframe",
             "url": "withdrawal-rewards-notices.html",
             "children": []
+          },
+          {
+            "id": "new_cash_out",
+            "pageName": "新提款页面",
+            "type": "Wireframe",
+            "url": "新提款页面.html",
+            "children": []
           }
         ]
       },
