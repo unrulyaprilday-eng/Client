@@ -1,0 +1,92 @@
+// Offline state-transition checks; no browser or live service is used.
+const fs = require('fs');
+const path = require('path');
+const vm = require('vm');
+const assert = require('assert/strict');
+const root = path.resolve(__dirname, '..');
+const pageName = '\u65b0VIP \u5c55\u793a';
+const html = fs.readFileSync(path.join(root, pageName + '.html'), 'utf8');
+const source = fs.readFileSync(path.join(root, 'custom/js/new-vip-benefits.js'), 'utf8');
+const nodes = new Map(), groups = { demo: [], dialog: [], close: [], level: [] };
+function node(attrs = '') {
+  const result = { dataset: {}, hidden: /\bhidden\b/.test(attrs), disabled: false, textContent: '', innerHTML: '', handlers: {},
+    addEventListener(type, fn) { this.handlers[type] = fn; },
+    setAttribute(key, value) { this[key] = value; }, focus() {}, closest() { return null; },
+    querySelector() { return this.caption || (this.caption = { textContent: '' }); },
+    offsetLeft: 0, offsetWidth: 96, clientWidth: 388 };
+  for (const match of attrs.matchAll(/data-([a-z-]+)="([^"]*)"/g)) result.dataset[match[1]] = match[2];
+  return result;
+}
+for (const tag of html.matchAll(/<[a-z][^>]*>/g)) {
+  const attrs = tag[0], item = node(attrs), id = /\bid="([^"]+)"/.exec(attrs);
+  if (id) { assert(!nodes.has(id[1]), 'Duplicate HTML id'); nodes.set(id[1], item); }
+  if ('demo' in item.dataset) groups.demo.push(item);
+  if ('dialog' in item.dataset) groups.dialog.push(item);
+  if ('level' in item.dataset) groups.level.push(item);
+  if (/\bdata-close\b/.test(attrs)) groups.close.push(item);
+}
+const dialog = node(), timers = new Map(); let serial = 0;
+const document = { readyState: 'complete', getElementById: id => nodes.get(id),
+  querySelector: selector => selector === '.vip-dialog' ? dialog : groups.level.find(item => selector === '[data-level="' + item.dataset.level + '"]'),
+  querySelectorAll: selector => groups[selector.slice(6, -1)] || [], addEventListener() {} };
+for (const match of source.matchAll(/el\('([^']+)'\)/g)) assert(nodes.has(match[1]), 'Missing DOM id: ' + match[1]);
+vm.runInNewContext(source, { document, setTimeout(fn, delay) { timers.set(++serial, { fn, delay }); return serial; }, clearTimeout(id) { timers.delete(id); } });
+const get = id => nodes.get(id);
+const click = item => item.handlers.click.call(item, { target: item });
+const demo = value => click(groups.demo.find(item => item.dataset.demo === value));
+const runClaim = () => { for (const [id, timer] of [...timers]) if (timer.delay === 650) { timers.delete(id); timer.fn(); } };
+const pick = value => get('dialog-content').handlers.click({ target: { closest: () => ({ dataset: { pickLevel: String(value) } }) } });
+assert.equal(groups.level.length, 15);
+assert.equal(get('preview-panel').hidden, false);
+assert.equal(get('benefits-panel').hidden, true);
+assert.equal(get('preview-title').textContent, 'VIP 2');
+assert.equal(groups.level[1]['aria-pressed'], 'true');
+assert.equal(groups.level[0].caption.textContent, 'Current');
+click(get('claim-button')); runClaim(); assert.notEqual(get('claim-button').textContent, 'Claimed today');
+click(get('return-current'));
+assert.equal(get('benefits-panel').hidden, false);
+assert.equal(get('daily-amount').textContent, '$5');
+assert.equal(get('current-badge').textContent, 'VIP 1');
+assert.equal(get('claim-button').disabled, false);
+assert.equal(get('cash-deposit-link').hidden, true);
+click(get('claim-button')); runClaim(); assert.equal(get('claim-button').textContent, 'Claimed today');
+click(groups.level[1]); assert.equal(get('preview-title').textContent, 'VIP 2');
+assert.equal(get('benefits-panel').hidden, true);
+click(groups.level[0]); assert.equal(get('claim-button').textContent, 'Claimed today');
+click(get('reset-demo'));
+click(get('cash-deposit-demo')); assert.equal(get('cash-deposit-link').hidden, false);
+assert.equal(get('claim-button').disabled, false);
+click(get('progress-button')); assert.match(get('dialog-content').innerHTML, /credited deposit/);
+click(groups.close[0]);
+click(get('claim-lock-demo')); assert.equal(get('claim-button').disabled, true);
+click(get('claim-button')); runClaim(); assert.equal(get('claim-button').textContent, 'Not eligible to claim');
+click(get('progress-button')); assert.equal(get('vip-overlay').hidden, false);
+click(groups.close[0]); click(get('claim-lock-demo'));
+pick(15); assert.match(get('deposit-link').href, /targetVip=15&/); assert.equal(get('preview-daily').textContent, '—');
+assert.equal(get('current-badge').textContent, 'VIP 1');
+demo('paid'); assert.equal(get('benefits-panel').hidden, false); assert.equal(get('cash-count').textContent, '2 of 3');
+click(groups.level[0]); assert.equal(get('deposit-link').hidden, true); assert.equal(get('benefits-panel').hidden, true);
+pick(2); assert.equal(get('benefits-panel').hidden, false);
+assert.equal(groups.level[1].caption.textContent, 'Current');
+click(get('claim-button')); click(get('claim-button'));
+assert.equal([...timers.values()].filter(timer => timer.delay === 650).length, 1);
+runClaim(); assert.equal(get('claim-button').textContent, 'Claimed today');
+click(get('progress-button')); assert.match(get('dialog-content').innerHTML, /\$75 \/ \$100/);
+click(groups.close[0]); click(get('next-level'));
+assert.equal(get('preview-title').textContent, 'VIP 3'); assert.equal(get('current-badge').textContent, 'VIP 2');
+click(get('return-current')); assert.equal(get('claim-button').textContent, 'Claimed today');
+click(get('fail-demo')); click(get('claim-button')); runClaim();
+assert.equal(get('claim-button').disabled, false); assert.match(get('vip-toast').textContent, /Unable to claim/);
+click(get('claim-button')); runClaim(); assert.equal(get('claim-button').textContent, 'Claimed today');
+demo('paid'); click(get('claim-button')); demo('pending'); runClaim();
+assert.equal(get('benefits-panel').hidden, true); assert.equal(get('current-badge').textContent, 'VIP 1');
+assert.equal(get('preview-title').textContent, 'VIP 2');
+assert.equal(get('claim-button').disabled, false);
+assert.notEqual(get('claim-button').textContent, 'Claimed today');
+assert.match(get('deposit-status').textContent, /processing/);
+demo('failed'); assert.match(get('deposit-status').textContent, /unsuccessful/);
+click(groups.dialog.find(item => item.dataset.dialog === 'compare'));
+assert.equal((get('dialog-content').innerHTML.match(/class="vip-compare-card"/g) || []).length, 16);
+for (const match of html.matchAll(/(?:src|href)="([^"]+)"/g)) assert(fs.existsSync(path.join(root, match[1].split('?')[0])), 'Missing asset');
+assert(!html.includes('\ufffd') && !html.includes('????'), 'Encoding');
+console.log('PASS: VIP1 daily claim without deposit, independent claim/cash-out eligibility, direct 15-level switching, lower-level read-only preview, preserved claim status, upgrade target, retry/cancellation, progress and assets.');

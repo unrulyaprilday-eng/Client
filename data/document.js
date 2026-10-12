@@ -115,22 +115,37 @@ $axure.loadDocument({
         ]
       },
       {
-        "id": "onbtmf",
-        "pageName": "VIP CLUB",
-        "type": "Wireframe",
-        "url": "vip_club.html"
-      },
-      {
-        "id": "p17udf",
-        "pageName": "VIP CLUB 保级",
-        "type": "Wireframe",
-        "url": "vip_club___.html"
-      },
-      {
-        "id": "3vstxy",
-        "pageName": "VIP CLUB 保级_en",
-        "type": "Wireframe",
-        "url": "vip_club____en.html"
+        "id": "vip_group",
+        "pageName": "VIP",
+        "type": "Folder",
+        "url": "",
+        "children": [
+          {
+            "id": "onbtmf",
+            "pageName": "VIP CLUB",
+            "type": "Wireframe",
+            "url": "vip_club.html"
+          },
+          {
+            "id": "p17udf",
+            "pageName": "VIP CLUB 保级",
+            "type": "Wireframe",
+            "url": "vip_club___.html"
+          },
+          {
+            "id": "3vstxy",
+            "pageName": "VIP CLUB 保级_en",
+            "type": "Wireframe",
+            "url": "vip_club____en.html"
+          },
+          {
+            "id": "new_vip_benefits",
+            "pageName": "新VIP 展示",
+            "type": "Wireframe",
+            "url": "新VIP 展示.html",
+            "children": []
+          }
+        ]
       },
       {
         "id": "",
