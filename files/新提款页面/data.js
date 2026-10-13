@@ -1,7 +1,7 @@
 $axure.loadCurrentPage({
   "url": "新提款页面.html",
   "generationDate": new Date(1791763200000),
-  "defaultAdaptiveView": { "name": "", "size": { "width": 800, "height": 926 } },
+  "defaultAdaptiveView": { "name": "", "size": { "width": 1148, "height": 926 } },
   "adaptiveViews": [],
   "sketchKeys": { "": "s0" },
   "variables": ["Login", "Skin", "OpenList"],

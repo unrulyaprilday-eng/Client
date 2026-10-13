@@ -10,6 +10,28 @@
     if (!content || !modal || !dialog || !scenario || !feedback || !M) return;
     var state = M.create(scenario.value);
     var returnFocus = null, modalKind = '', accountOrigin = '', accountDraft = null, reviewSnapshot = '';
+    var layoutFrame = null;
+    function refreshScrollBounds() {
+      if (layoutFrame !== null || typeof window.requestAnimationFrame !== 'function') return;
+      layoutFrame = window.requestAnimationFrame(function () {
+        layoutFrame = null;
+        // Axure may own the scrollbar; refresh its measured range without changing zoom or position.
+        var jq = window.jQuery;
+        if (jq && jq.fn && typeof jq.fn.getNiceScroll === 'function') {
+          jq(document.documentElement).getNiceScroll().resize();
+        }
+      });
+    }
+    var board = document.querySelector('.co-board');
+    if (board && typeof window.addEventListener === 'function') {
+      if (typeof window.ResizeObserver === 'function') {
+        var layoutObserver = new window.ResizeObserver(refreshScrollBounds);
+        layoutObserver.observe(board);
+      }
+      board.addEventListener('toggle', refreshScrollBounds, true);
+      window.addEventListener('load', refreshScrollBounds, { once: true });
+      window.addEventListener('resize', refreshScrollBounds);
+    }
     var m = M.money;
     function amountLabel(value) { return m(value).replace(/\.00$/, ''); }
     function periodLabel(config) {
@@ -90,7 +112,10 @@
       return html + '</section>' + footer(state.tab === 'free');
     }
     function pendingOther() {
-      return pending() ? '<button type="button" class="co-inline-notice" data-action="current-request">A cash-out is in progress <span>View ›</span></button>' : '';
+      var r = state.request;
+      if (!r || r.type === state.tab || r.dismissed) return '';
+      var message = r.status === 'processing' ? 'A cash-out is in progress' : r.status === 'success' ? 'Your previous cash-out completed' : 'Your previous cash-out was returned';
+      return '<button type="button" class="co-inline-notice" data-action="current-request">' + message + ' <span>View ›</span></button>';
     }
     function freeContent() {
       if (activeRequest()) return requestView();
@@ -132,8 +157,11 @@
       return html + footer(false);
     }
     function render() {
+      state.tab = state.playerType === 'deposit' ? 'deposit' : 'free';
       document.querySelectorAll('[data-tab]').forEach(function (button) {
+        button.hidden = false;
         button.setAttribute('aria-selected', String(button.dataset.tab === state.tab));
+        button.setAttribute('aria-disabled', String(button.dataset.tab !== state.tab));
         button.tabIndex = button.dataset.tab === state.tab ? 0 : -1;
       });
       content.setAttribute('aria-labelledby', state.tab + '-tab');
@@ -141,6 +169,7 @@
       document.querySelectorAll('[data-demo]').forEach(function (button) {
         button.disabled = button.dataset.demo !== 'reset' && (!pending() || (button.dataset.demo === 'win' && !state.free));
       });
+      refreshScrollBounds();
     }
     function openDialog(kind, html) {
       if (modal.hidden) returnFocus = document.activeElement;
@@ -182,22 +211,24 @@
     }
     function rules() {
       var free = state.tab === 'free';
-      openDialog('rules', '<h2 id="co-dialog-title">Cash-out rules</h2><p>' + (free ? 'Free Play cash-out availability, payout, balance and playthrough requirements, and cash-out limits follow your current VIP benefits. Meet the displayed requirements with cash-outs remaining to request. VIP retention is assessed separately.' : 'Your eligible deposit balance must reach 3× the corresponding deposit, with 10× deposit playthrough completed. The payout is your eligible balance or remaining redemption limit, whichever is lower. The total limit is 10× the corresponding deposit.') +
-        '</p><p>The balance shown in your review is locked while processing. On success, it is settled, including any amount shown as cleared. If the request fails, the full locked balance is returned.</p><p>New funds and their game results are unaffected.</p>' +
-        (free ? '<p>Bonus Bank contains bonus credits, not cash. A deposit is required to unlock credits under its rules.</p>' : '') + primary('Got it', 'close', false));
+      openDialog('rules', '<h2 id="co-dialog-title">Cash-out rules</h2><p>' + (free ? 'Availability, payout, requirements and limits follow your VIP benefits. Retention is separate.' : 'Requires 3× deposit balance and completed 10× deposit playthrough. Payout is the lower of your eligible balance and remaining limit. Total limit: 10× deposit.') +
+        '</p><p>The reviewed balance is locked until the result is confirmed. Success settles the payout and clears the stated remainder; failure returns the full balance.</p><p>New funds and their winnings are unaffected.</p>' +
+        (free ? '<p>Bonus Bank is bonus credit, not cash. Deposit to unlock under its rules.</p>' : '') + primary('Got it', 'close', false));
     }
     function requestDetails() {
       var r = state.request;
       if (!r) return;
       openDialog('details', '<h2 id="co-dialog-title">Request details</h2>' + row('Request', r.id) + row('Status', r.status === 'failed' ? 'Returned' : r.status === 'success' ? 'Completed' : 'Processing') + row('Payout', m(r.amount)) + row('Payout account', esc(r.method) + ' · ' + mask(r.account)) +
-        row('Locked at submission', m(r.freeze)) + (r.clear ? row('Clear on success', m(r.clear)) : '') +
+        row('Source balance', r.type === 'free' ? 'Free Play' : 'Deposit Balance') +
+        row('Locked at submission', m(r.freeze)) + (r.clear ? row(r.status === 'success' ? 'Cleared on success' : 'Clear on success', m(r.clear)) : '') +
+        (r.status === 'failed' ? '<p>' + m(r.freeze) + ' returned to ' + (r.type === 'free' ? 'Free Play' : 'Deposit Balance') + '. Your new funds are unaffected.</p>' : '') +
         (r.type === 'free' ? row('Cash-outs reserved', r.status === 'processing' ? '1' : '0') : '') +
         '<p>Only the funds in this request are affected. Other available funds can still be used.</p>' + primary('Got it', 'close', false));
     }
     document.querySelector('.co-board').addEventListener('click', function (event) {
       var button = event.target.closest('button');
       if (!button || button.disabled) return;
-      if (button.dataset.tab) { state.tab = button.dataset.tab; render(); return; }
+      if (button.dataset.tab) return;
       if (button.dataset.method) {
         if (modalKind === 'account') {
           if (accountDraft.method !== button.dataset.method) { accountDraft.method = button.dataset.method; accountDraft.account = ''; renderAccount(); }
@@ -212,7 +243,7 @@
       if (action === 'close') cancelDialog();
       if (action === 'rules') rules();
       if (action === 'request-details') requestDetails();
-      if (action === 'current-request' && pending()) { state.tab = state.request.type; render(); }
+      if (action === 'current-request') requestDetails();
       if (action === 'dismiss-result' && state.request && !pending()) { state.request.dismissed = true; render(); }
       if (action === 'account') openAccount();
       if (action === 'limit') {
@@ -235,16 +266,11 @@
         button.disabled = true;
         var r = M.submit(state, state.tab);
         closeDialog(); render();
-        if (r) feedback.textContent = '已提交演示申请：冻结 ' + m(r.freeze) + '，到账 ' + m(r.amount) + '。展开下方可模拟申请结果。';
+        if (r) feedback.textContent = '已提交：冻结 ' + m(r.freeze) + '，到账 ' + m(r.amount) + '。';
       }
     });
     document.addEventListener('keydown', function (event) {
-      if (modal.hidden) {
-        if (event.target.matches('[data-tab]') && (event.key === 'ArrowLeft' || event.key === 'ArrowRight')) {
-          event.preventDefault(); state.tab = state.tab === 'free' ? 'deposit' : 'free'; render(); document.querySelector('[data-tab="' + state.tab + '"]').focus();
-        }
-        return;
-      }
+      if (modal.hidden) return;
       if (event.key === 'Escape') { cancelDialog(); return; }
       if (event.key === 'Tab') {
         var nodes = dialog.querySelectorAll('button:not(:disabled), input, a[href]');
@@ -253,14 +279,14 @@
         else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
       }
     });
-    function reset() { closeDialog(); state = M.create(scenario.value); render(); feedback.textContent = '已重置示例。可点击左侧按钮体验确认流程。'; }
+    function reset() { closeDialog(); state = M.create(scenario.value); render(); feedback.textContent = ''; }
     function demo(action) {
       if (action === 'reset') { reset(); return; }
       if (!pending()) return;
       var message = '';
       if (action === 'reward') { state.free += 1000; message = '免费奖励 +$10，旧申请冻结金额不变。'; }
       if (action === 'win' && state.free > 0) { state.free += 500; message = '免费游戏净赢 +$5，仍归属免费资金。'; }
-      if (action === 'deposit') { state.newDeposit += 1000; message = '新充值 +$10，单独记录，不并入旧申请。'; }
+      if (action === 'deposit') { state.newDeposit += 1000; state.playerType = 'deposit'; message = '充值 +$10，显示 Deposit Balance；旧申请不变。'; }
       if (action === 'progress') { state.request.stage = Math.min(2, state.request.stage + 1); message = '已推进处理进度。'; }
       if (action === 'unknown') { M.settle(state, 'unknown'); message = '支付结果未知，继续核对，不退款。'; }
       if (action === 'success' || action === 'failed') {

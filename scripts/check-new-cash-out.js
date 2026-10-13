@@ -21,11 +21,11 @@ assert.ok(all.find(n => n.id === 'withdrawal_group').children.includes(node[0]))
 assert.equal(page.page.packageId, node[0].id);
 assert.equal(page.page.name, name);
 assert.equal(page.url, node[0].url);
-assert.equal(page.defaultAdaptiveView.size.width, 800);
+assert.equal(page.defaultAdaptiveView.size.width, 1148);
 assert.equal(page.defaultAdaptiveView.size.height, 926);
 const html = read(name + '.html');
 assert.ok(html.includes('data-axure-page-id="new_cash_out"'));
-assert.ok(html.includes('width=800, initial-scale=1'));
+assert.ok(html.includes('width=1148, initial-scale=1'));
 assert.ok(html.includes('<div id="base"></div>'));
 for (const match of html.matchAll(/(?:src|href)="([^"#]+)"/g)) {
   assert.ok(!/^https?:/.test(match[1]), 'External asset: ' + match[1]);
@@ -133,7 +133,7 @@ assert.equal(M.quote(independentDeposit, 'deposit').canSubmit, true, 'Deposit ru
 // Run handlers with a minimal DOM facade; no browser, network or payment calls.
 function uiScenario(value, configure) {
   const element = (dataset = {}) => ({ dataset, innerHTML: '', textContent: '', value: '', hidden: false, disabled: false, handlers: {},
-    addEventListener(event, handler) { this.handlers[event] = handler; }, setAttribute() {}, focus() {} });
+    addEventListener(event, handler) { this.handlers[event] = handler; }, setAttribute(name, value) { this[name] = value; }, focus() {} });
   const elements = Object.fromEntries(['co-content', 'co-modal', 'co-dialog', 'co-scenario', 'co-demo-result', 'co-account-input', 'co-account-error'].map(id => [id, element()]));
   elements['co-modal'].hidden = true;
   elements['co-scenario'].value = value;
@@ -147,10 +147,17 @@ function uiScenario(value, configure) {
   };
   const uiModel = Object.assign({}, M, { create(scenario) { const state = M.create(scenario); if (configure) configure(state); return state; } });
   vm.runInNewContext(read('custom/js/new-cash-out.js'), { document, window: { CashOutDemo: uiModel } });
-  return { elements, page: () => elements['co-content'].innerHTML, popup: () => elements['co-dialog'].innerHTML,
+  return { elements, tabs, page: () => elements['co-content'].innerHTML, popup: () => elements['co-dialog'].innerHTML,
     click(dataset) { const button = element(dataset); board.handlers.click({ target: { closest() { return button; } } }); } };
 }
 const ui = uiScenario('free-ready');
+assert.equal(ui.tabs[0].hidden, false);
+assert.equal(ui.tabs[1].hidden, false, 'Both tabs remain visible for a free player');
+assert.equal(ui.tabs[0]['aria-selected'], 'true');
+assert.equal(ui.tabs[1]['aria-selected'], 'false');
+const freePageBeforeClick = ui.page();
+ui.click({ tab: 'deposit' });
+assert.equal(ui.page(), freePageBeforeClick, 'A player cannot manually change their funding page');
 assert.ok(ui.page().includes('On success'));
 assert.ok(!ui.page().includes('Balance locked on submission'), 'Keep full freeze details out of the main page');
 ui.click({ action: 'review' });
@@ -170,6 +177,10 @@ assert.ok(!ui.page().includes('Not ready yet'), 'Do not show an unmet applicatio
 ui.click({ demo: 'success' });
 assert.ok(ui.page().includes('Cash-out completed') && !ui.page().includes('Not ready yet'), 'Show one result view at a time');
 const depositUi = uiScenario('deposit-120');
+assert.equal(depositUi.tabs[0].hidden, false);
+assert.equal(depositUi.tabs[1].hidden, false, 'Both tabs remain visible for a deposit player');
+assert.equal(depositUi.tabs[0]['aria-selected'], 'false');
+assert.equal(depositUi.tabs[1]['aria-selected'], 'true');
 assert.ok(depositUi.page().includes('$20.00 above your remaining limit'));
 depositUi.click({ action: 'review' });
 depositUi.click({ action: 'submit' });
@@ -178,7 +189,20 @@ depositUi.click({ demo: 'win' });
 depositUi.click({ demo: 'failed' });
 assert.ok(depositUi.page().includes('$120.00') && depositUi.page().includes('Returned to Deposit Balance'));
 depositUi.click({ tab: 'free' });
-assert.ok(depositUi.page().includes('$15.00'), 'The UI must retain new rewards and their game result after releasing the old request');
+assert.ok(depositUi.page().includes('Returned to Deposit Balance'), 'The inactive tab must not change the player-type content');
+assert.ok(depositUi.elements['co-demo-result'].textContent.includes('$15.00'), 'The new Free Play balance stays recorded even when its page is hidden');
+const switchedUi = uiScenario('deposit-ready', s => {
+  M.submit(s, 'deposit');
+  s.playerType = 'free';
+  s.free = 1500;
+});
+assert.equal(switchedUi.tabs[0].hidden, false);
+assert.equal(switchedUi.tabs[1].hidden, false);
+assert.equal(switchedUi.tabs[0]['aria-selected'], 'true', 'The current player type takes precedence over the old request type');
+assert.ok(switchedUi.page().includes('$15.00'));
+switchedUi.click({ action: 'current-request' });
+assert.ok(switchedUi.popup().includes('Deposit Balance') && switchedUi.popup().includes('$40.00'));
+assert.equal(switchedUi.tabs[1]['aria-selected'], 'false', 'Viewing an old request must not activate the other funding page');
 const closedUi = uiScenario('free-locked');
 assert.ok(closedUi.page().includes('Not available at your current VIP level (VIP 1)'));
 assert.ok(!closedUi.page().includes('VIP required') && !closedUi.page().includes('VIP 2 required'));
@@ -189,7 +213,8 @@ const dailyUi = uiScenario('exhausted', s => {
 });
 assert.ok(dailyUi.page().includes('Cash-outs left today') && dailyUi.page().includes('Oct 14, 2026, 00:00 UTC'));
 assert.ok(!dailyUi.page().includes('this week'));
-console.log('PASS: menu/page identity, relative assets, 800x926 viewport, UTF-8 and snapshot.');
+console.log('PASS: menu/page identity, relative assets, 1148x926 three-column viewport, UTF-8 and snapshot.');
 console.log('PASS: automatic amounts, full freeze, quota reservation, timeout handling, duplicate events and new-fund isolation.');
 console.log('PASS: review/account return paths, cancellation, isolated result screens and visible new-fund balances (without a browser).');
 console.log('PASS: VIP configuration controls availability, amounts, requirements and periods independently of retention and player type.');
+console.log('PASS: both tabs stay visible; player type selects the active content, and old requests remain accessible.');

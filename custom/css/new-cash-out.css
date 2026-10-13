@@ -1,9 +1,10 @@
-html { margin: 0; background: #edeef0; }
-body { margin: 0; width: 800px; min-width: 800px; position: static; color: #f5f5f7; font-family: Arial, 'Microsoft YaHei', sans-serif; text-align: left; }
+/* Override Axure's html/body height:100% so all three columns contribute to scrolling. */
+html { margin: 0; height: auto; min-height: 100%; overflow-y: auto; background: #edeef0; }
+body { margin: 0; height: auto; min-height: 100vh; overflow: visible; width: 1148px; min-width: 1148px; position: static; color: #f5f5f7; font-family: Arial, 'Microsoft YaHei', sans-serif; text-align: left; }
 body .form_sketch { background: transparent; border: 0; }
-#base { position: absolute; width: 800px; z-index: 0; }
+#base { position: absolute; width: 1148px; z-index: 0; }
 .co-board, .co-board * { box-sizing: border-box; }
-.co-board { position: relative; display: grid; grid-template-columns: 428px 324px; gap: 24px; width: 800px; align-items: start; }
+.co-board { position: relative; display: grid; grid-template-columns: 428px 324px 324px; gap: 24px; width: 1148px; padding: 0 24px 64px 0; align-items: start; }
 .co-phone { width: 428px; min-height: 926px; position: relative; background: #101315; color: #f5f5f7; }
 .co-header { display: flex; align-items: center; gap: 14px; height: 62px; padding: 10px 20px; }
 .co-header h1 { font-size: 20px; margin: 0; font-weight: 600; }
@@ -12,6 +13,7 @@ body .form_sketch { background: transparent; border: 0; }
 .co-tabs { display: flex; margin: 0 16px; border-bottom: 1px solid #35383d; }
 .co-tabs button { flex: 1; min-height: 46px; padding: 8px 0 12px; background: none; color: #b8bec8; border: 0; border-bottom: 3px solid transparent; font-size: 16px; }
 .co-tabs button[aria-selected=true] { color: #f9df9b; border-bottom-color: #f1d38d; font-weight: 600; }
+.co-tabs button[aria-disabled=true] { cursor: default; }
 .co-content { padding: 16px 16px 20px; }
 .co-board button, .co-board a, .co-board select, .co-board summary { cursor: pointer; }
 .co-board button, .co-board input, .co-board select { font-family: inherit; }
@@ -127,7 +129,7 @@ body .form_sketch { background: transparent; border: 0; }
 .co-timeline li.current::before { background: #efc579; box-shadow: 0 0 0 4px #564b33; }
 .co-pending-note { color: #f8d28b !important; }
 .co-inline-notice { display: flex; justify-content: space-between; gap: 10px; width: 100%; padding: 12px; margin: 0 0 14px; border: 1px solid #6b5c3b; border-radius: 8px; background: #302a1f; color: #f2d696; font-size: 13px; }
-.co-notes { width: 324px; padding: 26px 0 40px; color: #242d39; }
+.co-notes { width: 324px; padding: 26px 0 0; color: #242d39; }
 .co-kicker { font-size: 11px; letter-spacing: 2px; color: #82642e; font-weight: 700; }
 .co-notes h2 { font-size: 23px; margin: 9px 0; }
 .co-notes > p { color: #616b76; font-size: 13px; line-height: 1.7; }
@@ -146,6 +148,7 @@ body .form_sketch { background: transparent; border: 0; }
 .co-demo-actions button { border: 1px solid #d6c8a0; background: #fffdf7; color: #4f452d; border-radius: 6px; padding: 9px 5px; font-size: 12px; }
 .co-demo-actions button:disabled { opacity: .45; cursor: not-allowed; }
 .co-demo-result { padding-top: 10px; font-size: 12px; line-height: 1.6; color: #726037; }
+.co-demo-result:empty { display: none; }
 .co-doc-link { display: block; margin-top: 12px; color: #72551a; font-size: 13px; }
 .co-modal { position: fixed; inset: 0 auto 0 0; width: 428px; z-index: 100; display: flex; align-items: center; justify-content: center; padding: 20px; background: rgba(0,0,0,.74); }
 .co-modal[hidden] { display: none; }

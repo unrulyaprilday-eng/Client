@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>新提款页面</title>
-  <meta name="viewport" content="width=800, initial-scale=1">
+  <meta name="viewport" content="width=1148, initial-scale=1">
   <link href="resources/css/axure_rp_page.css" rel="stylesheet">
   <link href="data/styles.css" rel="stylesheet">
   <link href="files/新提款页面/styles.css" rel="stylesheet">
@@ -55,9 +55,9 @@
   <main class="co-board">
     <section class="co-phone" aria-label="Cash Out">
       <header class="co-header"><a class="co-back" href="首页-APP安装.html" aria-label="Back to home"><svg class="co-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 4-8 8 8 8"/></svg></a><h1>Cash Out</h1></header>
-      <nav class="co-tabs" role="tablist" aria-label="Balance type">
+      <nav class="co-tabs" role="tablist" aria-label="Cash-out balance for your player type">
         <button type="button" id="free-tab" role="tab" aria-selected="true" aria-controls="co-content" data-tab="free">Free Play</button>
-        <button type="button" id="deposit-tab" role="tab" aria-selected="false" aria-controls="co-content" data-tab="deposit">Deposit Balance</button>
+        <button type="button" id="deposit-tab" role="tab" aria-selected="false" aria-disabled="true" aria-controls="co-content" data-tab="deposit" tabindex="-1">Deposit Balance</button>
       </nav>
       <div class="co-content" id="co-content" role="tabpanel" aria-labelledby="free-tab">
         <section class="co-card co-balance"><span class="co-label">Free Play balance</span><strong class="co-amount">$126.50</strong></section>
@@ -71,30 +71,29 @@
       </div>
       <div class="co-modal" id="co-modal" hidden><section class="co-dialog" role="dialog" aria-modal="true" aria-labelledby="co-dialog-title" tabindex="-1" id="co-dialog"></section></div>
     </section>
-    <aside class="co-notes" lang="zh-CN" aria-label="原型演示与后台说明">
+    <aside class="co-notes co-interaction-notes" lang="zh-CN" aria-label="交互与规则说明">
       <div class="co-kicker">CASH OUT · PROTOTYPE</div>
-      <h2>新提款页面</h2>
-      <p>以参考图为基准。左侧为玩家界面，右侧仅供评审；数据为示例，未接后台或真实支付。</p>
+      <h2>交互与规则</h2>
+      <p>金额、等级及次数均为演示数据。</p>
       <section class="co-note accent">
         <h3>页面状态</h3>
-        <label for="co-scenario">切换会重置本页演示数据</label>
+        <label for="co-scenario">切换示例（重置数据）</label>
         <select id="co-scenario">
-          <optgroup label="Free Play">
-            <option value="free-locked">免费玩家 · 当前等级未开放兑换</option>
-            <option value="free-unmet">已开放兑换 · 余额及流水不足</option>
-            <option value="free-ready" selected>已达标 · 按 VIP 配置兑换 $10</option>
-            <option value="exhausted">当前兑换周期次数用完</option>
+          <optgroup label="免费玩家 · Free Play">
+            <option value="free-locked">当前等级未开放</option>
+            <option value="free-unmet">余额、流水未达标</option>
+            <option value="free-ready" selected>已达标 · 兑换 $10</option>
+            <option value="exhausted">次数用完</option>
           </optgroup>
-          <optgroup label="Deposit Balance">
+          <optgroup label="存款玩家 · Deposit Balance">
             <option value="deposit-unmet">未达标 · 余额 $21</option>
             <option value="deposit-ready">已达标 · 自动兑换 $40</option>
             <option value="deposit-120">超上限 · 到账 $100 / 清除 $20</option>
           </optgroup>
         </select>
-        <p>点击主按钮 → 核对收款账户和余额变化 → 确认提交。</p>
         <details>
-          <summary>申请后演示（可选）</summary>
-          <p>先在左侧提交申请，再模拟以下事件。此处不属于玩家功能。</p>
+          <summary>申请后演示</summary>
+          <p>提交申请后可用。</p>
           <div class="co-demo-actions">
             <button type="button" data-demo="progress" disabled>推进处理进度</button><button type="button" data-demo="unknown" disabled>支付超时待核对</button>
             <button type="button" data-demo="reward" disabled>新奖励 +$10</button><button type="button" data-demo="win" disabled>免费游戏净赢 +$5</button>
@@ -102,19 +101,41 @@
             <button type="button" data-demo="failed" disabled>拒绝并原路释放</button><button type="button" data-demo="reset">重置当前示例</button>
           </div>
         </details>
-        <div class="co-demo-result" id="co-demo-result" role="status">可直接体验左侧申请流程。</div>
+        <div class="co-demo-result" id="co-demo-result" role="status"></div>
       </section>
       <section class="co-note">
-        <h3>交互说明</h3>
-        <ul><li>Free Play 是否开放、固定金额与条件跟随 VIP 提现配置；Deposit 按充值余额规则自动计算。</li><li>保级独立判断，不额外限制提现；玩家类型变化、领取奖励不重置提现次数。</li><li>主页面保留参考图必要信息。超上限提前提示清除金额，冻结明细在确认弹窗查看。</li><li>缺账户时先补账户再确认；修改后回到确认，取消修改不改变原账户。</li><li>处理中显示进度；成功或退款显示结果，不与申请表单重复堆叠。</li></ul>
-        <p>加载与加载失败沿用通用框架，本页不单独设计。</p>
+        <h3>展示与申请</h3>
+        <ul><li>两个 Tab 均保留。免费玩家选中 Free Play；存款玩家选中 Deposit Balance，内容随玩家类型展示。</li><li>只提示未完成条件；次数用完显示重置时间。</li><li>提交前确认账户、到账金额和余额变化；缺账户先补充。</li><li>处理中禁止重复申请；类型变化后仍可查看旧申请。</li></ul>
       </section>
       <section class="co-note accent">
-        <h3>后台内容 · 独立说明</h3>
-        <p>成功只结算本申请锁定的资金，失败原路释放。任何期间新增资金都不受旧申请影响。</p>
-        <details><summary>资格与金额</summary><ul><li>Free Play 读取有效 VIP 提现配置：开放状态、固定金额、余额门槛、流水要求、次数及重置周期。实际剩余流水取对应进度。</li><li>默认 VIP 1，不能按“非 VIP”或在前端写死“VIP 2 以上”判断；第一种状态仅表示当前配置未开放。</li><li>保级只影响保级。玩家身份切换不重置资格、次数；领取奖励不增加次数。页面不另设“本周充值”门槛。</li><li>Deposit 满足 3 倍余额、10 倍流水后，到账取符合条件余额与剩余兑换上限的较小值。</li><li>剩余上限 = 对应充值 × 10 − 已使用 − 处理中占用。金额、条件与状态取同一后台口径。</li></ul></details>
-        <details><summary>资金、冻结与退款</summary><ul><li>充值、免费奖励、Bonus Bank 分账；冻结保留来源和规则版本。</li><li>冻结完整对应余额。$120 例中到账 $100、待清除 $20，失败则完整退回 $120。</li><li>冻结、占用资格、创建申请原子执行；提交与回调幂等。超时结果不明继续处理中。</li><li>失败退款不算充值、不发赠送、不加 VIP 累计、不重置流水；补资料或人工审核要求仍保留。</li></ul></details>
-        <details><summary>演示边界与待定口径</summary><p>未开放状态用 VIP 1 作示例；已开放状态用 VIP 2、每周 3 次作示例，均不代表等级硬门槛或正式配置。周期文案随配置显示，保级周期与提现周期分开。</p><p>演示采用单笔充值、同账号一笔处理中、成功清除超额、不另扣手续费。新充值单独记账，不加入旧批次资格。</p><p>多笔充值归属、Free Play 来源范围、跨周期恢复、并发和费用以正式规则为准。收款账户仅演示填写和返回流程，不代表后台验证通过。</p></details>
+        <h3>Free Play</h3>
+        <ul><li>开放状态、金额、余额门槛、流水、次数及周期跟随 VIP 提现配置，保级独立。</li><li>成功后本次免费余额归零，充值余额不受影响。</li><li>身份变化或领取奖励不增加、重置次数。</li><li>Bonus Bank 是充值解锁的奖金额度，不是现金。</li></ul>
+      </section>
+      <section class="co-note">
+        <h3>Deposit Balance</h3>
+        <ul><li>条件：对应充值 3 倍余额、10 倍流水。</li><li>自动到账金额 = min（符合条件余额，剩余兑换上限）。总上限为充值的 10 倍。</li><li>超额清除须提前提示：余额 $120 → 到账 $100、清除 $20、本次余额归零。</li></ul>
+      </section>
+    </aside>
+    <aside class="co-notes co-backend-notes" lang="zh-CN" aria-label="后台实现说明">
+      <div class="co-kicker">BACKEND · IMPLEMENTATION</div>
+      <h2>后台说明</h2>
+      <p>开发口径；原型未接后台。</p>
+      <section class="co-note accent">
+        <h3>资金边界</h3>
+        <p>成功仅结算本申请冻结资金，失败完整原路释放。新增资金及其游戏输赢不受影响。</p>
+      </section>
+      <section class="co-note">
+        <h3>数据口径</h3>
+        <ul><li>玩家类型、有效 VIP 配置及流水进度由后台返回；不写死等级或充值门槛。</li><li>剩余兑换上限 = 充值 × 10 − 已使用 − 处理中占用。</li><li>金额和状态统一返回，提交时重新校验。</li></ul>
+      </section>
+      <section class="co-note">
+        <h3>冻结与退款</h3>
+        <ul><li>充值、Free Play、Bonus Bank 分账；冻结保留来源与规则版本。</li><li>冻结额包含到账额和待清除额。$120 示例冻结 $120，失败退回 $120。</li><li>冻结、占用资格、创建申请同一事务；重复请求或回调只处理一次。</li><li>支付结果不明保持处理中，不直接退款。</li><li>退款不算充值、不发赠送、不加 VIP 累计、不重置流水；补资料及审核限制保留。</li></ul>
+      </section>
+      <section class="co-note">
+        <h3>演示与待定</h3>
+        <p>示例：单笔充值、一笔处理中、超额清除、无手续费；VIP 等级与次数不代表正式配置。</p>
+        <p>待定：多笔资金归属、Free Play 来源范围、跨周期恢复、并发及费用。</p>
         <a class="co-doc-link" href="custom/docs/new-cash-out-backend.md" target="_blank" rel="noopener">完整后台需求清单 ↗</a>
       </section>
     </aside>
