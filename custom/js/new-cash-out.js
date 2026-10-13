@@ -12,6 +12,9 @@
     var returnFocus = null, modalKind = '', accountOrigin = '', accountDraft = null, reviewSnapshot = '';
     var m = M.money;
     function amountLabel(value) { return m(value).replace(/\.00$/, ''); }
+    function periodLabel(config) {
+      return config.period === 'day' ? 'today' : config.period === 'week' ? 'this week' : config.period === 'month' ? 'this month' : 'this period';
+    }
     var methods = ['Cash App', 'PayPal', 'Card', 'Chime', 'ACH'];
     function esc(value) { return String(value).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
     function icon(name) {
@@ -91,20 +94,21 @@
     }
     function freeContent() {
       if (activeRequest()) return requestView();
+      var config = state.vipCashOut;
       var q = M.quote(state, 'free');
       var html = balanceCard() + pendingOther();
-      if (!state.vip) return html + '<section class="co-card co-entry"><div class="co-entry-main"><span class="co-entry-icon gold">' + icon('crown') + '</span><div><div class="co-topline"><h2>Free Play Cash-Out</h2><span class="co-badge outlined">VIP required</span></div><p>Requires VIP, qualifying balance<br>and completed playthrough.</p></div></div><a class="co-outline" href="新VIP 展示.html">View VIP Benefits ' + icon('arrow') + '</a></section><section class="co-card co-entry"><div class="co-entry-main"><span class="co-entry-icon">' + icon('coins') + '</span><div><h2>Bonus Bank</h2><p>Bonus credits, not cash.<br>A deposit is required to<br>unlock credits.</p></div></div><a class="co-outline" href="PIGGY BANK.html">View Conversion ' + icon('arrow') + '</a></section>' + footer(false);
-      var percent = Math.min(100, Math.floor(state.free / state.requiredFree * 100));
-      html += '<section class="co-card co-vip-card"><div class="co-topline"><div class="co-offer"><span class="co-vip">VIP 2</span><div><small>Cash-out amount</small><strong>' + amountLabel(state.fixed) + '</strong></div></div><span class="co-badge ' + (q.eligible ? 'ready' : '') + '">' + (q.eligible ? '<span class="co-mini-check">✓</span> Ready to request' : 'Not ready yet') + '</span></div><div class="co-rows">' +
-        row('Free Play balance', m(state.free) + ' / ' + m(state.requiredFree)) + '<div class="co-progress-line"><div class="co-progress ' + (percent === 100 ? 'complete' : '') + '" role="progressbar" aria-label="Required balance" aria-valuenow="' + percent + '" aria-valuemin="0" aria-valuemax="100"><span style="width:' + percent + '%"></span></div><span>' + percent + '%</span></div>' +
-        row('Playthrough left', m(state.freeLeft)) + row('Cash-outs left this week', q.times + ' of ' + state.weeklyLimit) + '</div>';
+      if (!config.enabled) return html + '<section class="co-card co-entry"><div class="co-entry-main"><span class="co-entry-icon gold">' + icon('crown') + '</span><div><div class="co-topline"><h2>Free Play Cash-Out</h2><span class="co-badge outlined">Unavailable</span></div><p>Not available at your current VIP level (' + esc(config.tierLabel) + ').<br>View VIP benefits for cash-out eligibility.</p></div></div><a class="co-outline" href="新VIP 展示.html">View VIP Benefits ' + icon('arrow') + '</a></section><section class="co-card co-entry"><div class="co-entry-main"><span class="co-entry-icon">' + icon('coins') + '</span><div><h2>Bonus Bank</h2><p>Bonus credits, not cash.<br>A deposit is required to<br>unlock credits.</p></div></div><a class="co-outline" href="PIGGY BANK.html">View Conversion ' + icon('arrow') + '</a></section>' + footer(false);
+      var percent = config.requiredBalance > 0 ? Math.min(100, Math.floor(state.free / config.requiredBalance * 100)) : 100;
+      html += '<section class="co-card co-vip-card"><div class="co-topline"><div class="co-offer"><span class="co-vip">' + esc(config.tierLabel) + '</span><div><small>Cash-out amount</small><strong>' + amountLabel(config.amount) + '</strong></div></div><span class="co-badge ' + (q.eligible ? 'ready' : '') + '">' + (q.eligible ? '<span class="co-mini-check">✓</span> Ready to request' : 'Not ready yet') + '</span></div><div class="co-rows">' +
+        row('Free Play balance', m(state.free) + ' / ' + m(config.requiredBalance)) + '<div class="co-progress-line"><div class="co-progress ' + (percent === 100 ? 'complete' : '') + '" role="progressbar" aria-label="Required balance" aria-valuenow="' + percent + '" aria-valuemin="0" aria-valuemax="100"><span style="width:' + percent + '%"></span></div><span>' + percent + '%</span></div>' +
+        row('Playthrough left', m(q.playthroughLeft)) + row('Cash-outs left ' + periodLabel(config), q.times + ' of ' + config.limit) + '</div>';
       if (!q.eligible) {
-        var reasons = q.reasons.filter(function (text) { return text !== 'Your weekly cash-outs have been used.' && text !== 'A cash-out is in progress.'; });
-        if (!q.times) reasons.push('Weekly limit reached. Resets ' + state.resetAt + '.');
+        var reasons = q.reasons.filter(function (text) { return text !== 'Your cash-out limit has been reached.' && text !== 'A cash-out is in progress.'; });
+        if (!q.times) reasons.push('Cash-out limit reached. Resets ' + config.resetAt + '.');
         if (reasons.length) html += '<div class="co-condition co-condition-plain"><span class="co-status-icon">!</span><div>' + reasons.map(esc).join(' ') + '</div></div>';
       } else html += onSuccess(q);
       if (state.needsAccount) html += '<p class="co-excess">Update your payout account before submitting again.</p>';
-      html += primary('Request ' + amountLabel(state.fixed), 'review', !q.eligible);
+      html += primary('Request ' + amountLabel(config.amount), 'review', !q.eligible);
       html += q.eligible ? '<div class="co-footnote">Review and confirm next.</div>' : '<p class="co-legal">' + icon('doc') + '<span>On success, the Free Play balance in this request resets to $0. Deposit balance is unaffected.</span></p>';
       return html + '</section>' + footer(true);
     }
@@ -156,7 +160,7 @@
       if (modalKind === 'account' && accountOrigin === 'review' && state.account && !state.needsAccount) openReview(false);
       else closeDialog();
     }
-    function signature(q) { return JSON.stringify([state.tab, q.amount, q.freeze, q.clear, q.times, q.cap, state.method, state.account]); }
+    function signature(q) { return JSON.stringify([state.tab, q.amount, q.freeze, q.clear, q.times, q.cap, state.method, state.account, state.tab === 'free' ? state.vipCashOut : null]); }
     function openReview(changed) {
       var q = M.quote(state, state.tab);
       if (!q.eligible) return;
@@ -178,7 +182,7 @@
     }
     function rules() {
       var free = state.tab === 'free';
-      openDialog('rules', '<h2 id="co-dialog-title">Cash-out rules</h2><p>' + (free ? 'Free Play cash-outs require VIP, a qualifying balance and completed playthrough. Your VIP tier sets the fixed payout and weekly limit.' : 'Your eligible deposit balance must reach 3× the corresponding deposit, with 10× deposit playthrough completed. The payout is your eligible balance or remaining redemption limit, whichever is lower. The total limit is 10× the corresponding deposit.') +
+      openDialog('rules', '<h2 id="co-dialog-title">Cash-out rules</h2><p>' + (free ? 'Free Play cash-out availability, payout, balance and playthrough requirements, and cash-out limits follow your current VIP benefits. Meet the displayed requirements with cash-outs remaining to request. VIP retention is assessed separately.' : 'Your eligible deposit balance must reach 3× the corresponding deposit, with 10× deposit playthrough completed. The payout is your eligible balance or remaining redemption limit, whichever is lower. The total limit is 10× the corresponding deposit.') +
         '</p><p>The balance shown in your review is locked while processing. On success, it is settled, including any amount shown as cleared. If the request fails, the full locked balance is returned.</p><p>New funds and their game results are unaffected.</p>' +
         (free ? '<p>Bonus Bank contains bonus credits, not cash. A deposit is required to unlock credits under its rules.</p>' : '') + primary('Got it', 'close', false));
     }
@@ -187,7 +191,7 @@
       if (!r) return;
       openDialog('details', '<h2 id="co-dialog-title">Request details</h2>' + row('Request', r.id) + row('Status', r.status === 'failed' ? 'Returned' : r.status === 'success' ? 'Completed' : 'Processing') + row('Payout', m(r.amount)) + row('Payout account', esc(r.method) + ' · ' + mask(r.account)) +
         row('Locked at submission', m(r.freeze)) + (r.clear ? row('Clear on success', m(r.clear)) : '') +
-        (r.type === 'free' ? row('Weekly cash-outs reserved', r.status === 'processing' ? '1' : '0') : '') +
+        (r.type === 'free' ? row('Cash-outs reserved', r.status === 'processing' ? '1' : '0') : '') +
         '<p>Only the funds in this request are affected. Other available funds can still be used.</p>' + primary('Got it', 'close', false));
     }
     document.querySelector('.co-board').addEventListener('click', function (event) {

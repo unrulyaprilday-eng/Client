@@ -64,7 +64,7 @@ for (const [scenario, amount, freeze] of [['deposit-ready', 4000, 4000], ['depos
 }
 for (const type of ['free', 'deposit']) {
   const s = M.create(type === 'free' ? 'free-ready' : 'deposit-120');
-  const previousTimes = s.weeklyUsed;
+  const previousTimes = s.cashOutUsed;
   const r = M.submit(s, type);
   if (type === 'free') assert.equal(M.quote(s, type).times, 1, 'Reserve one weekly use');
   else assert.equal(M.quote(s, type).cap, 0, 'Reserve redemption cap');
@@ -75,10 +75,10 @@ for (const type of ['free', 'deposit']) {
   assert.equal(s.free, freeBefore, 'Success must preserve new rewards');
   assert.equal(s.newDeposit, 1000, 'Success must preserve new deposits');
   assert.equal(M.settle(s, 'success'), false);
-  if (type === 'free') assert.equal(s.weeklyUsed, previousTimes + 1);
+  if (type === 'free') assert.equal(s.cashOutUsed, previousTimes + 1);
   else assert.equal(s.capUsed, r.amount);
 }
-for (const scenario of ['regular', 'free-unmet', 'exhausted', 'empty']) assert.equal(M.quote(M.create(scenario), 'free').eligible, false);
+for (const scenario of ['free-locked', 'free-unmet', 'exhausted', 'empty']) assert.equal(M.quote(M.create(scenario), 'free').eligible, false);
 assert.equal(M.quote(M.create('deposit-unmet'), 'deposit').eligible, false);
 const freeFailure = M.create('free-ready');
 M.submit(freeFailure, 'free');
@@ -87,16 +87,51 @@ assert.equal(M.quote(freeFailure, 'free').times, 1);
 M.settle(freeFailure, 'failed');
 assert.equal(freeFailure.free, 14150, 'Return original Free Play without overwriting new winnings');
 assert.equal(M.quote(freeFailure, 'free').times, 2, 'Release reserved weekly use');
-assert.equal(freeFailure.freeLeft, 0, 'Keep original completed playthrough');
+assert.equal(M.quote(freeFailure, 'free').playthroughLeft, 0, 'Keep original completed playthrough');
 const noAccount = M.create('deposit-ready');
 noAccount.account = '';
 assert.equal(M.quote(noAccount, 'deposit').eligible, true);
 assert.equal(M.quote(noAccount, 'deposit').amount, 4000, 'A missing payout account must not zero the eligible amount');
 assert.equal(M.submit(noAccount, 'deposit'), null, 'Cannot submit before account completion');
 assert.ok(!html.includes('value="loading"') && !html.includes('value="error"'), 'Generic framework owns loading states');
+assert.ok(!html.includes('VIP required'), 'Do not label default VIP members as non-VIP');
+
+const configured = M.create('free-ready');
+configured.vipCashOut.tierLabel = 'VIP 1';
+assert.equal(M.quote(configured, 'free').eligible, true, 'Availability must come from config, not a hardcoded VIP level');
+const originalQuote = M.quote(configured, 'free');
+configured.retentionMet = !configured.retentionMet;
+configured.playerType = 'deposit';
+assert.deepEqual(M.quote(configured, 'free'), originalQuote, 'Retention and player type cannot add withdrawal conditions');
+const originalUses = configured.cashOutUsed;
+configured.free += 1000;
+assert.equal(configured.cashOutUsed, originalUses, 'Claiming a reward cannot add or reset uses');
+assert.equal(M.quote(configured, 'free').times, originalQuote.times);
+configured.vipCashOut.amount = 2000;
+configured.vipCashOut.requiredBalance = 20000;
+configured.vipCashOut.playthroughRequired = 110000;
+configured.vipCashOut.limit = 5;
+configured.vipCashOut.period = 'day';
+assert.equal(M.quote(configured, 'free').amount, 2000);
+assert.equal(M.quote(configured, 'free').times, 4);
+assert.equal(M.quote(configured, 'free').playthroughLeft, 10000);
+assert.equal(M.quote(configured, 'free').eligible, false, 'Use the configured balance and playthrough requirements');
+configured.free = 20000;
+configured.freePlaythroughDone = 110000;
+const configRequest = M.submit(configured, 'free');
+assert.ok(configRequest);
+configured.vipCashOut.amount = 5000;
+configured.vipCashOut.enabled = false;
+assert.equal(configRequest.amount, 2000);
+assert.equal(configRequest.vipConfig.amount, 2000, 'The request retains its rule snapshot');
+assert.equal(configRequest.vipConfig.period, 'day');
+const independentDeposit = M.create('deposit-ready');
+independentDeposit.vipCashOut.enabled = false;
+independentDeposit.retentionMet = false;
+assert.equal(M.quote(independentDeposit, 'deposit').canSubmit, true, 'Deposit rules must stay independent of Free Play VIP eligibility and retention');
 
 // Run handlers with a minimal DOM facade; no browser, network or payment calls.
-function uiScenario(value) {
+function uiScenario(value, configure) {
   const element = (dataset = {}) => ({ dataset, innerHTML: '', textContent: '', value: '', hidden: false, disabled: false, handlers: {},
     addEventListener(event, handler) { this.handlers[event] = handler; }, setAttribute() {}, focus() {} });
   const elements = Object.fromEntries(['co-content', 'co-modal', 'co-dialog', 'co-scenario', 'co-demo-result', 'co-account-input', 'co-account-error'].map(id => [id, element()]));
@@ -110,7 +145,8 @@ function uiScenario(value) {
     querySelector(selector) { return selector === '.co-board' ? board : tabs.find(tab => selector.includes(tab.dataset.tab)); },
     querySelectorAll(selector) { return selector === '[data-tab]' ? tabs : []; }
   };
-  vm.runInNewContext(read('custom/js/new-cash-out.js'), { document, window: { CashOutDemo: M } });
+  const uiModel = Object.assign({}, M, { create(scenario) { const state = M.create(scenario); if (configure) configure(state); return state; } });
+  vm.runInNewContext(read('custom/js/new-cash-out.js'), { document, window: { CashOutDemo: uiModel } });
   return { elements, page: () => elements['co-content'].innerHTML, popup: () => elements['co-dialog'].innerHTML,
     click(dataset) { const button = element(dataset); board.handlers.click({ target: { closest() { return button; } } }); } };
 }
@@ -143,6 +179,17 @@ depositUi.click({ demo: 'failed' });
 assert.ok(depositUi.page().includes('$120.00') && depositUi.page().includes('Returned to Deposit Balance'));
 depositUi.click({ tab: 'free' });
 assert.ok(depositUi.page().includes('$15.00'), 'The UI must retain new rewards and their game result after releasing the old request');
+const closedUi = uiScenario('free-locked');
+assert.ok(closedUi.page().includes('Not available at your current VIP level (VIP 1)'));
+assert.ok(!closedUi.page().includes('VIP required') && !closedUi.page().includes('VIP 2 required'));
+const dailyUi = uiScenario('exhausted', s => {
+  s.vipCashOut.tierLabel = 'VIP 1';
+  s.vipCashOut.period = 'day';
+  s.vipCashOut.resetAt = 'Oct 14, 2026, 00:00 UTC';
+});
+assert.ok(dailyUi.page().includes('Cash-outs left today') && dailyUi.page().includes('Oct 14, 2026, 00:00 UTC'));
+assert.ok(!dailyUi.page().includes('this week'));
 console.log('PASS: menu/page identity, relative assets, 800x926 viewport, UTF-8 and snapshot.');
 console.log('PASS: automatic amounts, full freeze, quota reservation, timeout handling, duplicate events and new-fund isolation.');
 console.log('PASS: review/account return paths, cancellation, isolated result screens and visible new-fund balances (without a browser).');
+console.log('PASS: VIP configuration controls availability, amounts, requirements and periods independently of retention and player type.');

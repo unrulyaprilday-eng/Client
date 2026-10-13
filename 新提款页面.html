@@ -80,10 +80,10 @@
         <label for="co-scenario">切换会重置本页演示数据</label>
         <select id="co-scenario">
           <optgroup label="Free Play">
-            <option value="regular">普通会员 · VIP required</option>
-            <option value="free-unmet">VIP 未达标 · 余额及流水不足</option>
-            <option value="free-ready" selected>VIP 已达标 · 固定兑换 $10</option>
-            <option value="exhausted">VIP 本周次数用完</option>
+            <option value="free-locked">免费玩家 · 当前等级未开放兑换</option>
+            <option value="free-unmet">已开放兑换 · 余额及流水不足</option>
+            <option value="free-ready" selected>已达标 · 按 VIP 配置兑换 $10</option>
+            <option value="exhausted">当前兑换周期次数用完</option>
           </optgroup>
           <optgroup label="Deposit Balance">
             <option value="deposit-unmet">未达标 · 余额 $21</option>
@@ -106,15 +106,15 @@
       </section>
       <section class="co-note">
         <h3>交互说明</h3>
-        <ul><li>Free Play 固定金额、Deposit 自动计算；未达标禁用按钮，只提示未完成条件。</li><li>主页面保留参考图必要信息。超上限提前提示清除金额，冻结明细在确认弹窗查看。</li><li>缺账户时先补账户再确认；修改后回到确认，取消修改不改变原账户。</li><li>处理中显示进度；成功或退款显示结果，不与申请表单重复堆叠。</li></ul>
+        <ul><li>Free Play 是否开放、固定金额与条件跟随 VIP 提现配置；Deposit 按充值余额规则自动计算。</li><li>保级独立判断，不额外限制提现；玩家类型变化、领取奖励不重置提现次数。</li><li>主页面保留参考图必要信息。超上限提前提示清除金额，冻结明细在确认弹窗查看。</li><li>缺账户时先补账户再确认；修改后回到确认，取消修改不改变原账户。</li><li>处理中显示进度；成功或退款显示结果，不与申请表单重复堆叠。</li></ul>
         <p>加载与加载失败沿用通用框架，本页不单独设计。</p>
       </section>
       <section class="co-note accent">
         <h3>后台内容 · 独立说明</h3>
         <p>成功只结算本申请锁定的资金，失败原路释放。任何期间新增资金都不受旧申请影响。</p>
-        <details><summary>资格与金额</summary><ul><li>Free Play 读取 VIP 固定金额、余额门槛、剩余流水、次数和重置时间。</li><li>Deposit 满足 3 倍余额、10 倍流水后，到账取符合条件余额与剩余兑换上限的较小值。</li><li>剩余上限 = 对应充值 × 10 − 已使用 − 处理中占用。金额、条件与状态取同一后台口径。</li></ul></details>
+        <details><summary>资格与金额</summary><ul><li>Free Play 读取有效 VIP 提现配置：开放状态、固定金额、余额门槛、流水要求、次数及重置周期。实际剩余流水取对应进度。</li><li>默认 VIP 1，不能按“非 VIP”或在前端写死“VIP 2 以上”判断；第一种状态仅表示当前配置未开放。</li><li>保级只影响保级。玩家身份切换不重置资格、次数；领取奖励不增加次数。页面不另设“本周充值”门槛。</li><li>Deposit 满足 3 倍余额、10 倍流水后，到账取符合条件余额与剩余兑换上限的较小值。</li><li>剩余上限 = 对应充值 × 10 − 已使用 − 处理中占用。金额、条件与状态取同一后台口径。</li></ul></details>
         <details><summary>资金、冻结与退款</summary><ul><li>充值、免费奖励、Bonus Bank 分账；冻结保留来源和规则版本。</li><li>冻结完整对应余额。$120 例中到账 $100、待清除 $20，失败则完整退回 $120。</li><li>冻结、占用资格、创建申请原子执行；提交与回调幂等。超时结果不明继续处理中。</li><li>失败退款不算充值、不发赠送、不加 VIP 累计、不重置流水；补资料或人工审核要求仍保留。</li></ul></details>
-        <details><summary>演示边界与待定口径</summary><p>单笔充值、VIP 2 及周重置时间均为示例；演示采用同账号一笔处理中、成功清除超额、不另扣手续费。新充值单独记账，不加入旧批次资格。</p><p>多笔充值归属、Free Play 来源范围、跨周恢复、并发和费用以正式规则为准。收款账户仅演示填写和返回流程，不代表后台验证通过。</p></details>
+        <details><summary>演示边界与待定口径</summary><p>未开放状态用 VIP 1 作示例；已开放状态用 VIP 2、每周 3 次作示例，均不代表等级硬门槛或正式配置。周期文案随配置显示，保级周期与提现周期分开。</p><p>演示采用单笔充值、同账号一笔处理中、成功清除超额、不另扣手续费。新充值单独记账，不加入旧批次资格。</p><p>多笔充值归属、Free Play 来源范围、跨周期恢复、并发和费用以正式规则为准。收款账户仅演示填写和返回流程，不代表后台验证通过。</p></details>
         <a class="co-doc-link" href="custom/docs/new-cash-out-backend.md" target="_blank" rel="noopener">完整后台需求清单 ↗</a>
       </section>
     </aside>
