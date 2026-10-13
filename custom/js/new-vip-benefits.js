@@ -14,6 +14,8 @@
   var claimEligible = true, cashRequiresDeposit = false;
   var claimed = false, busy = false, failNext = false, balance = 65;
   var weeklyDeposits = 0, remaining = 1, wagered = 420, wagerTarget = 1000;
+  // Example API result: renewal status and expected level are not inferred from deposit progress.
+  var retention = { depositRequired: 0, secured: true, expectedLevel: 1, benefitsThrough: null };
   var focusOrigin, toastTimer, claimTimer, cashTimer, cashBusy = false, compareTarget = 2;
   function el(id) { return document.getElementById(id); }
   function money(value) { return value === null ? '—' : '$' + Number(value.toFixed(2)); }
@@ -23,6 +25,9 @@
   }
   function requirements(level) { return level.balance === null ? 'Required Free Play balance: — · Playthrough: —' : money(level.balance) + ' Free Play balance + ' + level.multiplier + '× playthrough.'; }
   function cashReady() { return remaining > 0 && balance >= levels[current].balance && wagered >= wagerTarget && !cashRequiresDeposit && !cashBusy; }
+  function retentionRulesContent() {
+    return '<section class="vip-rule-section"><h3>Keep your VIP level</h3><p>Meet your weekly requirements to keep your VIP level for the next week. Your current benefits remain active through the date shown. Each week resets at 00:00 on Monday (server time).</p><p>If you do not qualify, your level drops by one when the period ends, to a minimum of VIP 1. VIP 1 requires no renewal.</p><p>Until then, cash-outs follow your current VIP level’s rules.</p></section>';
+  }
   function toast(message) {
     clearTimeout(toastTimer); el('vip-toast').textContent = message; el('vip-toast').hidden = false;
     toastTimer = setTimeout(function () { el('vip-toast').hidden = true; }, 3500);
@@ -58,6 +63,12 @@
     el('claim-foot').textContent = claimed ? 'Added to your Free Play balance.' : !claimEligible ? 'Daily Free Play is not available for your account today.' : 'Added to your Free Play balance when claimed.';
     el('cash-count').textContent = remaining + ' of ' + actual.count;
     el('cash-amount').textContent = money(actual.cash); el('requirements').textContent = requirements(actual);
+    el('retention-expiry').textContent = retention.benefitsThrough || 'No expiration';
+    el('retention-progress').textContent = money(weeklyDeposits) + ' / ' + money(retention.depositRequired);
+    el('retention-status').setAttribute('data-secured', String(retention.secured));
+    el('retention-status').textContent = retention.secured ? '✓ ' + actual.name + ' secured' : 'Expected level after expiry: ' + levels[retention.expectedLevel].name;
+    el('retention-unmet-demo').setAttribute('aria-pressed', String(current === 2 && !retention.secured));
+    el('retention-met-demo').setAttribute('aria-pressed', String(current === 2 && retention.secured));
     el('cash-eligibility').hidden = !cashRequiresDeposit && remaining > 0 && !cashReady();
     el('cash-eligibility').textContent = remaining === 0 ? 'No cash-outs left today. Your daily limit resets tomorrow.' : cashRequiresDeposit ? 'A credited deposit is also required before you can cash out.' : cashReady() ? 'Requirements met · You can request a cash-out.' : '';
     el('cash-deposit-link').hidden = !cashRequiresDeposit;
@@ -72,7 +83,10 @@
     selected = value === 'paid' ? current : 2; claimed = false; busy = false; cashBusy = false; failNext = false;
     claimEligible = true; cashRequiresDeposit = false;
     balance = 65; wagered = 420; wagerTarget = 1000;
-    weeklyDeposits = value === 'paid' ? 29.99 : 0; remaining = value === 'paid' ? 2 : 1;
+    weeklyDeposits = value === 'paid' ? 30 : 0; remaining = value === 'paid' ? 2 : 1;
+    retention.depositRequired = value === 'paid' ? 49.95 : 0;
+    retention.secured = value !== 'paid'; retention.expectedLevel = 1;
+    retention.benefitsThrough = value === 'paid' ? 'Oct 18, 2026' : null;
     el('vip-overlay').hidden = true; el('vip-toast').hidden = true; chooseLevel(selected);
   }
   function chooseLevel(value) {
@@ -116,8 +130,8 @@
       compareTarget = selected !== current ? selected : current < 15 ? current + 1 : 14;
       content = comparisonContent();
     } else if (kind === 'rules') {
-      title = 'Upgrade rules';
-      content = '<section class="vip-rule-section"><h3>Upgrade your level</h3><ol><li>Choose a higher VIP level to see how much more you need to deposit and the benefits you can unlock. Credited deposits this week count toward the amount shown.</li><li>Tap Deposit to Upgrade. Choose a payment method and a fixed deposit amount.</li><li>Your upgrade takes effect after the deposit is credited and your upgrade requirements are met. Pending or failed deposits do not count.</li></ol></section><section class="vip-rule-section"><h3>Daily Free Play</h3><p>Claim the reward for your current level when available. Viewing a higher level does not unlock its reward. Claimed today means your reward has already been added.</p></section><section class="vip-rule-section"><h3>Cash-out requirements</h3><p>Meet the required Free Play balance and playthrough, with cash-outs left in your daily limit. Any additional account requirements appear beside your benefits.</p><p>Claiming Free Play does not automatically qualify you for a cash-out. Successful cash-out clears the Free Play balance included in your request.</p></section>';
+      title = 'Level & renewal rules';
+      content = '<section class="vip-rule-section"><h3>Upgrade your level</h3><p>Choose a higher level to see the remaining deposit amount. Your upgrade takes effect when deposits are credited and the requirements are met.</p></section>' + retentionRulesContent() + '<section class="vip-rule-section"><h3>Daily Free Play & cash-outs</h3><p>Claim the reward for your current level when available. Cash-outs require the qualifying balance, completed playthrough and remaining daily attempts.</p><p>Successful cash-out clears only the Free Play balance included in that request.</p></section>';
     } else if (kind === 'cash-confirm') {
       if (!cashReady() || busy) return;
       title = 'Confirm cash-out';
@@ -211,6 +225,14 @@
       clearTimeout(cashTimer); cashBusy = false; remaining = 0;
       chooseLevel(current); showDialog('progress', el('progress-button'));
     });
+    function setRetentionDemo(state) {
+      if (current !== 2) setDemo('paid');
+      weeklyDeposits = state === 'met' ? 49.95 : 30;
+      retention.secured = state === 'met'; retention.expectedLevel = retention.secured ? 2 : 1;
+      closeDialog(); chooseLevel(current);
+    }
+    el('retention-unmet-demo').addEventListener('click', function () { setRetentionDemo('unmet'); });
+    el('retention-met-demo').addEventListener('click', function () { setRetentionDemo('met'); });
     render();
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();

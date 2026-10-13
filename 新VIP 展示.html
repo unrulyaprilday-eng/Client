@@ -48,7 +48,7 @@
   <div id="base"></div>
   <div class="vip-canvas">
     <main class="vip-phone">
-      <header class="vip-header"><a href="profile.html" aria-label="Back to Account">‹</a><h1>VIP Benefits</h1><span class="vip-badge"><small>Current</small><span id="current-badge">VIP 1</span></span></header>
+      <header class="vip-header"><a href="profile.html" aria-label="Back to Account">‹</a><h1>VIP Benefits</h1><span class="vip-badge"><small>Your level</small><span id="current-badge">VIP 1</span></span></header>
       <nav class="vip-tabs" id="level-tabs" aria-label="View VIP benefits">
         <button type="button" data-level="1" aria-pressed="false">VIP 1<small data-level-caption>Current</small></button>
         <button type="button" data-level="2" aria-pressed="true">VIP 2<small data-level-caption>View benefits</small></button>
@@ -82,11 +82,14 @@
         </section>
         <section id="benefits-panel" aria-label="Your current VIP benefits" hidden>
           <div class="vip-hero"><h2>Daily Free Play</h2><div class="vip-amount" id="daily-amount">$5</div><button class="vip-primary" id="claim-button" type="button">Claim $5 Free Play ›</button><p class="vip-hero-foot" id="claim-foot">Added to your Free Play balance.</p></div>
-          <div class="vip-summary-card"><dl><div><dt>Cash-outs left today</dt><dd id="cash-count">1 of 1</dd></div><div><dt>Each cash-out</dt><dd id="cash-amount">$10</dd></div></dl></div>
+          <div class="vip-summary-card">
+            <dl><div><dt>Cash-outs left today</dt><dd id="cash-count">1 of 1</dd></div><div><dt>Each cash-out</dt><dd id="cash-amount">$10</dd></div><div><dt>Benefits valid through</dt><dd id="retention-expiry">No expiration</dd></div><div><dt>This week's deposits</dt><dd id="retention-progress">$0 / $0</dd></div></dl>
+            <p class="vip-retention" id="retention-status" data-secured="true" role="status">✓ VIP 1 secured</p>
+          </div>
           <div class="vip-requirements vip-cash-card"><h3>Cash-out requirements</h3><p id="requirements">$100 Free Play balance + 10× playthrough.</p><p class="vip-eligibility-note" id="cash-eligibility" hidden></p><p class="vip-muted">Successful cash-out clears the Free Play balance included in your request.</p><a class="vip-secondary" id="cash-deposit-link" href="存款.html?source=vip-cash-out" hidden>Go to Deposit ›</a><button class="vip-secondary" id="progress-button" type="button">View Cash-Out Progress ›</button></div>
           <button type="button" class="vip-next-level" id="next-level">Explore VIP 2 benefits ›</button>
         </section>
-        <section class="vip-links"><button type="button" data-dialog="compare"><span><b>Compare all levels</b></span><span aria-hidden="true">›</span></button><button type="button" data-dialog="rules"><span><b>Upgrade rules</b></span><span aria-hidden="true">›</span></button></section>
+        <section class="vip-links"><button type="button" data-dialog="compare"><span><b>Compare all levels</b></span><span aria-hidden="true">›</span></button><button type="button" data-dialog="rules"><span><b>Level &amp; renewal rules</b></span><span aria-hidden="true">›</span></button></section>
       </div>
       <div class="vip-overlay" id="vip-overlay" hidden><button class="vip-scrim" type="button" aria-label="Close dialog" data-close></button><section class="vip-dialog" role="dialog" aria-modal="true" aria-labelledby="dialog-title" tabindex="-1"><header><h2 id="dialog-title"></h2><button type="button" data-close aria-label="Close dialog">×</button></header><div id="dialog-content"></div></section></div>
       <div class="vip-toast" id="vip-toast" role="status" hidden></div>
@@ -96,8 +99,9 @@
       <section><h3>切换评审状态</h3><div class="vip-demo-switch"><button type="button" data-demo="unpaid" aria-pressed="true">未充值 · VIP1</button><button type="button" data-demo="paid" aria-pressed="false">已充值 · VIP2</button></div><p>状态切换仅供演示，不出现在玩家界面。</p></section>
       <section><h3>01 · 未充值：先看升级福利</h3><p>当前 VIP1，默认选中 VIP2 预览。主卡清楚展示还需充值金额、每日 Free Play、每日提现次数、单次金额及提现条件；金色主按钮引导充值升级。还需金额按目标门槛减本周已到账充值展示，不重复显示总门槛。</p><p>若 VIP1 今日可领取，轻提示保留当前福利入口；领取后提示隐藏，仍可从 VIP1 Tab 查看。预览任何等级都不会改变实际等级或领取资格。</p></section>
       <section><h3>02 · 已充值：先领取，再提现</h3><p>默认展示实际当前等级，先每日领取，再今日剩余提现次数及单次金额。提现条件、清除本次对应免费余额的说明留在待遇旁，进度弹层演示提现引导。</p><button type="button" id="reset-demo">重置领取演示</button><button type="button" id="fail-demo">演示领取失败</button><button type="button" id="claim-lock-demo" aria-pressed="false">领取资格受限</button><button type="button" id="cash-deposit-demo" aria-pressed="false">提现需先充值</button><button type="button" id="cash-ready-demo">提现条件已满足</button><button type="button" id="cash-limit-demo">今日次数用完</button></section>
-      <section><h3>03 · 15 级与规则收纳</h3><p>顶部直接切换 VIP1–VIP15，Current 表示实际等级，选中态表示正在查看。All levels 用于快速定位；Compare all levels 对比当前与任意等级；Upgrade rules 点击查看升级、领取及提现说明。</p><p>每日提现次数与每周充值门槛分别展示，没有 Free Tab、有效期或保级模块。原有升降级规则口径不变。</p></section>
-      <section class="vip-note-important"><h3>原型数据说明</h3><p>VIP1–VIP3 金额与次数为评审示例，VIP4–VIP15 未确定的待遇用 — 占位。正式取值按后台配置。外部入口、支付及参数传递不属于本轮原型评审范围。</p></section>
+      <section><h3>03 · 每周保级</h3><p>沿用保级_en 的 Keep VIP 表达。当前等级标记 Your level；福利有效期用 Benefits valid through；本周充值用 This week's deposits；达标显示 VIP 2 secured，未达标显示 Expected level after expiry: VIP 1。</p><p>VIP1 无保级要求，福利显示 No expiration。进度、保级结果与预计等级按后台返回；到期前维持当前等级及提现规则。</p><div class="vip-demo-switch"><button type="button" id="retention-unmet-demo" aria-pressed="false">保级未达标</button><button type="button" id="retention-met-demo" aria-pressed="false">已保级</button></div></section>
+      <section><h3>04 · 等级与规则</h3><p>顶部查看 VIP1–VIP15，Current 标记实际等级。All levels 快速定位；Compare all levels 对比待遇；Level &amp; renewal rules 收纳升级、保级与降级规则。</p></section>
+      <section class="vip-note-important"><h3>原型数据说明</h3><p>金额、次数与日期为演示数据。自然周按服务器时间，期末未保级降一级，最低 VIP1。VIP4–VIP15 未确定待遇以 — 占位。</p></section>
     </aside>
   </div>
 </body>

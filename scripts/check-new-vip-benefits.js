@@ -115,6 +115,57 @@ click(get('cash-limit-demo')); assert.match(get('dialog-content').innerHTML, /Da
 assert.match(get('dialog-content').innerHTML, /data-request-cash disabled/);
 demo('paid'); click(get('progress-button'));
 assert.match(get('dialog-content').innerHTML, /\$420 \/ \$1000/);
+
+// Weekly retention is separate from reward and cash-out eligibility.
+demo('unpaid'); click(groups.level[0]);
+assert.equal(get('retention-expiry').textContent, 'No expiration');
+assert.equal(get('retention-progress').textContent, '$0 / $0');
+assert.equal(get('retention-status').textContent, '✓ VIP 1 secured');
+assert.equal(get('claim-button').disabled, false);
+click(groups.dialog.find(item => item.dataset.dialog === 'rules'));
+assert.equal(get('dialog-title').textContent, 'Level & renewal rules');
+assert.match(get('dialog-content').innerHTML, /00:00 on Monday/);
+assert.match(get('dialog-content').innerHTML, /drops by one.*minimum of VIP 1/);
+assert.match(get('dialog-content').innerHTML, /cash-outs follow your current VIP level/);
+
+demo('paid');
+assert.equal(get('retention-expiry').textContent, 'Oct 18, 2026');
+assert.equal(get('retention-progress').textContent, '$30 / $49.95');
+assert.equal(get('retention-status').textContent, 'Expected level after expiry: VIP 1');
+assert.equal(get('retention-status')['data-secured'], 'false');
+assert(!groups.dialog.some(item => item.dataset.dialog === 'retention'), 'Retention summary must not open the old details dialog');
+click(get('retention-unmet-demo'));
+assert.equal(get('current-badge').textContent, 'VIP 2', 'Unmet retention must not downgrade before review');
+pick(3);
+assert.equal(get('benefits-panel').hidden, true, 'Retention belongs to the current level, not the preview');
+assert.match(get('preview-threshold').textContent, /\$29.99/);
+
+click(get('retention-unmet-demo')); click(get('cash-ready-demo'));
+const readyContent = get('dialog-content').innerHTML;
+const readyCount = get('cash-count').textContent;
+assert.match(readyContent, /Ready to cash out/);
+assert.doesNotMatch(readyContent, /data-request-cash disabled/);
+click(get('retention-met-demo'));
+assert.equal(get('retention-status').textContent, '✓ VIP 2 secured');
+assert.equal(get('retention-status')['data-secured'], 'true');
+assert.equal(get('retention-progress').textContent, '$49.95 / $49.95');
+assert.equal(get('retention-expiry').textContent, 'Oct 18, 2026', 'Secured status must not invent a new validity date');
+assert.equal(get('current-badge').textContent, 'VIP 2');
+assert.equal(get('claim-button').disabled, false);
+assert.equal(get('cash-count').textContent, readyCount, 'Retention must not grant or reset attempts');
+click(get('progress-button'));
+assert.equal(get('dialog-content').innerHTML, readyContent, 'Securing retention must not alter cash-out eligibility or playthrough');
+click(get('retention-unmet-demo'));
+assert.equal(get('retention-progress').textContent, '$30 / $49.95');
+assert.equal(get('retention-status').textContent, 'Expected level after expiry: VIP 1');
+click(get('progress-button')); action('[data-request-cash]'); action('[data-confirm-cash]');
+for (const [id, timer] of [...timers]) if (timer.delay === 700) { timers.delete(id); timer.fn(); }
+assert.equal(get('retention-progress').textContent, '$30 / $49.95', 'Cash-out must not reset retention progress');
+assert.equal(get('retention-status').textContent, 'Expected level after expiry: VIP 1');
+demo('unpaid');
+assert.equal(get('retention-expiry').textContent, 'No expiration', 'Returning to VIP1 must clear stale retention state');
+assert.equal(get('retention-status').textContent, '✓ VIP 1 secured');
+
 for (const match of html.matchAll(/(?:src|href)="([^"]+)"/g)) assert(fs.existsSync(path.join(root, match[1].split('?')[0])), 'Missing asset');
 assert(!html.includes('\ufffd') && !html.includes('????'), 'Encoding');
-console.log('PASS: unpaid upgrade preview, current VIP1 reward, independent eligibility, 15 levels, side-by-side comparison, claim retry, cash-out confirmation/limits and balance cleared only after success, DOM and assets.');
+console.log('PASS: VIP previews/rewards, 15 levels, comparison, claim retry, cash-out confirmation/limits, weekly retention states and downgrade copy, independent eligibility/playthrough, DOM and assets.');

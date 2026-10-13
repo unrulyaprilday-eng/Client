@@ -73,6 +73,8 @@ body { margin:0; width:800px; position:static; background:#f5f5f5; font-family:A
 .vip-summary-card dt { color:#a6a199; }
 .vip-summary-card dd { margin:0; color:#e9e1d4; text-align:right; font-weight:600; }
 .vip-summary-card dd strong { color:#e6c58c; }
+.vip-retention { margin:0; padding:11px 0; border-top:1px solid #33312d; color:#dfbf87; font-size:12px; line-height:1.6; }
+.vip-retention[data-secured=true] { color:#87c7a4; }
 .vip-cash-card { margin-top:10px; }
 .vip-cash-card>a:not(.vip-secondary):not(.vip-primary) { display:inline-block; margin-top:9px; color:#dfbf87; font-size:12px; line-height:1.5; }
 .vip-secondary { display:flex; align-items:center; justify-content:center; gap:9px; width:100%; min-height:41px; margin-top:12px; border:1px solid #756043; border-radius:6px; padding:10px; background:transparent; color:#dfbf87; font-size:13px!important; font-weight:600!important; }
