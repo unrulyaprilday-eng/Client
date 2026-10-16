@@ -210,10 +210,14 @@
         '<label for="co-account-input">' + esc(accountDraft.method) + '<input id="co-account-input" type="text" maxlength="60" autocomplete="off" placeholder="' + placeholders[accountDraft.method] + '" value="' + esc(accountDraft.account) + '"></label><p class="co-small">Use an account you own.</p><div id="co-account-error" class="co-error" role="status"></div>' + primary('Save and continue', 'save-account', false) + cancel());
     }
     function rules() {
-      var free = state.tab === 'free';
-      openDialog('rules', '<h2 id="co-dialog-title">Cash-out rules</h2><p>' + (free ? 'Availability, payout, requirements and limits follow your VIP benefits. Retention is separate.' : 'Requires 3× deposit balance and completed 10× deposit playthrough. Payout is the lower of your eligible balance and remaining limit. Total limit: 10× deposit.') +
-        '</p><p>The reviewed balance is locked until the result is confirmed. Success settles the payout and clears the stated remainder; failure returns the full balance.</p><p>New funds and their winnings are unaffected.</p>' +
-        (free ? '<p>Bonus Bank is bonus credit, not cash. Deposit to unlock under its rules.</p>' : '') + primary('Got it', 'close', false));
+      openDialog('rules', '<div class="co-rules"><h2 id="co-dialog-title">Withdrawal Rules</h2><ul>' +
+        '<li>The minimum cash-out amount is 3× your deposit.</li>' +
+        '<li>Total betting turnover must reach 10× your deposit before withdrawal.</li>' +
+        '<li>Weekly withdrawal limits, including the number of withdrawals and the total amount, are based on your VIP level.</li>' +
+        '<li>Once all requirements are completed, you may redeem online or contact customer support for assistance with your withdrawal.</li></ul>' +
+        '<h3>Experience Mode</h3><p>Once your coin balance reaches 100, you may redeem $10 by contacting customer support.</p>' +
+        '<p>Before submitting your redemption request, please make sure your payout account information is entered correctly.</p>' +
+        '<p>If you experience any issues during online redemption, please contact customer support for manual assistance. Your redemption request will be successfully processed once verified.</p></div>' + primary('Got it', 'close', false));
     }
     function requestDetails() {
       var r = state.request;

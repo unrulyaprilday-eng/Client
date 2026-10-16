@@ -156,6 +156,9 @@ body .form_sketch { background: transparent; border: 0; }
 .co-dialog h2 { font-size: 20px; margin: 0 0 18px; }
 .co-dialog p { color: #c7cdd5; font-size: 14px; line-height: 1.55; margin: 14px 0; }
 .co-dialog p.co-small { font-size: 13px; }
+.co-rules h3 { font-size: 16px; margin: 22px 0 10px; }
+.co-rules ul { margin: 0 0 18px; padding-left: 20px; list-style: disc; }
+.co-rules li { color: #c7cdd5; font-size: 14px; line-height: 1.55; margin: 10px 0; }
 .co-dialog label { display: block; margin: 14px 0; font-size: 14px; line-height: 1.6; }
 .co-dialog input[type=text] { display: block; width: 100%; padding: 12px; color: #fff; background: #111519; border: 1px solid #666e78; border-radius: 7px; margin-top: 8px; font-size: 15px; }
 .co-dialog .co-secondary { display: block; width: 100%; margin-top: 5px; }
