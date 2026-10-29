@@ -55,9 +55,9 @@
   <main class="co-board">
     <section class="co-phone" aria-label="Cash Out">
       <header class="co-header"><a class="co-back" href="首页-APP安装.html" aria-label="Back to home"><svg class="co-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 4-8 8 8 8"/></svg></a><h1>Cash Out</h1></header>
-      <nav class="co-tabs" role="tablist" aria-label="Cash-out balance for your player type">
+      <nav class="co-tabs" role="tablist" aria-label="Cash-out types">
         <button type="button" id="free-tab" role="tab" aria-selected="true" aria-controls="co-content" data-tab="free">Free Play</button>
-        <button type="button" id="deposit-tab" role="tab" aria-selected="false" aria-disabled="true" aria-controls="co-content" data-tab="deposit" tabindex="-1">Deposit Balance</button>
+        <button type="button" id="deposit-tab" role="tab" aria-selected="false" aria-disabled="false" aria-controls="co-content" data-tab="deposit" tabindex="-1">Deposit Balance</button>
       </nav>
       <div class="co-content" id="co-content" role="tabpanel" aria-labelledby="free-tab">
         <section class="co-card co-balance"><span class="co-label">Free Play balance</span><strong class="co-amount">$126.50</strong></section>
@@ -105,7 +105,7 @@
       </section>
       <section class="co-note">
         <h3>展示与申请</h3>
-        <ul><li>两个 Tab 均保留。免费玩家选中 Free Play；存款玩家选中 Deposit Balance，内容随玩家类型展示。</li><li>只提示未完成条件；次数用完显示重置时间。</li><li>提交前确认账户、到账金额和余额变化；缺账户先补充。</li><li>处理中禁止重复申请；类型变化后仍可查看旧申请。</li></ul>
+        <ul><li>首次按当前玩家类型选中；两个 Tab 均可查看完整条件。交叉查看时按无此类提现额度展示，金额为零、次数不套用另一类型数据，申请不可提交。</li><li>只提示未完成条件；次数用完显示重置时间。</li><li>提交前确认账户、到账金额和余额变化；缺账户先补充。</li><li>处理中禁止重复申请；类型变化后仍可查看旧申请。</li></ul>
       </section>
       <section class="co-note accent">
         <h3>Free Play</h3>

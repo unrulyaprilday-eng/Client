@@ -13,7 +13,6 @@ body .form_sketch { background: transparent; border: 0; }
 .co-tabs { display: flex; margin: 0 16px; border-bottom: 1px solid #35383d; }
 .co-tabs button { flex: 1; min-height: 46px; padding: 8px 0 12px; background: none; color: #b8bec8; border: 0; border-bottom: 3px solid transparent; font-size: 16px; }
 .co-tabs button[aria-selected=true] { color: #f9df9b; border-bottom-color: #f1d38d; font-weight: 600; }
-.co-tabs button[aria-disabled=true] { cursor: default; }
 .co-content { padding: 16px 16px 20px; }
 .co-board button, .co-board a, .co-board select, .co-board summary { cursor: pointer; }
 .co-board button, .co-board input, .co-board select { font-family: inherit; }
