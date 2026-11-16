@@ -15,8 +15,8 @@ window.HOME_SUPPORT_CONFIG = {
     telegram: "https://t.me/zzyybb4"
   },
   channelDetails: {
-    facebook: { name: "Official Facebook", availability: "24/7" },
-    telegram: { name: "Official Telegram", availability: "24/7" }
+    facebook: { name: "Official Facebook", status: "Online", availability: "24/7" },
+    telegram: { name: "Official Telegram", status: "Online", availability: "24/7" }
   },
   prototype: { responseDelay: 900 }
 };

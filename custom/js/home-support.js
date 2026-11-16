@@ -113,13 +113,13 @@
         var details = config.channelDetails && config.channelDetails[key];
         var raw = config.channels && config.channels[key];
         var url = safeChannelUrl(raw, entry[1]);
-        if (name && details && typeof details.name === "string") { name.textContent = details.name; name.title = details.name; }
+        if (name && details && typeof details.name === "string") { name.textContent = details.name; name.title = "Open " + details.name + " in a new tab"; }
         if (availability && details && typeof details.availability === "string") {
-          availability.textContent = details.availability;
+          availability.textContent = (typeof details.status === "string" ? details.status : "Online") + " · " + details.availability;
           availability.title = "Online time: " + details.availability;
-          availability.setAttribute("aria-label", availability.title);
+          availability.setAttribute("aria-label", availability.textContent);
         }
-        [anchor, link].forEach(function (element) {
+        [anchor, link, name].forEach(function (element) {
           if (!element) return;
           if (url) element.href = url;
           element.setAttribute("aria-disabled", String(!url));
@@ -198,7 +198,7 @@
       var scaleX = targetRect.width / panelRect.width;
       var scaleY = targetRect.height / panelRect.height;
       return {
-        transform: "translate(" + (targetRect.left - panelRect.left) + "px, " + (targetRect.top - panelRect.top) + "px) scale(" + scaleX + ", " + scaleY + ")",
+        transform: "translate(" + (targetRect.left + targetRect.width / 2 - panelRect.left - panelRect.width / 2) + "px, " + (targetRect.top + targetRect.height / 2 - panelRect.top - panelRect.height / 2) + "px) scale(" + scaleX + ", " + scaleY + ")",
         opacity: opacity,
         borderRadius: radius
       };
@@ -222,7 +222,7 @@
       var currentVersion = motionVersion;
       var newRect = typeof shell.getBoundingClientRect === "function" ? shell.getBoundingClientRect() : null;
       var fullFrame = { opacity: 1, transform: "translate(0px, 0px) scale(1)", borderRadius: "16px" };
-      shell.style.transformOrigin = newRect && launcherRect ? "0 0" : launcherConfig.side === "left" ? "0% 100%" : "100% 100%";
+      shell.style.transformOrigin = "50% 50%";
       if (next === "collapsed") {
         var startFrame = oldRect && newRect && newRect.width && newRect.height ? frameAtRect(newRect, oldRect, 1, "16px") : fullFrame;
         var endFrame = compactFrame(newRect, launcherRect);
@@ -246,7 +246,13 @@
         var openingFrame = oldRect && newRect && newRect.width && newRect.height ? frameAtRect(newRect, oldRect, 1, "16px") : compactFrame(newRect, launcherRect);
         animate(shell, [Object.assign({ offset: 0 }, openingFrame), { opacity: 1, offset: .18 }, Object.assign({ offset: 1 }, fullFrame)], { duration: 320, easing: "cubic-bezier(.2,.75,.25,1)" });
       } else {
-        if (oldRect && newRect && Math.abs(oldRect.height - newRect.height) > 1) animate(shell, [{ height: oldRect.height + "px" }, { height: newRect.height + "px" }], { duration: 220, easing: "cubic-bezier(.2,.75,.25,1)" });
+        if (oldRect && newRect) {
+          var bottomOffset = oldRect.top + oldRect.height - newRect.top - newRect.height;
+          if (Math.abs(oldRect.height - newRect.height) > 1 || Math.abs(bottomOffset) > 1) animate(shell, [
+            { height: oldRect.height + "px", transform: "translateY(" + bottomOffset + "px)" },
+            { height: newRect.height + "px", transform: "translateY(0px)" }
+          ], { duration: 260, easing: "cubic-bezier(.2,.75,.25,1)" });
+        }
         animate(next === "chat" ? chatView : channelView, [{ opacity: .25, transform: "translateY(5px) scale(.985)" }, { opacity: 1, transform: "translateY(0) scale(1)" }], { duration: 200, easing: "ease-out" });
       }
     }

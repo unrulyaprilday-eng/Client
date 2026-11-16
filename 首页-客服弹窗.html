@@ -87,26 +87,26 @@
 
       <!-- One floating shell. Views stay mounted so hiding the shell never ends a session. -->
       <section class="hs-support-window" id="hs-support-window" data-view="channels" role="dialog" aria-modal="false" aria-labelledby="hs-window-title" tabindex="-1" hidden>
-        <header class="hs-support-header"><button class="hs-icon-button" id="hs-back" type="button" aria-label="Back to support channels" title="Back" hidden><svg><use href="#hs-back-icon"/></svg></button><div class="hs-window-heading"><h2 id="hs-window-title">How can we help?</h2><span id="hs-window-subtitle" hidden></span></div><button class="hs-icon-button" id="hs-minimize" type="button" aria-label="Minimize support" title="Minimize" hidden><svg><use href="#hs-minus"/></svg></button><button class="hs-icon-button" id="hs-close" type="button" aria-label="Close support" title="Close"><svg><use href="#hs-close-icon"/></svg></button></header>
+        <header class="hs-support-header"><button class="hs-icon-button" id="hs-back" type="button" aria-label="Back to support channels" title="Back" hidden><svg><use href="#hs-back-icon"/></svg></button><div class="hs-window-heading"><div class="hs-window-greeting">Hi there <span aria-hidden="true">👋</span></div><h2 id="hs-window-title">How can we help?</h2><span id="hs-window-subtitle" hidden></span></div><button class="hs-icon-button" id="hs-minimize" type="button" aria-label="Minimize support" title="Minimize" hidden><svg><use href="#hs-minus"/></svg></button><button class="hs-icon-button" id="hs-close" type="button" aria-label="Close support" title="Close"><svg><use href="#hs-close-icon"/></svg></button></header>
         <div class="hs-channel-view" id="hs-channel-view">
           <div class="hs-channel-list">
-            <button class="hs-channel" id="hs-open-chat" type="button"><span class="hs-channel-icon hs-online-icon"><svg><use href="#hs-headset"/></svg></span><span><strong>Online Support</strong><small><i class="hs-dot"></i>Chat with us now</small></span><svg class="hs-channel-arrow"><use href="#hs-arrow"/></svg></button>
+            <button class="hs-channel" id="hs-open-chat" type="button"><span class="hs-channel-icon hs-online-icon"><svg><use href="#hs-headset"/></svg></span><strong class="hs-channel-title">Online Support</strong><svg class="hs-channel-arrow"><use href="#hs-arrow"/></svg><small class="hs-channel-summary">Chat with us now</small><span class="hs-online-time hs-channel-status"><i class="hs-dot" aria-hidden="true"></i>Online · 24/7</span></button>
             <article class="hs-social-channel" aria-labelledby="hs-facebook-name">
               <span class="hs-channel-icon hs-facebook-icon" aria-hidden="true"><svg><use href="#hs-facebook-icon"/></svg></span>
-              <h3 class="hs-contact-name" id="hs-facebook-name">Official Facebook</h3>
+              <h3 class="hs-contact-name"><a class="hs-contact-title" id="hs-facebook-name" href="https://www.facebook.com/777vip" target="_blank" rel="noopener noreferrer" title="Open Facebook support">Official Facebook</a></h3>
               <a class="hs-contact-now" id="hs-facebook" href="https://www.facebook.com/777vip" target="_blank" rel="noopener noreferrer" aria-label="Open Facebook support in a new tab" title="Open Facebook support"><svg aria-hidden="true"><use href="#hs-external"/></svg></a>
               <div class="hs-social-details">
                 <div class="hs-contact-link-row"><a class="hs-contact-link" id="hs-facebook-link" href="https://www.facebook.com/777vip" target="_blank" rel="noopener noreferrer" title="https://www.facebook.com/777vip">https://www.facebook.com/777vip</a><button class="hs-copy-button" id="hs-copy-facebook" type="button" aria-label="Copy Facebook support link" title="Copy link"><svg><use href="#hs-copy-icon"/></svg></button></div>
-                <span class="hs-online-time"><i class="hs-dot" aria-hidden="true"></i><strong id="hs-facebook-availability" title="Online time: 24/7" aria-label="Online time: 24/7">24/7</strong></span>
+                <span class="hs-online-time"><i class="hs-dot" aria-hidden="true"></i><strong id="hs-facebook-availability" title="Online time: 24/7" aria-label="Online, available 24/7">Online · 24/7</strong></span>
               </div>
             </article>
             <article class="hs-social-channel" aria-labelledby="hs-telegram-name">
               <span class="hs-channel-icon hs-telegram-icon" aria-hidden="true"><svg><use href="#hs-telegram-icon"/></svg></span>
-              <h3 class="hs-contact-name" id="hs-telegram-name">Official Telegram</h3>
+              <h3 class="hs-contact-name"><a class="hs-contact-title" id="hs-telegram-name" href="https://t.me/zzyybb4" target="_blank" rel="noopener noreferrer" title="Open Telegram support">Official Telegram</a></h3>
               <a class="hs-contact-now" id="hs-telegram" href="https://t.me/zzyybb4" target="_blank" rel="noopener noreferrer" aria-label="Open Telegram support in a new tab" title="Open Telegram support"><svg aria-hidden="true"><use href="#hs-external"/></svg></a>
               <div class="hs-social-details">
                 <div class="hs-contact-link-row"><a class="hs-contact-link" id="hs-telegram-link" href="https://t.me/zzyybb4" target="_blank" rel="noopener noreferrer" title="https://t.me/zzyybb4">https://t.me/zzyybb4</a><button class="hs-copy-button" id="hs-copy-telegram" type="button" aria-label="Copy Telegram support link" title="Copy link"><svg><use href="#hs-copy-icon"/></svg></button></div>
-                <span class="hs-online-time"><i class="hs-dot" aria-hidden="true"></i><strong id="hs-telegram-availability" title="Online time: 24/7" aria-label="Online time: 24/7">24/7</strong></span>
+                <span class="hs-online-time"><i class="hs-dot" aria-hidden="true"></i><strong id="hs-telegram-availability" title="Online time: 24/7" aria-label="Online, available 24/7">Online · 24/7</strong></span>
               </div>
             </article>
           </div>
@@ -127,9 +127,9 @@
     <aside class="hs-review-notes" lang="zh-CN" aria-label="客服悬浮窗交互说明">
       <span class="hs-note-eyebrow">首页 / 客服体验</span><h2>多渠道客服悬浮窗</h2><p class="hs-note-intro">左侧为可操作的首页原型，默认收起。点击右下角客服按钮开始体验。</p>
       <section class="hs-preview-controls" aria-label="预览状态"><h3>状态预览</h3><div><button type="button" data-preview="collapsed" aria-pressed="true">收起入口</button><button type="button" data-preview="channels" aria-pressed="false">渠道选择</button><button type="button" data-preview="chat" aria-pressed="false">在线聊天</button></div><p>当前：<strong id="hs-preview-state">首页 · 客服入口</strong></p></section>
-      <section class="hs-note-card"><span>01 / 首页悬浮入口</span><h3>从右下角放大，缩回同一位置</h3><p>整个弹窗从客服按钮处约 320ms 放大展开；收起时约 280ms 等比缩小并移回按钮中心，再恢复客服按钮。按钮位置、图片、文字及尺寸可配置，动画跟随实际按钮位置。浮层限制在左侧 428px 手机区域。</p></section>
-      <section class="hs-note-card"><span>02 / 渠道选择</span><h3>三个入口等高，信息各两行</h3><p>顶部只保留简短问候及关闭按钮。三个渠道均为 72px 高；社媒第一行是图标、昵称及外链入口，第二行是链接、紧随的复制按钮与 24/7 在线标识。链接超宽才省略，复制始终使用完整地址。小屏可内部滚动。</p></section>
-      <section class="hs-note-card"><span>03 / Online Support</span><h3>同一容器内切换内容</h3><dl><div><dt>‹ 返回</dt><dd>返回渠道选择，保留聊天</dd></div><div><dt>− 最小化</dt><dd>恢复按钮，再展开回到聊天</dd></div><div><dt>× 关闭</dt><dd>隐藏窗口，不主动结束会话</dd></div></dl><p>聊天时点击窗外只操作首页，不会关闭聊天。窗口宽约 92%，聊天高度约 70%，预留底部导航及手势安全区。</p></section>
+      <section class="hs-note-card"><span>01 / 首页悬浮入口</span><h3>从右下角放大，缩回同一位置</h3><p>渠道面板底部预留 144px 及安全区，聊天态向下展开至预留 88px。以弹窗中心为缩放锚点，从客服按钮处约 320ms 放大展开；收起时约 280ms 等比缩小并移回按钮中心。动画跟随实际按钮位置，浮层限制在左侧 428px 手机区域。</p></section>
+      <section class="hs-note-card"><span>02 / 渠道选择</span><h3>保留欢迎大标题，三个渠道等高</h3><p>保留「Hi there 👋 / How can we help?」大标题，关闭按钮位于欢迎区右上角。三个渠道均为 108px 高，分三行展示：名称与进入图标、链接或说明、Online · 24/7。社媒昵称和外链图标均可点击；复制按钮紧随左对齐的链接，超宽才省略，复制始终使用完整地址。</p></section>
+      <section class="hs-note-card"><span>03 / Online Support</span><h3>同一容器内上下展开</h3><dl><div><dt>‹ 返回</dt><dd>返回渠道选择，保留聊天</dd></div><div><dt>− 最小化</dt><dd>恢复按钮，再展开回到聊天</dd></div><div><dt>× 关闭</dt><dd>隐藏窗口，不主动结束会话</dd></div></dl><p>进入聊天时，上沿向上、下沿向下平滑展开，聊天高度约 68%，位置比原先更低。预留底部导航及手势安全区，窗外操作不会关闭聊天。</p></section>
       <section class="hs-note-card hs-implementation-note"><span>原型与接入说明</span><p>聊天为本地交互演示，支持输入、回复及未读提示；本页会话与草稿在收起、返回、关闭及刷新后保留。实际生命周期由客服 SDK 管理，容器隐藏时不销毁实例。</p><p>配置文件：<code>custom/js/home-support-config.js</code>。Telegram 使用参考图链接；Facebook 使用本次指定的 /777vip 示例路径，接入时可替换为正式客服地址。</p><button class="hs-offline-toggle" id="hs-offline-toggle" type="button" aria-pressed="false">演示发送失败</button><small>仅影响本地聊天演示，可点击消息“重试”恢复。</small></section>
     </aside>
   </div>
