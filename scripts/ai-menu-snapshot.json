@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "savedAt": "2026-10-12T07:39:46.588Z",
+  "savedAt": "2026-11-16T06:19:53.369Z",
   "source": "data/document.js sitemap.rootNodes",
   "rootNodes": [
     {
@@ -48,6 +48,13 @@
           "pageName": "首页-APP安装",
           "type": "Wireframe",
           "url": "首页-APP安装.html",
+          "children": []
+        },
+        {
+          "id": "home_support_floating",
+          "pageName": "首页-客服弹窗",
+          "type": "Wireframe",
+          "url": "首页-客服弹窗.html",
           "children": []
         }
       ]

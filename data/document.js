@@ -60,6 +60,13 @@ $axure.loadDocument({
             "type": "Wireframe",
             "url": "首页-APP安装.html",
             "children": []
+          },
+          {
+            "id": "home_support_floating",
+            "pageName": "首页-客服弹窗",
+            "type": "Wireframe",
+            "url": "首页-客服弹窗.html",
+            "children": []
           }
         ]
       },
