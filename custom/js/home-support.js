@@ -4,6 +4,8 @@
   function ready() {
     var byId = function (id) { return document.getElementById(id); };
     var phone = byId("hs-phone");
+    var homeSurface = byId("hs-home-surface");
+    var backdrop = byId("hs-support-backdrop");
     var shell = byId("hs-support-window");
     var launcher = byId("hs-launcher");
     var channelView = byId("hs-channel-view");
@@ -12,7 +14,7 @@
     var composer = byId("hs-composer");
     var input = byId("hs-message-input");
     var sendButton = byId("hs-send");
-    if (!phone || !shell || !launcher || !channelView || !chatView || !messages || !composer || !input || !sendButton) return;
+    if (!phone || !homeSurface || !backdrop || !shell || !launcher || !channelView || !chatView || !messages || !composer || !input || !sendButton) return;
 
     var config = window.HOME_SUPPORT_CONFIG || {};
     var launcherConfig = config.launcher || {};
@@ -218,6 +220,25 @@
       }, 0, (Math.max(launcherRect.width, launcherRect.height) / 2 / scale) + "px");
     }
 
+    function finishCollapse() {
+      shell.hidden = true;
+      shell.dataset.motion = "";
+      shell.setAttribute("aria-modal", "false");
+      backdrop.hidden = true;
+      homeSurface.inert = false;
+    }
+
+    function animateBackdrop(previous, next, opacity) {
+      if (next !== "collapsed") {
+        homeSurface.inert = true;
+        backdrop.hidden = false;
+        if (previous === "collapsed") animate(backdrop, [{ opacity: opacity }, { opacity: 1 }], { duration: 180, easing: "ease-out" });
+      } else if (previous !== "collapsed") {
+        // Keep blocking home input until the window finishes shrinking.
+        animate(backdrop, [{ opacity: opacity }, { opacity: 0 }], { duration: 180, delay: 100, easing: "ease-in", fill: "both" });
+      }
+    }
+
     function animateView(previous, next, oldRect, launcherRect) {
       var currentVersion = motionVersion;
       var newRect = typeof shell.getBoundingClientRect === "function" ? shell.getBoundingClientRect() : null;
@@ -231,12 +252,11 @@
           { opacity: 1, offset: .7 },
           Object.assign({ offset: 1 }, endFrame)
         ], { duration: 280, easing: "cubic-bezier(.4,0,.2,1)", fill: "both" });
-        if (!closing) { shell.hidden = true; return; }
+        if (!closing) { finishCollapse(); return; }
         shell.dataset.motion = "closing";
         closing.onfinish = function () {
           if (currentVersion !== motionVersion) return;
-          shell.hidden = true;
-          shell.dataset.motion = "";
+          finishCollapse();
           closing.cancel();
         };
         if (!launcher.hidden) animate(launcher, [{ opacity: 0, transform: "scale(.8)" }, { opacity: 1, transform: "scale(1)" }], { duration: 90, delay: 210, fill: "backwards", easing: "ease-out" });
@@ -262,6 +282,7 @@
     function setView(next, moveFocus) {
       var previous = view;
       var oldRect = !shell.hidden && typeof shell.getBoundingClientRect === "function" ? shell.getBoundingClientRect() : null;
+      var backdropOpacity = backdrop.hidden ? 0 : typeof window.getComputedStyle === "function" ? Number(window.getComputedStyle(backdrop).opacity) : 1;
       cancelMotion();
       var launcherRect = measureLauncher();
       view = next;
@@ -270,6 +291,7 @@
       // Keep the outgoing view mounted until the shrink animation finishes.
       shell.hidden = !isOpen && previous === "collapsed";
       shell.inert = !isOpen;
+      if (isOpen) shell.setAttribute("aria-modal", "true");
       launcher.hidden = isOpen || launcherConfig.enabled === false;
       launcher.setAttribute("aria-expanded", String(isOpen));
       if (isOpen || previous === "collapsed") {
@@ -293,7 +315,9 @@
       if (stateLabel) stateLabel.textContent = isChat ? "在线聊天 · 会话保留" : isOpen ? "客服渠道选择" : "首页 · 客服入口";
       previews.forEach(function (button) { button.setAttribute("aria-pressed", String(button.dataset.preview === next)); });
       persist();
+      animateBackdrop(previous, next, backdropOpacity);
       if (previous !== next) animateView(previous, next, oldRect, launcherRect);
+      else if (!isOpen) finishCollapse();
       if (moveFocus !== false) {
         if (isOpen) shell.focus({ preventScroll: true });
         else if (!launcher.hidden) launcher.focus({ preventScroll: true });
@@ -405,10 +429,15 @@
     byId("hs-back").addEventListener("click", function () { setView("channels"); });
     byId("hs-minimize").addEventListener("click", function () { setView("collapsed"); });
     byId("hs-close").addEventListener("click", function () { setView("collapsed"); });
-    // No overlay is created: outside clicks still reach the home controls.
-    document.addEventListener("click", function (event) {
-      if (view === "channels" && !shell.contains(event.target) && !launcher.contains(event.target) && !event.target.closest("[data-preview], #hs-footer-support")) setView("collapsed", false);
+    backdrop.addEventListener("click", function (event) {
+      event.preventDefault();
+      event.stopPropagation();
+      if (view === "channels") setView("collapsed");
     });
+    ["wheel", "touchmove"].forEach(function (type) {
+      backdrop.addEventListener(type, function (event) { event.preventDefault(); event.stopPropagation(); }, { passive: false });
+    });
+    shell.addEventListener("click", function (event) { event.stopPropagation(); });
     shell.addEventListener("keydown", function (event) {
       if (event.key === "Escape") { event.preventDefault(); setView("collapsed"); }
     });

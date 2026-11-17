@@ -8,11 +8,20 @@ const root = path.resolve(__dirname, "..");
 const pageName = "\u9996\u9875-\u5ba2\u670d\u5f39\u7a97";
 const html = fs.readFileSync(path.join(root, pageName + ".html"), "utf8");
 const js = fs.readFileSync(path.join(root, "custom/js/home-support.js"), "utf8");
+const css = fs.readFileSync(path.join(root, "custom/css/home-support.css"), "utf8");
 const configSource = fs.readFileSync(path.join(root, "custom/js/home-support-config.js"), "utf8");
 
 assert.match(html, /width=800, initial-scale=1/);
 assert.match(html, /<div id="base"><\/div>/);
 assert.equal((html.match(/id="hs-support-window"/g) || []).length, 1);
+assert.equal((html.match(/id="hs-support-backdrop"/g) || []).length, 1);
+const backdropRule = /\.hs-support-backdrop\s*\{([^}]+)\}/.exec(css)[1];
+assert.match(backdropRule, /position:\s*absolute/);
+assert.match(backdropRule, /inset:\s*0/);
+assert.match(backdropRule, /background:\s*rgba\(0,\s*0,\s*0,\s*\.4\)/);
+const zIndex = selector => Number(new RegExp("\\." + selector + "\\s*\\{[^}]*z-index:\\s*(\\d+)").exec(css)[1]);
+assert(zIndex("hs-launcher") < zIndex("hs-support-backdrop"));
+assert(zIndex("hs-support-backdrop") < zIndex("hs-support-window"));
 const htmlIds = new Set(Array.from(html.matchAll(/\bid="([^"]+)"/g), match => match[1]));
 for (const match of html.matchAll(/<use href="#([^"]+)"/g)) assert(htmlIds.has(match[1]), "Missing SVG icon: " + match[1]);
 for (const match of html.matchAll(/(?:src|href)="([^"]+)"/g)) {
@@ -52,7 +61,7 @@ for (const relative of [pageName + ".html", "files/" + pageName + "/data.js", "d
 class Element {
   constructor(tag = "div", attrs = "") {
     this.tagName = tag; this.hidden = /\bhidden\b/.test(attrs); this.value = ""; this.textContent = "";
-    this.children = []; this.handlers = {}; this.attributes = {}; this.dataset = {}; this.disabled = false;
+    this.children = []; this.handlers = {}; this.attributes = {}; this.dataset = {}; this.disabled = false; this.inert = false;
     this.clientHeight = 926; this.scrollHeight = 1000; this.scrollTop = 0;
     this.style = { setProperty(name, value) { this[name] = value; } };
     this.classList = { add() {}, toggle() {} };
@@ -64,7 +73,7 @@ class Element {
   replaceChildren(...children) { this.children = []; children.forEach(child => this.appendChild(child)); }
   insertBefore(child) { child.parent = this; this.children.unshift(child); }
   replaceWith(child) { const index = this.parent.children.indexOf(this); this.parent.children[index] = child; child.parent = this.parent; }
-  focus() {}
+  focus() { if (this.ownerDocument) this.ownerDocument.activeElement = this; }
   select() {}
   setSelectionRange() {}
   remove() { if (this.parent) this.parent.children = this.parent.children.filter(child => child !== this); }
@@ -94,6 +103,7 @@ function createEnvironment(storage = new Map(), options = {}) {
       continue;
     }
     const element = new Element(tag, attrs);
+    element.ownerDocument = document;
     if (stack.length) stack[stack.length - 1].appendChild(element);
     const id = /\bid="([^"]+)"/.exec(attrs);
     if (id) { assert(!nodes.has(id[1]), "Duplicate DOM id: " + id[1]); element.id = id[1]; nodes.set(id[1], element); }
@@ -103,7 +113,7 @@ function createEnvironment(storage = new Map(), options = {}) {
   }
   document.getElementById = id => nodes.get(id);
   document.querySelectorAll = selector => selector === "[data-preview]" ? previews : selector === "[data-game-tab]" ? tabs : [];
-  document.createElement = tag => new Element(tag);
+  document.createElement = tag => { const element = new Element(tag); element.ownerDocument = document; return element; };
   document.execCommand = command => {
     assert.equal(command, "copy");
     if (options.copyFails) return false;
@@ -116,6 +126,7 @@ function createEnvironment(storage = new Map(), options = {}) {
     return { then(success, failure) { if (options.clipboardRejects) failure(); else { clipboardWrites.push(text); success(); } } };
   } };
   window.matchMedia = () => ({ matches: options.reducedMotion === true });
+  window.getComputedStyle = element => ({ opacity: element.testOpacity ?? "1" });
   if (options.motion) nodes.forEach(element => {
     element.getBoundingClientRect = () => {
       if (element.id === "hs-launcher") {
@@ -146,10 +157,16 @@ function createEnvironment(storage = new Map(), options = {}) {
   vm.runInNewContext(js, context);
   const get = id => { assert(nodes.has(id), "Missing node: " + id); return nodes.get(id); };
   const fire = (element, type, additions = {}) => {
-    const event = { target: element, preventDefault() { this.defaultPrevented = true; }, ...additions };
+    const event = { target: element, preventDefault() { this.defaultPrevented = true; }, stopPropagation() { this.propagationStopped = true; }, ...additions };
     (element.handlers[type] || []).forEach(handler => handler(event)); return event;
   };
-  const click = element => { const event = fire(element, "click"); fire(document, "click", { target: element }); return event; };
+  const click = element => {
+    for (let node = element; node; node = node.parent) if (node.hidden || node.inert || node.disabled) return { blocked: true };
+    const event = fire(element, "click");
+    for (let node = element.parent; node && !event.propagationStopped; node = node.parent) (node.handlers.click || []).forEach(handler => handler(event));
+    if (!event.propagationStopped) (document.handlers.click || []).forEach(handler => handler(event));
+    return event;
+  };
   const flush = () => { for (const [id, handler] of [...timers]) { timers.delete(id); handler(); } };
   const submit = text => { get("hs-message-input").value = text; fire(get("hs-message-input"), "input"); fire(get("hs-composer"), "submit"); };
   const stored = () => JSON.parse(storage.get("play-home-support-prototype-v1"));
@@ -158,7 +175,15 @@ function createEnvironment(storage = new Map(), options = {}) {
 const env = createEnvironment();
 const { get, click, fire, flush, submit, stored } = env;
 assert.equal(get("hs-support-window").hidden, true);
+assert.equal(get("hs-support-backdrop").hidden, true);
+assert.equal(get("hs-home-surface").inert, false);
+assert(get("hs-home-surface").contains(get("hs-footer-support")));
+assert(get("hs-phone").contains(get("hs-support-backdrop")));
+assert(!get("hs-home-surface").contains(get("hs-support-backdrop")));
 click(get("hs-launcher"));
+assert.equal(get("hs-support-backdrop").hidden, false);
+assert.equal(get("hs-home-surface").inert, true);
+assert.equal(get("hs-support-window").attributes["aria-modal"], "true");
 assert.equal(get("hs-channel-view").hidden, false);
 assert.equal(get("hs-chat-view").hidden, true);
 assert.equal(get("hs-facebook-name").textContent, "Official Facebook");
@@ -170,7 +195,12 @@ assert.equal(get("hs-facebook-name").tagName, "a");
 assert.equal(get("hs-facebook-name").href, get("hs-facebook").href);
 assert.equal(get("hs-telegram-name").tagName, "a");
 assert.equal(get("hs-telegram-name").href, get("hs-telegram").href);
-assert(!click(get("hs-facebook-name")).defaultPrevented);
+let bubbledClicks = 0;
+env.document.addEventListener("click", () => bubbledClicks++);
+const facebookClick = click(get("hs-facebook-name"));
+assert(!facebookClick.defaultPrevented, "Stopping bubbling must retain external-link navigation");
+assert.equal(facebookClick.propagationStopped, true);
+assert.equal(bubbledClicks, 0, "Panel clicks do not bubble outside the support window");
 assert(!click(get("hs-telegram-name")).defaultPrevented);
 click(get("hs-copy-facebook"));
 click(get("hs-copy-telegram"));
@@ -184,8 +214,17 @@ click(get("hs-open-chat"));
 assert.equal(get("hs-support-window").dataset.view, "chat");
 assert.equal(get("hs-back").hidden, false);
 assert.equal(get("hs-minimize").hidden, false);
-fire(env.document, "click", { target: get("hs-game-grid") });
+const chatOutside = click(get("hs-support-backdrop"));
+assert.equal(chatOutside.defaultPrevented, true);
+assert.equal(chatOutside.propagationStopped, true);
+assert.equal(bubbledClicks, 0);
 assert.equal(get("hs-support-window").hidden, false, "Outside click must leave a chat open");
+assert.equal(get("hs-support-backdrop").hidden, false);
+for (const type of ["wheel", "touchmove"]) {
+  const event = fire(get("hs-support-backdrop"), type);
+  assert.equal(event.defaultPrevented, true, "Backdrop must consume " + type);
+  assert.equal(event.propagationStopped, true);
+}
 assert.equal(get("hs-send").disabled, true);
 submit("  "); assert.equal(stored().messages.length, 0);
 submit("Help with my deposit <script>alert(1)</script>");
@@ -194,6 +233,10 @@ assert.equal(get("hs-messages").children.at(-1).children[0].textContent, "Help w
 get("hs-message-input").value = "Unsent draft"; fire(get("hs-message-input"), "input");
 click(get("hs-minimize"));
 assert.equal(get("hs-launcher").hidden, false);
+assert.equal(get("hs-support-backdrop").hidden, true);
+assert.equal(get("hs-home-surface").inert, false);
+assert.equal(get("hs-support-window").attributes["aria-modal"], "false");
+assert.equal(env.document.activeElement, get("hs-launcher"));
 flush();
 assert.equal(stored().messages.length, 2, "Reply continues while minimized");
 assert.equal(get("hs-unread").hidden, false);
@@ -203,13 +246,20 @@ assert.equal(get("hs-message-input").value, "Unsent draft");
 assert.equal(get("hs-unread").hidden, true);
 click(get("hs-back"));
 assert.equal(get("hs-channel-view").hidden, false);
+assert.equal(get("hs-support-backdrop").hidden, false);
 assert.equal(stored().messages.length, 2);
 click(get("hs-open-chat")); click(get("hs-close")); click(get("hs-launcher"));
 assert.equal(get("hs-chat-view").hidden, false, "Close hides the window and retains its session");
 assert.equal(stored().messages.length, 2);
 click(get("hs-back"));
-fire(env.document, "click", { target: get("hs-game-grid") });
+const beforeOutside = JSON.stringify(stored());
+const channelOutside = click(get("hs-support-backdrop"));
+assert.equal(channelOutside.defaultPrevented, true);
+assert.equal(channelOutside.propagationStopped, true);
 assert.equal(get("hs-support-window").hidden, true, "Outside click collapses channel chooser");
+assert.equal(get("hs-support-backdrop").hidden, true);
+assert.equal(get("hs-home-surface").inert, false);
+assert.equal(JSON.stringify(stored()), beforeOutside, "Outside collapse retains session and draft");
 click(get("hs-launcher")); assert.equal(get("hs-channel-view").hidden, false);
 click(get("hs-open-chat"));
 click(get("hs-offline-toggle")); submit("Withdrawal question");
@@ -239,6 +289,7 @@ noStorage.click(noStorage.get("hs-launcher")); noStorage.click(noStorage.get("hs
 noStorage.click(noStorage.get("hs-close")); noStorage.click(noStorage.get("hs-launcher"));
 assert.equal(noStorage.get("hs-chat-view").hidden, false, "Storage restrictions must preserve in-page session");
 const badLinks = createEnvironment(new Map(), { badLinks: true });
+badLinks.click(badLinks.get("hs-launcher"));
 assert.equal(badLinks.click(badLinks.get("hs-facebook")).defaultPrevented, true);
 assert.equal(badLinks.click(badLinks.get("hs-telegram")).defaultPrevented, true);
 assert.equal(badLinks.get("hs-toast").hidden, false);
@@ -248,16 +299,23 @@ assert.equal(badLinks.click(badLinks.get("hs-telegram-link")).defaultPrevented, 
 assert.equal(badLinks.click(badLinks.get("hs-facebook-name")).defaultPrevented, true);
 assert.equal(badLinks.click(badLinks.get("hs-telegram-name")).defaultPrevented, true);
 const clipboardApi = createEnvironment(new Map(), { clipboardApi: true });
+clipboardApi.click(clipboardApi.get("hs-launcher"));
 clipboardApi.click(clipboardApi.get("hs-copy-telegram"));
 assert.deepEqual(clipboardApi.clipboardWrites, ["https://t.me/zzyybb4"]);
 const rejectedClipboard = createEnvironment(new Map(), { clipboardApi: true, clipboardRejects: true });
+rejectedClipboard.click(rejectedClipboard.get("hs-launcher"));
 rejectedClipboard.click(rejectedClipboard.get("hs-copy-telegram"));
 assert.deepEqual(rejectedClipboard.clipboardWrites, ["https://t.me/zzyybb4"], "Denied Clipboard API falls back to local-file copy");
 const failedCopy = createEnvironment(new Map(), { copyFails: true });
+failedCopy.click(failedCopy.get("hs-launcher"));
 failedCopy.click(failedCopy.get("hs-copy-telegram"));
 assert.match(failedCopy.get("hs-toast").textContent, /Unable to copy/);
 const animated = createEnvironment(new Map(), { motion: true });
 animated.click(animated.get("hs-launcher"));
+const maskOpening = animated.effects.find(effect => effect.element.id === "hs-support-backdrop");
+assert.equal(maskOpening.frames[0].opacity, 0);
+assert.equal(maskOpening.frames[1].opacity, 1);
+assert.equal(maskOpening.timing.duration, 180);
 assert.equal(animated.effects.at(-1).timing.duration, 320);
 assert.match(animated.effects.at(-1).frames[0].transform, /scale/);
 function assertAtLauncher(frame, panel, launcher) {
@@ -272,6 +330,7 @@ function assertAtLauncher(frame, panel, launcher) {
 assertAtLauncher(animated.effects.at(-1).frames[0], animated.get("hs-support-window").getBoundingClientRect(), animated.get("hs-launcher").getBoundingClientRect());
 assert.equal(animated.get("hs-support-window").style.transformOrigin, "50% 50%");
 animated.click(animated.get("hs-open-chat"));
+assert.equal(animated.effects.filter(effect => effect.element.id === "hs-support-backdrop").length, 1, "Switching views must retain the backdrop without a new fade");
 assert.equal(animated.effects.at(-1).timing.duration, 200);
 const expansion = animated.effects.find(effect => effect.timing.duration === 260);
 assert.equal(expansion.frames[0].height, "456px");
@@ -283,16 +342,28 @@ animated.click(animated.get("hs-close"));
 assert.equal(animated.get("hs-support-window").hidden, false, "Closing animation keeps the outgoing view visible");
 assert.equal(animated.get("hs-chat-view").hidden, false);
 assert.equal(animated.get("hs-support-window").inert, true);
+assert.equal(animated.get("hs-support-backdrop").hidden, false, "Closing animation must retain the click blocker");
+assert.equal(animated.get("hs-home-surface").inert, true);
+const maskClosing = animated.effects.filter(effect => effect.element.id === "hs-support-backdrop").at(-1);
+assert.equal(maskClosing.frames[1].opacity, 0);
+assert.equal(maskClosing.timing.duration + maskClosing.timing.delay, 280, "Backdrop and window finish closing together");
 const firstClose = animated.effects.find(effect => effect.timing.duration === 280);
 assertAtLauncher(firstClose.frames.at(-1), animated.get("hs-support-window").getBoundingClientRect(), animated.get("hs-launcher").getBoundingClientRect());
 const staleFinish = firstClose.onfinish;
+animated.get("hs-support-backdrop").testOpacity = ".35";
 animated.click(animated.get("hs-launcher"));
 staleFinish();
 assert.equal(animated.get("hs-support-window").hidden, false, "Reopening cancels a pending close");
 assert.equal(animated.get("hs-support-window").inert, false);
+assert.equal(animated.get("hs-support-backdrop").hidden, false, "A stale close must not hide a reopened backdrop");
+assert.equal(animated.get("hs-home-surface").inert, true);
+assert.equal(maskClosing.cancelled, true);
+assert.equal(animated.effects.filter(effect => effect.element.id === "hs-support-backdrop").at(-1).frames[0].opacity, .35, "Interrupted fade resumes from the displayed opacity");
 animated.click(animated.get("hs-close"));
 animated.effects.filter(effect => effect.timing.duration === 280).at(-1).finish();
 assert.equal(animated.get("hs-support-window").hidden, true);
+assert.equal(animated.get("hs-support-backdrop").hidden, true);
+assert.equal(animated.get("hs-home-surface").inert, false);
 animated.click(animated.get("hs-launcher"));
 assert.equal(animated.get("hs-chat-view").hidden, false);
 assert.equal(animated.stored().messages.length, 1, "Motion never destroys the session");
@@ -305,7 +376,13 @@ const reduced = createEnvironment(new Map(), { motion: true, reducedMotion: true
 reduced.click(reduced.get("hs-launcher")); reduced.click(reduced.get("hs-close"));
 assert.equal(reduced.effects.length, 0);
 assert.equal(reduced.get("hs-support-window").hidden, true);
+assert.equal(reduced.get("hs-support-backdrop").hidden, true);
+assert.equal(reduced.get("hs-home-surface").inert, false);
+assert.equal(click(env.tabs.find(button => button.dataset.gameTab === "Sports")).blocked, true, "An open chat makes home controls inert");
+assert.equal(get("hs-game-empty").hidden, true);
+assert.equal(get("hs-support-window").hidden, false);
+click(get("hs-close"));
 click(env.tabs.find(button => button.dataset.gameTab === "Sports"));
 assert.equal(get("hs-game-empty").hidden, false);
-assert.equal(get("hs-support-window").hidden, false, "Home interactions must leave chat mounted");
-console.log("PASS: Axure page/menu, retained chat, contact copy, proportional expand/shrink to the launcher center, configured positions, interrupted transitions and reduced motion.");
+assert.equal(get("hs-support-window").hidden, true, "Home controls work again after support closes");
+console.log("PASS: Axure page/menu, retained chat, contact copy, 40% backdrop layering, outside clicks, blocked home controls, coordinated fades, interrupted transitions and reduced motion.");

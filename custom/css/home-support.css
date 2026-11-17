@@ -12,6 +12,7 @@ body { margin: 0; position: static; left: auto; width: 800px; background: #f4f3e
 .hs-canvas svg { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
 .hs-canvas button:focus-visible, .hs-canvas a:focus-visible, .hs-canvas textarea:focus-visible { outline: 2px solid #e5cc8e; outline-offset: 3px; }
 .hs-phone { --hs-safe-bottom: env(safe-area-inset-bottom, 0px); --hs-safe-top: env(safe-area-inset-top, 0px); position: sticky; top: 0; display: flex; flex-direction: column; width: 428px; flex: 0 0 428px; height: min(926px, var(--hs-viewport-height, 100dvh)); overflow: hidden; isolation: isolate; background: #121110; color: #f5f3ed; }
+.hs-home-surface { display: flex; flex: 1; flex-direction: column; min-height: 0; }
 .hs-app-header { display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; height: calc(64px + var(--hs-safe-top)); padding: var(--hs-safe-top) 18px 0; border-bottom: 1px solid #302c24; background: #1d1b18; }
 .hs-brand { display: flex; align-items: center; font-size: 23px; font-weight: 800; letter-spacing: 1px; }
 .hs-brand > span:first-child { display: grid; place-items: center; width: 31px; height: 31px; margin-right: 8px; border: 1px solid #bda76e; border-radius: 8px; color: #d6bf83; font-size: 22px; font-style: italic; }
@@ -88,6 +89,7 @@ body { margin: 0; position: static; left: auto; width: 800px; background: #f4f3e
 .hs-launcher > i { position: absolute; top: 0; right: 0; width: 12px; height: 12px; border: 2px solid #171512; border-radius: 50%; background: #f05b57; }
 .hs-launcher { transition: transform 120ms ease; }
 .hs-launcher:active { transform: scale(.94); }
+.hs-support-backdrop { position: absolute; z-index: 35; inset: 0; background: rgba(0, 0, 0, .4); opacity: 1; pointer-events: auto; touch-action: none; overscroll-behavior: contain; }
 .hs-support-window { position: absolute; z-index: 40; right: 16px; bottom: calc(144px + var(--hs-safe-bottom)); display: flex; flex-direction: column; width: 92%; max-height: calc(100% - 164px - var(--hs-safe-bottom) - var(--hs-safe-top)); overflow: hidden; border: 1px solid #665635; border-radius: 16px; background: #211f1b; box-shadow: 0 12px 45px #0009, 0 0 0 1px #0003; outline: none; }
 .hs-support-window[data-motion="closing"] { pointer-events: none; }
 .hs-support-window[data-view="chat"] { bottom: calc(88px + var(--hs-safe-bottom)); height: 68%; max-height: calc(100% - 108px - var(--hs-safe-bottom) - var(--hs-safe-top)); }

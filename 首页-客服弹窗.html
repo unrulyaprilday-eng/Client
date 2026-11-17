@@ -67,6 +67,7 @@
   </svg>
   <div class="hs-canvas">
     <main class="hs-phone" id="hs-phone" aria-label="Home">
+      <div class="hs-home-surface" id="hs-home-surface">
       <header class="hs-app-header">
         <a class="hs-brand" href="首页-客服弹窗.html" aria-label="Home"><span>P</span>PLAY<span class="hs-brand-dot">.</span></a>
         <div><a class="hs-header-link" href="新VIP 展示.html">VIP CLUB</a><a class="hs-icon-button hs-notifications" href="通知.html" aria-label="Notifications"><svg><use href="#hs-bell"/></svg><i></i></a></div>
@@ -82,9 +83,11 @@
         <footer class="hs-home-footer"><button type="button" id="hs-footer-support"><svg><use href="#hs-headset"/></svg>24/7 Customer Service <span>›</span></button><p>Play responsibly. For players aged 18+.</p></footer>
       </div>
       <nav class="hs-bottom-nav" aria-label="Main navigation"><a class="is-active" href="首页-客服弹窗.html" aria-current="page"><svg><use href="#hs-home"/></svg>Home</a><a href="优惠.html"><svg><use href="#hs-grid"/></svg>Games</a><a href="优惠.html"><svg><use href="#hs-gift"/></svg>Promotions</a><a href="profile.html"><svg><use href="#hs-user"/></svg>Account</a></nav>
+      </div>
 
       <button class="hs-launcher" id="hs-launcher" type="button" aria-label="Contact customer support" aria-expanded="false" aria-controls="hs-support-window"><svg aria-hidden="true"><use href="#hs-headset"/></svg><span id="hs-launcher-label">Support</span><i id="hs-unread" hidden aria-label="New support message"></i></button>
 
+      <div class="hs-support-backdrop" id="hs-support-backdrop" aria-hidden="true" hidden></div>
       <!-- One floating shell. Views stay mounted so hiding the shell never ends a session. -->
       <section class="hs-support-window" id="hs-support-window" data-view="channels" role="dialog" aria-modal="false" aria-labelledby="hs-window-title" tabindex="-1" hidden>
         <header class="hs-support-header"><button class="hs-icon-button" id="hs-back" type="button" aria-label="Back to support channels" title="Back" hidden><svg><use href="#hs-back-icon"/></svg></button><div class="hs-window-heading"><div class="hs-window-greeting">Hi there <span aria-hidden="true">👋</span></div><h2 id="hs-window-title">How can we help?</h2><span id="hs-window-subtitle" hidden></span></div><button class="hs-icon-button" id="hs-minimize" type="button" aria-label="Minimize support" title="Minimize" hidden><svg><use href="#hs-minus"/></svg></button><button class="hs-icon-button" id="hs-close" type="button" aria-label="Close support" title="Close"><svg><use href="#hs-close-icon"/></svg></button></header>
@@ -129,7 +132,8 @@
       <section class="hs-preview-controls" aria-label="预览状态"><h3>状态预览</h3><div><button type="button" data-preview="collapsed" aria-pressed="true">收起入口</button><button type="button" data-preview="channels" aria-pressed="false">渠道选择</button><button type="button" data-preview="chat" aria-pressed="false">在线聊天</button></div><p>当前：<strong id="hs-preview-state">首页 · 客服入口</strong></p></section>
       <section class="hs-note-card"><span>01 / 首页悬浮入口</span><h3>从右下角放大，缩回同一位置</h3><p>渠道面板底部预留 144px 及安全区，聊天态向下展开至预留 88px。以弹窗中心为缩放锚点，从客服按钮处约 320ms 放大展开；收起时约 280ms 等比缩小并移回按钮中心。动画跟随实际按钮位置，浮层限制在左侧 428px 手机区域。</p></section>
       <section class="hs-note-card"><span>02 / 渠道选择</span><h3>保留欢迎大标题，三个渠道等高</h3><p>保留「Hi there 👋 / How can we help?」大标题，关闭按钮位于欢迎区右上角。三个渠道均为 108px 高，分三行展示：名称与进入图标、链接或说明、Online · 24/7。社媒昵称和外链图标均可点击；复制按钮紧随左对齐的链接，超宽才省略，复制始终使用完整地址。</p></section>
-      <section class="hs-note-card"><span>03 / Online Support</span><h3>同一容器内上下展开</h3><dl><div><dt>‹ 返回</dt><dd>返回渠道选择，保留聊天</dd></div><div><dt>− 最小化</dt><dd>恢复按钮，再展开回到聊天</dd></div><div><dt>× 关闭</dt><dd>隐藏窗口，不主动结束会话</dd></div></dl><p>进入聊天时，上沿向上、下沿向下平滑展开，聊天高度约 68%，位置比原先更低。预留底部导航及手势安全区，窗外操作不会关闭聊天。</p></section>
+      <section class="hs-note-card"><span>03 / Online Support</span><h3>同一容器内上下展开</h3><dl><div><dt>‹ 返回</dt><dd>返回渠道选择，保留聊天</dd></div><div><dt>− 最小化</dt><dd>恢复按钮，再展开回到聊天</dd></div><div><dt>× 关闭</dt><dd>隐藏窗口，不主动结束会话</dd></div></dl><p>进入聊天时，上沿向上、下沿向下平滑展开，聊天高度约 68%，位置比原先更低。预留底部导航及手势安全区。</p></section>
+      <section class="hs-note-card"><span>04 / 蒙版与窗外点击</span><h3>渠道可点外收起，聊天防误关</h3><p>展开时，手机全屏显示 40% 黑色蒙版，位于首页之上、客服窗口之下。渠道选择时点击蒙版收起；聊天时点击蒙版不关闭窗口，需主动最小化或关闭。窗口内部点击不触发蒙版，窗外点击不穿透首页。</p><p>蒙版约 180ms 淡入；收起时配合窗口缩小淡出，动画结束后移除蒙版并恢复首页操作。返回渠道不闪烁蒙版，收起不清空会话及草稿。</p></section>
       <section class="hs-note-card hs-implementation-note"><span>原型与接入说明</span><p>聊天为本地交互演示，支持输入、回复及未读提示；本页会话与草稿在收起、返回、关闭及刷新后保留。实际生命周期由客服 SDK 管理，容器隐藏时不销毁实例。</p><p>配置文件：<code>custom/js/home-support-config.js</code>。Telegram 使用参考图链接；Facebook 使用本次指定的 /777vip 示例路径，接入时可替换为正式客服地址。</p><button class="hs-offline-toggle" id="hs-offline-toggle" type="button" aria-pressed="false">演示发送失败</button><small>仅影响本地聊天演示，可点击消息“重试”恢复。</small></section>
     </aside>
   </div>
